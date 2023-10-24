@@ -231,7 +231,29 @@ $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \b
         \item $T_0X_1^{-1}T_0 = X^{s_0(\omega_1)} = q^{-1}X_1^{-1}X_2$
     \end{itemize}
 \end{example}
-\section{二重アファインブレイド群作用}
+\section{小平ファイバーの導来圏}
+$X$を楕円曲面$S$の既約でないファイバーとする。
+\begin{proposition}
+    $\Phi \in \Auteq D^b(X)$とし、$\Phi$は積分関手であると仮定する。また$X$の既約成分$G_0, \dots, G_n$から（複数の既約成分の交点ではない）閉点$x_i \in G_i$を選んでおく。
+    このとき$\Phi(\cO_X) \cong \cO$かつ全ての$i$について$\Phi(\cO_{x_i}) \cong \cO_{x_i}$ならば、ある$f \in \Aut(X)$が存在して$\Phi \cong f^*$である。
+\end{proposition}
+\begin{proof}
+    \cite{MR3182005}のLemma 3.3と同様の議論をする。アファイン$A$型Dynkin図形に対応する小平ファイバーについては\cite{MR3182005}ですでに示されているので、$D$と$E$の場合を確かめる。
+
+    $D$型の場合、既約成分のうち$G_0, G_1, G_{n-1}, G_n$が重複度$1$で他の既約成分が重複度$2$で現れるように番号づけしておく。$X$上の非常に豊富な直線束$L$を
+    \begin{equation}
+        L^{-1} = \Ker(\cO_X \to \cO_{x_0}\oplus \cO_{x_1} \oplus E_2 \oplus \cdots \oplus E_{n-2}\oplus \cO_{x_{n-1}} \oplus \cO_{x_n})
+    \end{equation}
+    となるようにとる。ただし$E_i$は$x_i$を台に持つ長さ$2$のArtin加群である。
+    このとき$\Phi(E_i) \cong E_i$が成り立つ。なぜなら$E_i$は$\cO_{x_i}$を$\cO_{x_i}$で拡大することで得られるが、
+    \begin{equation}
+        \Ext_X^1(\cO_{x_i}, \cO_{x_i}) \cong \Hom(\cO_{x_i}, \cO_{x_i})^* \cong \bC
+    \end{equation}
+    より$E_i$はそのような加群として同型をのぞいて一意に定まるからである。（$\cO_{x_i}$は具体的に射影分解を作ることでperfectだとわかる。）
+    すると$\Phi$は$L^{-1}$を保つ。あとは\cite{MR3182005}と同様。
+
+    E型の場合
+\end{proof}
 \begin{lemma}
     $X$を既約でない小平ファイバーとし、$G$を既約成分の1つとする。また$\Phi \in \Aut(X) \ltimes \Pic(X) \subset \Auteq D^b(X)$とする。このとき
     \begin{equation}
@@ -239,9 +261,43 @@ $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \b
     \end{equation}
     が成り立つ。
 \end{lemma}
+\begin{proof}
+    一番ややこしい。明らかに正しそうだし一般論を整備すれば簡単に示せるのかもしれないが、現状だと泥臭い計算をやるしかなさそう。
+\end{proof}
 \begin{lemma}\label{lem:omega_in_automorphisms}
     $X$を既約でない小平ファイバーとし、対応する型のルート系を考える。このとき（アファイン）Dynkin図形への作用が$\Omega$と同じになるような$X$の自己同型群の部分群が存在する。ただし$X$の自己同型のDynkin図形への作用は既約成分への作用によって定めるものとする。
 \end{lemma}
+\begin{proof}
+    $D$型の場合
+\end{proof}
+
+\begin{lemma}
+    $X$を既約でない小平ファイバーとし、$G_i$たちを既約成分とする。このとき$X$上の直線束$L_i$たちで次の条件を満たすものが存在する。
+    \begin{enumerate}
+        \item $L_i$は$G_i$上で次数$1$、他の既約成分上で次数$0$を持つ。
+        \item $X \subset S$を$X$を特異ファイバーにもつ楕円曲面とし、$\cO(G_i) \in \Pic(S)$としたとき
+              \begin{equation}
+                  \cO(G_i)\vert_X \cong \bigotimes_j L_j^{\otimes (G_j\cdot G_i)}
+              \end{equation}
+              が成り立つ。
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    $\Pic(X)$を具体的に表示すれば線形代数$+\alpha$ぐらいの問題になるはず。
+\end{proof}
+
+\begin{lemma}
+    $X$を既約でない小平ファイバーとし、既約成分$G_i$について$H_i = H_{\cO_{G_i}(-1)} \in \Auteq D^b(X)$とする。このとき、全ての$i$について
+    \begin{equation}
+        H_iL_iH_i = -\otimes \cO_S(G_i)\vert_Y \otimes L_i
+    \end{equation}
+    が成り立つ。
+\end{lemma}
+\begin{proof}
+    ややこしい。
+\end{proof}
+\section{二重アファインブレイド群作用}
+
 \begin{proposition}\label{prop:action_of_affine_braid_group}
     $X$を既約でない小平ファイバーとし、$G_0, \dots, G_n$を既約成分とする。さらに$\cO_{G_i}(-1)$の定める半ねじり関手を$H_{\cO_{G_i}(-1)} = H_i \in \Auteq D^b(X)$とする。また$B^a$を$X$に対応するアファインDynkin図形に付随するアファインブレイド群とする。このとき$H_0, \dots, H_n$は$B^a$の$D^b(X)$への作用を定める。さらに補題\ref{lem:omega_in_automorphisms}の自己同型群の部分群と合わせることで$B^{ae}$の作用を定める。
 \end{proposition}
