@@ -2,7 +2,7 @@
 ## How to compile the source files
 Run
 ```bash
-git clone https://github.com/aralsea/double-affine-graid-group-note.git && cd double-affine-braid-group-note
+git clone https://github.com/aralsea/double-affine-braid-group-note.git && cd double-affine-braid-group-note
 ```
 and
 ``` bash
