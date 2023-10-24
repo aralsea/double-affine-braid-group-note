@@ -1,0 +1,278 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, dvipdfmx]{jsarticle}
+\usepackage[backend=biber, style=alphabetic, sorting=nyt]{biblatex}
+\addbibresource{../bib/double-affine-braid-group.bib} 
+
+\usepackage{amsthm}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{tikz-cd}
+\usepackage{dynkin-diagrams}
+
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{fact}[theorem]{事実}
+\newtheorem{example}[theorem]{例}
+\newtheorem{remark}[theorem]{補足}
+
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+\DeclareMathOperator{\CHom}{\mathcal{H}\!\mathit{om}}
+\DeclareMathOperator{\CTor}{\mathcal{T}\!\mathit{or}}
+\DeclareMathOperator{\Auteq}{\mathrm{Auteq}}
+\DeclareMathOperator{\Cone}{\mathrm{Cone}}
+\DeclareMathOperator{\ev}{\mathrm{ev}}
+\DeclareMathOperator{\id}{\mathrm{id}}
+\DeclareMathOperator{\depth}{\mathrm{depth}}
+\DeclareMathOperator{\Pic}{\mathrm{Pic}}
+\DeclareMathOperator{\MCG}{\mathrm{MCG}}
+\DeclareMathOperator{\PMCG}{\mathrm{PMCG}}
+\DeclareMathOperator{\RHom}{\mathrm{RHom}}
+\DeclareMathOperator{\Ker}{\mathrm{Ker}}
+\DeclareMathOperator{\Image}{\mathrm{Im}}
+\DeclareMathOperator{\Aut}{\mathrm{Aut}}
+\DeclareMathOperator{\Inn}{\mathrm{Inn}}
+\DeclareMathOperator{\Out}{\mathrm{Out}}
+\DeclareMathOperator{\Supp}{\mathrm{Supp}}
+\DeclareMathOperator{\SL}{\mathrm{SL}}
+\DeclareMathOperator{\GL}{\mathrm{GL}}
+\DeclareMathOperator{\Spec}{\mathrm{Spec}}
+\DeclareMathOperator{\Perf}{\mathrm{Perf}}
+\DeclareMathOperator{\NS}{\mathrm{NS}}
+\DeclareMathOperator{\Ext}{\mathrm{Ext}}
+\DeclareMathOperator{\Hilb}{\mathrm{Hilb}}
+\DeclareMathOperator{\res}{\mathrm{res}}
+\DeclareMathOperator{\Ch}{\mathrm{Ch}}
+\DeclareMathOperator{\coh}{\mathrm{coh}}
+\DeclareMathOperator{\Ann}{\mathrm{Ann}}
+\DeclareMathOperator{\Aff}{\mathrm{Aff}}
+
+
+
+\newcommand{\nc}{\newcommand}
+
+%% Calligraphic letters
+
+\nc{\cF}{{\mathcal{F}}}
+\nc{\cG}{{\mathcal{G}}}
+\nc{\cH}{{\mathcal{H}}}
+\nc{\cJ}{{\mathcal{J}}}
+\nc{\cM}{{\mathcal{M}}}
+\nc{\cO}{{\mathcal{O}}}
+\nc{\cU}{{\mathcal{U}}}
+\nc{\cW}{{\mathcal{W}}}
+
+%% Blackboard letters
+\nc{\bA}{{\mathbb{A}}}
+\nc{\bC}{{\mathbb{C}}}
+\nc{\bP}{{\mathbb{P}}}
+\nc{\bQ}{{\mathbb{Q}}}
+\nc{\bR}{{\mathbb{R}}}
+\nc{\bZ}{{\mathbb{Z}}}
+
+
+%% Fraktur letters
+\nc{\fg}{{\mathfrak{g}}}
+\nc{\fu}{{\mathfrak{u}}}
+
+% hyperref
+\usepackage[urlcolor=blue]{hyperref}
+
+
+\title{二重アファインブレイド群の作用}
+\author{荒井 勇人}
+\date{\today}
+\begin{document}
+\maketitle
+
+
+
+\section{記法}
+$(V,(-, -))$を$n$次元ユークリッド空間とし、$R$をその上の既約有限ルート系とする。
+\begin{itemize}
+    \item $\{\alpha_1, \dots, \alpha_n\} \subset R$を$R$の基底とする。つまり$\alpha_i$たちは単純ルートである。
+    \item $\{\alpha_1^\vee, \dots, \alpha_n^\vee\} \subset R$を単純コルートの集合とする。つまり$\alpha^\vee = \frac{2\alpha}{(\alpha, \alpha)}$である。
+    \item $Q = \bigoplus_{i = 1}^n \bZ \alpha_i \subset V$ をルート格子とし、 $Q^\vee = \bigoplus_{i = 1}^n \bZ \alpha_i^\vee \subset V$ をコルート格子とする。
+    \item $P = \{\lambda \in V \mid (\lambda, Q^\vee) \subset \bZ\}$をウェイト格子とし、$P^\vee = \{\lambda' \in V \mid (\lambda', Q) \subset \bZ\}$をコウェイト格子とする。
+    \item $s_\alpha$を$\alpha$に付随する鏡映、つまり$s_\alpha(x) = x - (x, \alpha)\alpha^\vee$で定まる$V$の（内積を保つ）自己同型とする。$R$のWeyl群$W = \langle s_\alpha \mid \alpha \in R \rangle$はそれらの生成する$\GL(V)$の部分群である。これは単純ルートに付随する鏡映$s_i = s_{\alpha_i}$たちで生成される有限群である。
+\end{itemize}
+\section{ルート系、Weyl群、ブレイド群}
+$(V,(-, -))$を$n$次元ユークリッド空間とする。
+\begin{itemize}
+    \item $F=\Aff(V)$を$V$上の$\bR$値アファイン関数全体のなすベクトル空間とし、$V$の内積を使って$F \cong V \oplus \bR \delta$と同一視する。ここで$\delta$は定数$1$を返す関数である。$f \in F$のとき$V$成分、つまり勾配ベクトルを$Df \in V$で表す。
+    \item $V$の内積を$\bR \delta$上$0$として$F$上の双線形形式に拡張する。そして定数でない$f \in F$について$f^\vee = \frac{2f}{(f, f)}$と定める。
+    \item 定数でない$f \in F$について$f^{-1}(0) \subset V$をアファイン超平面とし、それについての鏡映を$s_f$とおく。その$F$への作用も$s_f$とかく。
+    \item $v \in V$についての平行移動を$t(v)$とおく。
+\end{itemize}
+
+\begin{definition}
+    $F$の部分集合$R^a$が$V$上のアファインルート系であるとは以下を満たすこと。
+    \begin{enumerate}
+        \item $R^a$は$F$を生成する。
+        \item $a, b \in R^a$について$s_a(b) \in R^a$である。
+        \item $a, b \in R^a$について$(a^\vee, b) \in \bZ$である。
+        \item $W^a = \langle s_a \mid a \in R^a \rangle$の$V$への作用は固有不連続である。
+    \end{enumerate}
+    $W$を$R^a$のWeyl群という。
+\end{definition}
+
+\begin{theorem}
+    $R$が$V$上の既約有限ルート系ならば、
+    \begin{equation}
+        R^a = \{\alpha + n \delta \in F \mid \alpha \in R, n \in \bZ\}
+    \end{equation}
+    は$V$上のアファインルート系である。
+\end{theorem}
+\begin{proof}
+    やるだけ。
+\end{proof}
+\begin{remark}
+    ここでのルートはKac--Moody代数の文脈における実ルートに対応する。虚ルートは$\delta$の定数倍である。
+\end{remark}
+\begin{proposition}\label{prop:structure-of-affine-weyl-group}
+    $R$を既約有限ルート系とし、$R^a$を付随するアファインルート系とする。このとき$W^a = W \ltimes t(Q^\vee)$である。ただし$t(Q^\vee)$は$Q^\vee$のベクトルによる平行移動のなす部分群である。
+\end{proposition}
+\begin{proof}
+    $\alpha \in R$とし$a = \alpha + \delta \in R^a$とすると
+    \begin{equation}
+        s_\alpha s_a(x) = s_\alpha(x - ((x, a) + 1) \alpha^\vee) = x - (x, \alpha)\alpha^\vee + ((x, a) + 1) \alpha^\vee = x + \alpha^\vee
+    \end{equation}
+    だから$t(Q^\vee) \subset W^a$である。また計算により$wt(\alpha^\vee)w^{-1} = t(w(\alpha^\vee))$がわかるから、$t(Q^\vee)$は正規部分群である。残りは自明である。
+\end{proof}
+\begin{definition}
+    $W \ltimes t(Q^\vee)$を$R$に付随するアファインWeyl群という。命題\ref{prop:structure-of-affine-weyl-group}より、これは$R^a$のWeyl群と同一視できる。
+\end{definition}
+\begin{definition}
+    \begin{enumerate}
+        \item  $W^{ae} = W \ltimes t(P^\vee)$を$R$に付随する拡大アファインWeyl群という。これは自然に$V$にアファイン変換として作用する。
+        \item $\Omega = \{w \in W^{ae} \mid l(w) = 0\} = \{w \in W \mid wA = A\}$を、基本アルコーブ$A$を保つ$w$たちのなす部分群とする。
+    \end{enumerate}
+\end{definition}
+\begin{proposition}
+    \begin{enumerate}
+        \item $W^{ae} = \Omega \ltimes W^a$
+        \item $\Omega \cong P^\vee/Q^\vee$
+    \end{enumerate}
+\end{proposition}
+\begin{proposition}
+    $B^{ae} = \Omega \ltimes B^a$である。
+\end{proposition}
+\begin{corollary}
+    $B^{ae}$は次の2通りの表示をもつ。
+    \begin{enumerate}
+        \item (Coxeter表示) $B^{ae} = \langle T_0, \dots, T_n, \Omega\rangle$
+        \item (Bernstein表示) $B^{ae} = \langle T_1, \dots, T_n, Y^{P^\vee}\rangle$
+    \end{enumerate}
+\end{corollary}
+\begin{example}[$D_4$型の場合]
+    \begin{itemize}
+        \item  $V = \bR^4 = \bigoplus_{i=1}^4 \bR e_i$を標準的な内積でユークリッド空間とする。
+        \item  $R = \{\pm e_i \pm e_j \mid 1 \leq i < j \leq 4\}$を$D_4$型の既約有限ルート系とする。
+        \item $\alpha_1 = e_1 - e_2, \alpha_2 = e_2 - e_3, \alpha_3 = e_3 - e_4, \alpha_4 = e_3 + e_4$がルート系の基底（のひとつ）をなす。
+        \item 最高ルートは$\theta = e_1 + e_2 = \alpha_1 + 2\alpha_2 + \alpha_3 + \alpha_4$である。
+        \item $Q = Q^\vee = \bigoplus_{i=1}^4 \bZ e_i = \{(x_1, x_2, x_3, x_4) \in \bZ^4\mid \sum_i x_i \in 2 \bZ\}$である。
+        \item $\omega_1 = e_1, \omega_2 = e_1 + e_2, \omega_3 = \frac{1}{2}(e_1 + e_2 + e_3 - e_4), \omega_4 = \frac{1}{2}(e_1 + e_2 + e_3 + e_4)$が基本ウェイトで、$P = P^\vee = \bigoplus_{i=1}^4 \bZ \omega_i$である。
+        \item $s_i$ を$\alpha_i$に付随する鏡映とする。$s_1, s_2, s_3 \in W$はそれぞれ$e_1$と$e_2$、$e_2$と$e_3$、$e_3$と$e_4$を交換することで$V$に作用する。$s_4$は$e_3$を$-e_4$に、$e_4$を$-e_3$に送る。これらにより$W$は生成され、座標の入れ替えおよび偶数個の座標を$-1$倍するように$V$に忠実に作用し、$S_4 \ltimes (\bZ/2\bZ)^3$と同型である。
+        \item $\alpha_0 = -\theta + \delta$
+        \item $A = \{v \in V \mid (\alpha_i, v)>0, (\theta, v)<1\}$が基本アルコーブである。その境界はアファイン超平面$\alpha_i = 0$である。
+        \item $\Omega = \{1, \pi_1, \pi_3, \pi_4\} \cong \bZ/2\bZ \oplus \bZ/2\bZ$は$A$を保つ$W^{ae}$の部分群であり、$A$の境界の超平面と単純ルートの集合$\{\alpha_0, \dots, \alpha_4\}$を同一視することで単純ルートの集合に作用する。さらに単純ルートの集合を$\widetilde{D_4}$型Dynkin図形の頂点と同一視することで、$\Omega$は$\widetilde{D_4}$型Dynkin図形の自己同型群と同一視できる。これにより$\pi_i \in \Omega$はDynkin図形の頂点$0$と$i$を入れ替えるような折り返しによる自己同型に対応する。
+        \item $W^{ae} = \Omega \ltimes W^a$は共役作用$\pi_i s_{\alpha_j} \pi_i^{-1} = s_{\pi_i(\alpha_j)}$により記述される。つまり$\Omega$の単純ルートの集合への作用と整合的である。
+        \item 同様に$B^{ae} = \Omega \ltimes B^a$は共役作用$\pi_i T_{s_{\alpha_j}} \pi_i^{-1} = T_{s_{\pi_i(\alpha_j)}}$により記述される。
+    \end{itemize}
+\end{example}
+\section{二重アファインブレイド群}
+$\tau =\{\tau_0, \dots, \tau_n\}$を不定元の集合とする。ただし$s_i$と$s_j$が$W^a$の中で共役なときに$\tau_i = \tau_j$であると定める。そして$\bC_\tau = \bC(\tau_0, \dots, \tau_n)$を$\bC$上の有理関数体とする。
+
+次に$e \in \bZ>0$を$(P, P^\vee) = \frac{1}{e}\bZ$となるような整数と定め、格子$P \oplus \bZ \frac{\delta}{e} \subset F = \Aff(V)$への$W^{ae}$の作用を
+$w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \bZ$について
+\begin{equation}
+    w\left(\mu + \frac{k}{e} \delta\right) = v(\mu) +\left(k/e - (\lambda, \mu)\right)\delta
+\end{equation}
+あるいは$\mu + \frac{k}{e} \delta$を乗法的に$q^{k/e} X^\mu$と書いて
+\begin{equation}
+    w(q^{k/e}X^\mu) = q^{k/e} \cdot q^{-(\lambda, v(\mu))}X^{v(\mu)}
+\end{equation}
+と定義する。$v$の線形性よりこれはwell-definedである。これを用いて二重アファインブレイド群を以下で定義する。
+\begin{definition}
+    $B^{ae} = \langle T_0, \dots, T_n, \Omega\rangle$をCoxeter表示とする。このとき二重アファインブレイド群$B^d$は$T_0, \dots, T_n, \Omega, X^P, q^{1/e}$を生成元とし以下の関係式で定まるような群である。
+    \begin{enumerate}
+        \item $B^{ae}$のCoxeter表示の関係式
+        \item $X^P$の交換関係式
+        \item $q^{1/e}$は中心元
+        \item $\alpha_0^\vee = -\theta^\vee$とし$i = 0, \dots, n$について
+              \begin{itemize}
+                  \item $(\mu, \alpha_i^\vee) = 0$のとき$T_i$と$X^\mu$は可換
+                  \item $(\mu, \alpha_i^\vee) = 1$のとき$T_i$と$X^\mu$は$T_iX^\mu T_i = X^{s_i(\mu)}$を満たす
+              \end{itemize}
+        \item $\pi \in \Omega$について$\pi X^\mu \pi^{-1} = X^{\pi(\mu)}$
+    \end{enumerate}
+\end{definition}
+\begin{example}[$D_4$型の場合]
+    \begin{itemize}
+        \item $\omega_1 = e_1, \omega_2 = e_1 + e_2, \omega_3 = \frac{1}{2}(e_1 + e_2 + e_3 - e_4), \omega_4 = \frac{1}{2}(e_1 + e_2 + e_3 + e_4)$を基本ウェイトとして$P = P^\vee = \bZ \omega_1 \oplus \bZ \omega_2 \oplus \bZ \omega_3 \oplus \bZ \omega_4$である。
+        \item $e = 2$
+        \item $\mu = \sum_i \xi_i \omega_i \in P$について$(\mu, \alpha_i^\vee) = 0$となる条件は$i=0$のとき$\xi_1 + 2\xi_2 + \xi_3 + \xi_4 = 0$、$i > 0$のとき$\xi_i = 0$である。
+        \item $(\mu, \alpha_i^\vee) = 1$となる条件は$i=0$のとき$\xi_1 + 2\xi_2 + \xi_3 + \xi_4 = -1$、$i > 0$のとき$\xi_i = 1$である。
+    \end{itemize}
+    これらを踏まえて$B^d$の関係式を（$X_i = X^{\omega_i}$として）具体的に書き下すと
+    \begin{itemize}
+        \item $B^{ae}$のCoxeter表示の関係式、$X^P$の交換関係式、$q^{1/e}$は中心元
+        \item $1\leq i, j \leq 4$かつ$i \neq j$のとき$T_i$と$X_j$は可換
+        \item $\mu = \sum_i \xi_i \omega_i$が$\xi_1 + 2\xi_2 + \xi_3 + \xi_4 = 0$を満たすとき$T_0$と$X^\mu$は可換
+        \item $T_1X_1T_1 = X^{s_1(\omega_1)} = X^{\omega_2-\omega_1} = X_1^{-1}X_2$
+        \item $T_2X_2T_2 = X^{s_2(\omega_2)} = X_1X_2^{-1}X_3X_4$
+        \item $T_3X_3T_3 = X^{s_3(\omega_3)} = X^{\omega_2-\omega_3} = X_2X_3^{-1}$
+        \item $T_4X_4T_4 = X^{s_4(\omega_4)} = X^{\omega_2-\omega_4} = X_2X_4^{-1}$
+        \item $T_0X_1^{-1}T_0 = X^{s_0(\omega_1)} = q^{-1}X_1^{-1}X_2$
+    \end{itemize}
+\end{example}
+\section{二重アファインブレイド群作用}
+\begin{lemma}
+    $X$を既約でない小平ファイバーとし、$G$を既約成分の1つとする。また$\Phi \in \Aut(X) \ltimes \Pic(X) \subset \Auteq D^b(X)$とする。このとき
+    \begin{equation}
+        \Phi \circ H_{\cO_G(a)}\circ \Phi^{-1} = H_{\Phi(\cO_G(a))}
+    \end{equation}
+    が成り立つ。
+\end{lemma}
+\begin{lemma}\label{lem:omega_in_automorphisms}
+    $X$を既約でない小平ファイバーとし、対応する型のルート系を考える。このとき（アファイン）Dynkin図形への作用が$\Omega$と同じになるような$X$の自己同型群の部分群が存在する。ただし$X$の自己同型のDynkin図形への作用は既約成分への作用によって定めるものとする。
+\end{lemma}
+\begin{proposition}\label{prop:action_of_affine_braid_group}
+    $X$を既約でない小平ファイバーとし、$G_0, \dots, G_n$を既約成分とする。さらに$\cO_{G_i}(-1)$の定める半ねじり関手を$H_{\cO_{G_i}(-1)} = H_i \in \Auteq D^b(X)$とする。また$B^a$を$X$に対応するアファインDynkin図形に付随するアファインブレイド群とする。このとき$H_0, \dots, H_n$は$B^a$の$D^b(X)$への作用を定める。さらに補題\ref{lem:omega_in_automorphisms}の自己同型群の部分群と合わせることで$B^{ae}$の作用を定める。
+\end{proposition}
+\begin{proof}
+    \cite{MR1831820, brav2010braid,nordskova2020faithful}の結果などから前半は示せる（はず）。後半は補題\ref{lem:omega_in_automorphisms}と$B^{ae} = \Omega \ltimes B^a$からわかる。
+\end{proof}
+\begin{theorem}
+    $X$をアファイン$D_n$型のDynkin図形に付随する小平ファイバーとする。$B^d = \langle B^{ae}, X^P, q\rangle$を対応する型の二重アファインブレイド群とする。このとき$B^{ae}$を命題\ref{prop:action_of_affine_braid_group}の作用、$X^P$を直線束による捻りの作用、$q$を$\id$とするような$B^d$の$D^b(X)$への作用が存在する。
+\end{theorem}
+\begin{example}
+    \begin{itemize}
+        \item $B^{ae}$のCoxeter表示の関係式、$X^P$の交換関係式、$q^{1/e}$は中心元
+        \item $1\leq i, j \leq 4$かつ$i \neq j$のとき$T_i$と$X_j$は可換
+        \item $\mu = \sum_i \xi_i \omega_i$が$\xi_1 + 2\xi_2 + \xi_3 + \xi_4 = 0$を満たすとき$T_0$と$X^\mu$は可換
+        \item $T_1X_1T_1 = X^{s_1(\omega_1)} = X^{\omega_2-\omega_1} = X_1^{-1}X_2$
+        \item $T_2X_2T_2 = X^{s_2(\omega_2)} = X_1X_2^{-1}X_3X_4$
+        \item $T_3X_3T_3 = X^{s_3(\omega_3)} = X^{\omega_2-\omega_3} = X_2X_3^{-1}$
+        \item $T_4X_4T_4 = X^{s_4(\omega_4)} = X^{\omega_2-\omega_4} = X_2X_4^{-1}$
+        \item $T_0X_1^{-1}T_0 = X^{s_0(\omega_1)} = q^{-1}X_1^{-1}X_2$
+    \end{itemize}
+    以上の関係式を満たすように$X_i$の行き先を決めればよい。
+    まず$X$上の直線束$L_0, \dots, L_4$を次の条件を満たすようにとる。
+    \begin{enumerate}
+        \item $L_i$は$G_i$上で次数$1$、他の既約成分上で次数$0$を持つ。
+        \item $X \subset S$を$X$を特異ファイバーにもつ楕円曲面とし、$\cO(G_i) \in \Pic(S)$としたとき
+              \begin{equation}
+                  \cO(G_i)\vert_X \cong \bigotimes_{j=0}^4 L_j^{\otimes (G_j\cdot G_i)}
+              \end{equation}
+              が成り立つ。
+    \end{enumerate}
+    そして$X_i$の行き先を$i \neq 2$のとき$L_0^{-1}L_i \otimes-$、$i=2$のとき$L_0^{-2}L_2 \otimes -$とする。
+\end{example}
+\printbibliography[title=参考文献]
+\end{document}
