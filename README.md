@@ -10,6 +10,6 @@ latexmk src/double-affine-braid-group.tex
 ```
 in the `double-affine-braid-group-note` directory or run
 ``` bash
-cd latexmk -r ../.latexmkrc double-affine-braid-group.tex
+latexmk -r ../.latexmkrc double-affine-braid-group.tex
 ```
 in the `double-affine-braid-group-note/src` directory.
