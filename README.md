@@ -6,10 +6,10 @@ git clone https://github.com/aralsea/double-affine-braid-group-note.git && cd do
 ```
 and
 ``` bash
-latexmk src/double-affine-braid-group.tex
+latexmk src/*.tex
 ```
 in the `double-affine-braid-group-note` directory or run
 ``` bash
-latexmk -r ../.latexmkrc double-affine-braid-group.tex
+latexmk -r ../.latexmkrc *.tex
 ```
 in the `double-affine-braid-group-note/src` directory.
