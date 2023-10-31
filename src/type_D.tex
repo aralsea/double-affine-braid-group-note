@@ -42,6 +42,7 @@
 \DeclareMathOperator{\SL}{\mathrm{SL}}
 \DeclareMathOperator{\GL}{\mathrm{GL}}
 \DeclareMathOperator{\Spec}{\mathrm{Spec}}
+\DeclareMathOperator{\Proj}{\mathrm{Proj}}
 \DeclareMathOperator{\Perf}{\mathrm{Perf}}
 \DeclareMathOperator{\NS}{\mathrm{NS}}
 \DeclareMathOperator{\Ext}{\mathrm{Ext}}
@@ -51,6 +52,9 @@
 \DeclareMathOperator{\coh}{\mathrm{coh}}
 \DeclareMathOperator{\Ann}{\mathrm{Ann}}
 \DeclareMathOperator{\Aff}{\mathrm{Aff}}
+\DeclareMathOperator{\FM}{\mathrm{FM}}
+\DeclareMathOperator{\red}{\mathrm{red}}
+\DeclareMathOperator{\length}{\mathrm{length}}
 
 
 
@@ -231,29 +235,95 @@ $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \b
     \end{itemize}
 \end{example}
 \section{小平ファイバーの導来圏}
-$X$を楕円曲面$S$の既約でないファイバーとする。
-\begin{proposition}
-    $\Phi \in \Auteq D^b(X)$とし、$\Phi$は積分関手であると仮定する。また$X$の既約成分$G_0, \dots, G_n$から（複数の既約成分の交点ではない）閉点$x_i \in G_i$を選んでおく。
-    このとき$\Phi(\cO_X) \cong \cO$かつ全ての$i$について$\Phi(\cO_{x_i}) \cong \cO_{x_i}$ならば、ある$f \in \Aut(X)$が存在して$\Phi \cong f^*$である。
+
+\begin{proposition}[修正が必要！]
+    $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーとする。
+    既約成分を$G_0, \dots, G_n$とし、
+    %既約成分のうち$G_0, G_1, G_{n-1}, G_n$が重複度$1$で他の既約成分が重複度$2$で現れるように番号づけしておく。
+    $G_i \setminus \bigcup_{j \neq i}G_j$の閉点$x_i$を任意に選ぶ。
+    さらに$x_i$に台を持つlci zero cycle $Z_i$を任意に選ぶ。
+    $\Phi \in \Auteq D^b(X)$とし、$\Phi$は積分関手であると仮定する。
+    このとき$\Phi(\cO_X) \cong \cO_X$かつ全ての$i$について$\Phi(\cO_{Z_i}) \cong \cO_{Z_i}$ならば、ある$f \in \Aut(X)$が存在して$\Phi \cong f^*$である。
+
+    さらに$\Phi$が無限個の閉点の構造層を保つならば、$\Phi = \id$である。
 \end{proposition}
 \begin{proof}
-    \cite{MR3182005}のLemma 3.3と同様の議論をする。アファイン$A$型Dynkin図形に対応する小平ファイバーについては\cite{MR3182005}ですでに示されているので、$D$と$E$の場合を確かめる。
-
-    $D$型の場合、既約成分のうち$G_0, G_1, G_{n-1}, G_n$が重複度$1$で他の既約成分が重複度$2$で現れるように番号づけしておく。$X$上の非常に豊富な直線束$L$を
-    \begin{equation}
-        L^{-1} = \Ker(\cO_X \to \cO_{x_0}\oplus \cO_{x_1} \oplus E_2 \oplus \cdots \oplus E_{n-2}\oplus \cO_{x_{n-1}} \oplus \cO_{x_n})
+    $L = \cO_X(Z_0 + \cdots + Z_n)$は豊富な直線束である。（中井--Moishezonの判定法。非常に豊富なことまで言える？）
+    すると
+    \begin{equation}\label{eq:exact-triangle-of-very-ample-line-bundle}
+        L^{-1} \to \cO_X \xrightarrow{p} \cO_{Z_0} \oplus \cdots \oplus \cO_{Z_n}\xrightarrow{+1}
     \end{equation}
-    となるようにとる。ただし$E_i$は$x_i$を台に持つ長さ$2$のArtin加群である。
-    このとき$\Phi(E_i) \cong E_i$が成り立つ。なぜなら$E_i$は$\cO_{x_i}$を$\cO_{x_i}$で拡大することで得られるが、
-    \begin{equation}
-        \Ext_X^1(\cO_{x_i}, \cO_{x_i}) \cong \Hom(\cO_{x_i}, \cO_{x_i})^* \cong \bC
-    \end{equation}
-    より$E_i$はそのような加群として同型をのぞいて一意に定まるからである。（$\cO_{x_i}$は具体的に射影分解を作ることでperfectだとわかる。）
-    すると$\Phi$は$L^{-1}$を保つ。あとは\cite{MR3182005}と同様。
+    という$D^b(X)$の完全三角形がある。$\Phi$は$\cO$と$\cO_{Z_i}$を保ち完全三角形を保つから、以下の図式がある。
+    \[
+        \begin{tikzcd}
+            L^{-1} \ar[r] & \cO_X \ar[r, "p"] \ar[d, "\sim", sloped] & \cO_{Z_0} \oplus \cdots \oplus \cO_{Z_n} \ar[r, "+1"]\ar[d, "\sim", sloped] &{}\\
+            \Phi(L^{-1}) \ar[r] & \Phi(\cO_X) \ar[r, "\Phi(p)"] & \Phi(\cO_{Z_0}) \oplus \cdots \oplus \Phi(\cO_{Z_n}) \ar[r, "+1"] &{}\\
+        \end{tikzcd}
+    \]
+    右側の縦の射を成分ごとに適切に定数倍で置き換えることで、これを可換図式にすることができる。よって$\Phi(L^{-1}) \cong L^{-1}$が成り立つ。$L$や一般の$L^m$についてもやはり\cite{MR3182005}と同様に$\Phi$で保たれることがわかる。
 
-    E型の場合
+    よって$\Phi$は次数付きベクトル空間の同型
+    \begin{equation}
+        \varphi \colon \bigoplus_{m = 0}^\infty H^0(X, L^m) \xrightarrow{\sim} \bigoplus_{m = 0}^\infty H^0(X, \Phi(L^m)) \cong \bigoplus_{m = 0}^\infty H^0(X, L^m)
+    \end{equation}
+    を誘導する。Bondal--Orlov reconstructionの証明\cite{MR1818984}と同様に、2つ目の同型射を適切に取り替えることで$\varphi$は次数付き代数の準同型にできる。（使うのは$\Phi$が関手だから射の合成を保つことと、上の環の積が射の合成で定義されることである。）そこで$\varphi$の定める$X$の自己同型
+    \begin{equation}
+        X \cong \Proj(\bigoplus_{m = 0}^\infty H^0(X, L^m)) \xrightarrow{\varphi^*} \Proj(\bigoplus_{m = 0}^\infty H^0(X, L^m)) \cong X
+    \end{equation}
+    を$f$とおく。すると$\Phi \cong f^*$である。（$f_*$かも。）
+
+    $m$を十分大きくとって$L^m$が非常に豊富になるようにし、これ改めて$L$とおく。以下この$f$が恒等写像であることを示す。まず$f$は$L$の定める埋め込み$X \hookrightarrow \bP(H^0(X, L)^*)$により射影空間の自己同型$\widetilde{f}$に延長される。
+    \[
+        \begin{tikzcd}
+            X \ar[r, hook] \ar[d, "f"] & \bP(H^0(X, L)^\vee) \ar[d, "\widetilde{f}"] \\
+            X \ar[r, hook] & \bP(H^0(X, L)^\vee)
+        \end{tikzcd}
+    \]
+    特に$\widetilde{f}$は線型写像で、$X$を含む最小の線形部分空間$V$を保つ。よって$\Phi$が$X$の無限個の閉点の構造層を保つならば$\widetilde{f}$は$V$上$\id$となり、特に$f$は$\id$となる。
+
+    ちなみに$L$が非常に豊富でまで言えたとすると、無限個の閉点についての仮定なしに$\Phi = \id$が言える。以下のようにする。
+
+    まずRiemann--Rochより
+    \begin{equation}
+        \chi(L) - \chi(\cO_X) = \sum_{i=0}^n \deg_{G_{i,\red}}(L) \cdot \length_{\eta_i}(\cO_{\eta_i})
+    \end{equation}
+    が成り立つ。ここで$\eta_i$は$G_i$の生成点である。
+    さらに完全列\eqref{eq:exact-triangle-of-very-ample-line-bundle}より長完全列
+    \begin{equation}
+        0 \to H^0(L^{-1}) \to H^0(\cO_X) \to \bigoplus_{i=0}^n H^0(\cO_{Z_i}) \to \cdots
+    \end{equation}
+    があり、$\bC \cong H^0(\cO_X) \to \bigoplus_{i=0}^n H^0(\cO_{Z_i})$は$0$でない定数関数を$0$でない元に送るから単射である。
+    よって（Serre双対から）$H^0(L^{-1}) \cong H^1(L)^\vee = 0$となる。
+    以上を合わせると
+    \begin{equation}
+        \dim H^0(L) = 1 + 1 + 2(n-3) + 1 + 1 = 2n-2
+    \end{equation}
+    だから、$X$は$\bP^{2n-3}$に埋め込まれる。
+    よって$X_{\red}$を含む最小の線形部分空間$V$は$\bP^{m}$（$m \leq 2n-3$）と同型である。$V$は$x_0, \dots, x_n$と既約成分の交点$\{s_j\}_{j \in J}$（$|J| = n$）でも生成されるが、$\widetilde{f}$はこれらの$2n+1 >2n-3$個の点を動かさない。よって$\widetilde{f}$は$V$上$\id$でなければならない。
+    % \cite{MR3182005}のLemma 3.3と同様の議論をする。アファイン$A$型Dynkin図形に対応する小平ファイバーについては\cite{MR3182005}ですでに示されているので、$D$と$E$の場合を確かめる。
+
+    % $D$型の場合、既約成分のうち$G_0, G_1, G_{n-1}, G_n$が重複度$1$で他の既約成分が重複度$2$で現れるように番号づけしておく。$X$上の非常に豊富な直線束$L$を
+    % \begin{equation}
+    %     L^{-1} = \Ker(\cO_X \to \cO_{x_0}\oplus \cO_{x_1} \oplus E_2 \oplus \cdots \oplus E_{n-2}\oplus \cO_{x_{n-1}} \oplus \cO_{x_n})
+    % \end{equation}
+    % となるようにとる。ただし$E_i$は$x_i$を台に持つ長さ$2$のArtin加群である。
+    % このとき$\Phi(E_i) \cong E_i$が成り立つ。なぜなら$E_i$は$\cO_{x_i}$を$\cO_{x_i}$で拡大することで得られるが、
+    % \begin{equation}
+    %     \Ext_X^1(\cO_{x_i}, \cO_{x_i}) \cong \Hom(\cO_{x_i}, \cO_{x_i})^* \cong \bC
+    % \end{equation}
+    % より$E_i$はそのような加群として同型をのぞいて一意に定まるからである。（$\cO_{x_i}$は具体的に射影分解を作ることでperfectだとわかる。）
+    % すると$\Phi$は$L^{-1}$を保つ。あとは\cite{MR3182005}と同様。
+
 \end{proof}
-\begin{lemma}
+
+\begin{definition}
+    $\pi \colon S \to C$を楕円曲面とし、$C$上の相対Fourier--向井変換全体のなす群を$\FM_C(D^b(X))$とする。$X$を$S$のファイバーとし、$E \in D^b(X)$を$i \colon X \to S$で押し出したとき$D^b(S)$の球面対象になるようなものとする。このとき捻り関手$T_{i_*E} \in \Auteq D^b(S)$は$\FM_C(D^b(S))$の元となる（\cite{2023arXiv230212501A}）。自然な群準同型
+    \begin{equation}
+        \FM_C(D^b(S)) \to \Auteq D^b(X)
+    \end{equation}
+    による$T_{i_*E}$の像を$H_E$と書き、$E$に付随する半捻り関手と呼ぶ。
+\end{definition}
+\begin{lemma}\label{lem:conjugate-action}
     $X$を既約でない小平ファイバーとし、$G$を既約成分の1つとする。また$\Phi \in \Aut(X) \ltimes \Pic(X) \subset \Auteq D^b(X)$とする。このとき
     \begin{equation}
         \Phi \circ H_{\cO_G(a)}\circ \Phi^{-1} = H_{\Phi(\cO_G(a))}
@@ -263,14 +333,8 @@ $X$を楕円曲面$S$の既約でないファイバーとする。
 \begin{proof}
     一番ややこしい。明らかに正しそうだし一般論を整備すれば簡単に示せるのかもしれないが、現状だと泥臭い計算をやるしかなさそう。
 \end{proof}
-\begin{lemma}\label{lem:omega_in_automorphisms}
-    $X$を既約でない小平ファイバーとし、対応する型のルート系を考える。このとき（アファイン）Dynkin図形への作用が$\Omega$と同じになるような$X$の自己同型群の部分群が存在する。ただし$X$の自己同型のDynkin図形への作用は既約成分への作用によって定めるものとする。
-\end{lemma}
-\begin{proof}
-    $D$型の場合
-\end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{lem:special-line-bundles}
     $X$を既約でない小平ファイバーとし、$G_i$たちを既約成分とする。このとき$X$上の直線束$L_i$たちで次の条件を満たすものが存在する。
     \begin{enumerate}
         \item $L_i$は$G_i$上で次数$1$、他の既約成分上で次数$0$を持つ。
@@ -284,27 +348,49 @@ $X$を楕円曲面$S$の既約でないファイバーとする。
 \begin{proof}
     $\Pic(X)$を具体的に表示すれば線形代数$+\alpha$ぐらいの問題になるはず。
 \end{proof}
-
+\begin{lemma}[{\cite{MR2198807}, Lemma 4.15}]\label{lem:composition-of-twists}
+    $S$が非特異曲面で$G \subset S$が$(-2)$曲線、$a \in \bZ$のとき、
+    \begin{equation}
+        T_{\cO_G(a-1)}\circ T_{\cO_G(a)} \cong -\otimes \cO_S(G)
+    \end{equation}
+    が成り立つ。
+\end{lemma}
 \begin{lemma}
-    $X$を既約でない小平ファイバーとし、既約成分$G_i$について$H_i = H_{\cO_{G_i}(-1)} \in \Auteq D^b(X)$とする。このとき、全ての$i$について
+    $X$を楕円曲面$S$の既約でない小平ファイバーとし、$L_i$を$i$番目の既約成分$G_i$上で次数$1$、他の既約成分上で次数$0$をもつ任意の直線束とする。また$H_i = H_{\cO_{G_i}(-1)} \in \Auteq D^b(X)$とする。（補題\ref{lem:conjugate-action}が正しいと仮定すると）このとき全ての$i$について
     \begin{equation}
         H_iL_iH_i = -\otimes \cO_S(G_i)\vert_Y \otimes L_i
     \end{equation}
     が成り立つ。
 \end{lemma}
 \begin{proof}
-    ややこしい。
+    補題\ref{lem:conjugate-action}より
+    \begin{equation}
+        L_i^{-1}H_iL_i = H_{\cO_{G_i}(-2)}
+    \end{equation}
+    が成り立つ。よって補題\ref{lem:composition-of-twists}より
+    \begin{equation}
+        L_i^{-1}H_iL_iH_i = H_{\cO_{G_i}(-2)}H_i = -\otimes \cO_S(G_i)\vert_X
+    \end{equation}
+    となる。
 \end{proof}
+\begin{lemma}\label{lem:omega_in_automorphisms}
+    $X$を既約でない小平ファイバーとし、対応する型のルート系を考える。このとき（アファイン）Dynkin図形への作用が$\Omega$と同じになるような$X$の自己同型群の部分群が存在する。ただし$X$の自己同型のDynkin図形への作用は既約成分への作用によって定めるものとする。
+\end{lemma}
+\begin{proof}
+    $D$型の場合
+\end{proof}
+
+
 \section{二重アファインブレイド群作用}
 
-\begin{proposition}\label{prop:action_of_affine_braid_group}
+\begin{proposition}\label{prop:action-of-affine-braid-group}
     $X$を既約でない小平ファイバーとし、$G_0, \dots, G_n$を既約成分とする。さらに$\cO_{G_i}(-1)$の定める半ねじり関手を$H_{\cO_{G_i}(-1)} = H_i \in \Auteq D^b(X)$とする。また$B^a$を$X$に対応するアファインDynkin図形に付随するアファインブレイド群とする。このとき$H_0, \dots, H_n$は$B^a$の$D^b(X)$への作用を定める。さらに補題\ref{lem:omega_in_automorphisms}の自己同型群の部分群と合わせることで$B^{ae}$の作用を定める。
 \end{proposition}
 \begin{proof}
     \cite{MR1831820, brav2010braid,nordskova2020faithful}の結果などから前半は示せる（はず）。後半は補題\ref{lem:omega_in_automorphisms}と$B^{ae} = \Omega \ltimes B^a$からわかる。
 \end{proof}
 \begin{theorem}
-    $X$をアファイン$D_n$型のDynkin図形に付随する小平ファイバーとする。$B^d = \langle B^{ae}, X^P, q\rangle$を対応する型の二重アファインブレイド群とする。このとき$B^{ae}$を命題\ref{prop:action_of_affine_braid_group}の作用、$X^P$を直線束による捻りの作用、$q$を$\id$とするような$B^d$の$D^b(X)$への作用が存在する。
+    $X$をアファイン$D_n$型のDynkin図形に付随する小平ファイバーとする。$B^d = \langle B^{ae}, X^P, q\rangle$を対応する型の二重アファインブレイド群とする。このとき$B^{ae}$を命題\ref{prop:action-of-affine-braid-group}の作用、$X^P$を直線束による捻りの作用、$q$を$\id$とするような$B^d$の$D^b(X)$への作用が存在する。
 \end{theorem}
 \begin{example}
     \begin{itemize}
