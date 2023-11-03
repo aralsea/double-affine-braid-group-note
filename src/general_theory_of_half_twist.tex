@@ -57,13 +57,14 @@
 \DeclareMathOperator{\red}{\mathrm{red}}
 \DeclareMathOperator{\length}{\mathrm{length}}
 \DeclareMathOperator{\Mod}{\mathrm{Mod}}
+\DeclareMathOperator{\tr}{\mathrm{tr}}
 
 
 
 \newcommand{\nc}{\newcommand}
 
 %% Calligraphic letters
-
+\nc{\cD}{{\mathcal{D}}}
 \nc{\cF}{{\mathcal{F}}}
 \nc{\cG}{{\mathcal{G}}}
 \nc{\cH}{{\mathcal{H}}}
@@ -110,11 +111,18 @@
     \end{equation}
     は右随伴$a \colon D_{\QCoh}(\cO_Y) \to D_{\QCoh}(\cO_X)$を持つ。さらにこれは$D_{\QCoh}^+$を保つ。
 \end{theorem}
+\begin{theorem}[{\cite[\href{https://stacks.math.columbia.edu/tag/0GEW}{Tag 0GEW}]{stacks-project}}]\label{thm:Grothendieck-Verdier-duality-for-complexes}
+    $f \colon X \to Y$をNoetherスキームの間の固有射とする。このとき任意の$L \in D_{\Coh}^-(\cO_X), K \in D_{\QCoh}^+(\cO_Y)$に対して自然な同型
+    \begin{equation}
+        f_* \CHom(L, a(K)) \xrightarrow{\sim} \CHom(f_*L, K)
+    \end{equation}
+    がある。
+\end{theorem}
 \begin{definition}[{\cite[\href{https://stacks.math.columbia.edu/tag/0A74}{Tag 0A74}]{stacks-project}}]
     $i \colon Z \to X$をスキームの閉埋め込みとする。$\cO_X$加群$F$に対して、層$\CHom_{\cO_X}(i_*\cO_Z, F)$は自然に$\cO_Z$加群とみなせる。
     これにより定まる関手$\Mod(\cO_X) \to \Mod(\cO_Z)$を$\CHom(\cO_Z, -)$と書く。
 \end{definition}
-\begin{proposition}
+\begin{proposition}[{\cite[\href{https://stacks.math.columbia.edu/tag/0A74}{Tag 0A74}]{stacks-project}}]\label{prop:Grothendieck-Verdier-duality-for-closed-immersion}
     $i \colon Z \to X$をスキームの閉埋め込みとする。このとき
     \begin{enumerate}
         \item 関手$\CHom(\cO_Z, -) \colon \Mod(\cO_X) \to \Mod(\cO_Z)$は左完全である。
@@ -228,28 +236,31 @@ $X, Y$を$S$上のスキームとし、$K \in D(\cO_{X \times_S Y})$とする。
         \item $D$の定義イデアルは局所的に非零因子で生成される。
     \end{enumerate}
 \end{proposition}
-\begin{proposition}
-    $X$をNoetherスキームとし、$i \colon D\hookrightarrow X$を有効Cartier因子とする。
+\begin{proposition}\label{prop:duality-for-Cartier-divisor}
+    $X$をスキームとし、$i \colon D\hookrightarrow X$を有効Cartier因子とする。
     このとき関手
     \begin{equation}
-        i^*(-)\otimes \cO_D(D)[-1] \colon D_{\QCoh}^+(\cO_X) \to D_{\QCoh}^+(\cO_D)
+        i^*(-)\otimes \cO_D(D)[-1] \colon D(\cO_X) \to D(\cO_D)
     \end{equation}
-    は関手$i_* \colon D_{\QCoh}^+(\cO_D) \to D_{\QCoh}^+(\cO_X)$の右随伴である。
-    特に$i_* \colon D_{\QCoh}(\cO_D) \to D_{\QCoh}(\cO_X)$の右随伴$a$の$D_{\QCoh}^+$への制限と一致する。
+    は関手$i_* \colon D(\cO_D) \to D(\cO_X)$の右随伴である。
+    さらにこれは$D_{\QCoh}$を保ち、
+    特に$i_* \colon D_{\QCoh}(\cO_D) \to D_{\QCoh}(\cO_X)$の右随伴$a$と一致する。
 \end{proposition}
 \begin{proof}
-    {\cite[\href{https://stacks.math.columbia.edu/tag/0a9X}{Tag 0a9X}]{stacks-project}}と{\cite[\href{https://stacks.math.columbia.edu/tag/0AA4}{Tag 0AA4}]{stacks-project}}より従う。
+    まず{\cite[\href{https://stacks.math.columbia.edu/tag/0AA4}{Tag 0AA4}]{stacks-project}}より$i^*(-)\otimes \cO_D(D)[-1] \cong R\CHom(\cO_D, -)$だから、命題\ref{prop:Grothendieck-Verdier-duality-for-closed-immersion}より$i^*(-)\otimes \cO_D(D)[-1]$は$i_*$の右随伴である。
+    さらに$i^*(-)\otimes \cO_D(D)[-1]$は明らかに$D_{\QCoh}$を保つ。
+    よって誘導される関手$i^*(-)\otimes \cO_D(D)[-1] \colon D_{\QCoh}(\cO_X) \to D_{\QCoh}(\cO_D)$も$i_*$の右随伴であり、特に$a$と一致する。
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\label{prop:triangle-for-push-pull}
     $k$を体とし、$X$を$k$上分離的なNoetherスキーム、$i \colon D \hookrightarrow X$を有効Cartier因子とする。
-    このとき任意の$F \in D_{\QCoh}^+(\cO_D)$に対して、$D(\cO_Y)$の完全三角形
+    このとき任意の$F \in D_{\QCoh}(\cO_D)$に対して、$D_{\QCoh}(\cO_Y)$の完全三角形
     \begin{equation}
         F \otimes \cO_D(-D)[1] \to i^*i_*F \to F \xrightarrow{+1}
     \end{equation}
-    が存在する。ここで$i^i_*F \to F$は随伴$i^* \dashv i_*$の余単位射、$F \otimes \cO_D(-D)[1] \to i^*i_*F$は
+    が存在する。ここで$i^*i_*F \to F$は随伴$i^* \dashv i_*$の余単位射、$F \otimes \cO_D(-D)[1] \to i^*i_*F$は
     \begin{equation}
-        \Hom(F \otimes \cO_D(-D)[1], i^*i_*F) \cong \Hom(F, i^*i_*F\otimes \cO_D(-D)[1]) = \Hom(F, a(i_*F))
+        \Hom(F \otimes \cO_D(-D)[1], i^*i_*F) \cong \Hom(F, i^*i_*F\otimes \cO_D(D)[-1]) = \Hom(F, a(i_*F))
     \end{equation}
     によって随伴$i_* \dashv a$の単位射に対応するものである。
 
@@ -269,7 +280,7 @@ $X, Y$を$S$上のスキームとし、$K \in D(\cO_{X \times_S Y})$とする。
     \end{equation}
     が$i_*\cO_D$の平坦分解を与えるから、これにより$i^*$を計算すればよい。
 
-    次に$F$が（一般の複体ではなく）$\cO_X$加群のときに成立することを示す。
+    次に$F$が（一般の複体ではなく）準連接層のときに成立することを示す。
     射影公式よりと分解\eqref{eq:koszul-resolution}より
     \begin{align}
         i_*i^*i_*F & \cong i_*\cO_D \otimes i_*F                                     \\
@@ -320,7 +331,7 @@ $X, Y$を$S$上のスキームとし、$K \in D(\cO_{X \times_S Y})$とする。
     \]
     に対応し、これは左端のコホモロジーからの自然な射に他ならない。
 
-    最後一般の$F \in D_{\QCoh}^+(\cO_D)$に対して示す。
+    最後一般の$F \in D_{\QCoh}(\cO_D)$に対して示す。
     $i \colon D \hookrightarrow X$のグラフを$\Gamma \subset D \times X$、その転置を$\overline{\Gamma} \subset X \times D$とする。
     \[
         \begin{tikzcd}
@@ -330,7 +341,7 @@ $X, Y$を$S$上のスキームとし、$K \in D(\cO_{X \times_S Y})$とする。
         \end{tikzcd}
     \]
     という可換図式を考える。ただし$\eta$は$D \xrightarrow{\sim} \Gamma$と$\id_D$の積である。
-    有効Cartier因子$\varphi \colon D \times D \times D \hookrightarrow D \times X \times D$と$\cO_{D \times D \times D}$加群$\overline{\varphi}_*\cO_{D \times \overline{\Gamma}}$に対して命題を適用すると、完全三角形
+    有効Cartier因子$\varphi \colon D \times D \times D \hookrightarrow D \times X \times D$と$D \times D \times D$上の準連接層$\overline{\varphi}_*\cO_{D \times \overline{\Gamma}}$に対して命題を適用すると、完全三角形
     \begin{equation}\label{eq:triangle-on-DDD}
         \overline{\varphi}_* \cO_{D \times \overline{\Gamma}}\otimes \pi_2^*\cO_D(-D)[1]\to \psi^*\psi_*\overline{\varphi}_*\cO_{D \times \overline{\Gamma}}\to \overline{\varphi}_*\cO_{D \times \overline{\Gamma}} \xrightarrow{+1}
     \end{equation}
@@ -368,8 +379,127 @@ $X, Y$を$S$上のスキームとし、$K \in D(\cO_{X \times_S Y})$とする。
 \end{proof}
 
 \section{共役作用}
+この節では$X \to T$を体$k$上の非特異多様体の間の平坦射とし、$\dim T = 1$とする。また$i \colon Y \hookrightarrow X$を$X \to T$の$0 \in T$でのファイバーとする。
+さらに以下のように射を定める。
+\[
+    \begin{tikzcd}
+        Y \arrow[r,"i"]\arrow[d, "\Delta_Y"] & X \arrow[d,"d"]\arrow[rdd, bend left, "\Delta_X"]&\\
+        Y \times Y \arrow[r, "k"]\arrow[rrd, bend right, "j=i \times i"]& X \times_T X\arrow[rd, "\iota"]&\\
+        & & X \times X.
+    \end{tikzcd}
+\]
+$i_* \colon D_{\QCoh}(\cO_Y) \to D_{\QCoh}(\cO_X)$の右随伴を$a$とおく。
+\begin{lemma}
+    $k \colon Y \times Y \hookrightarrow X \times_T X$は有効Cartier因子である。
+\end{lemma}
+\begin{proof}
+    以下のファイバー積の図式がある。
+    \[
+        \begin{tikzcd}
+            Y \times Y \arrow[r, "k"]\arrow[d] & X \times_T X \arrow[d]\\
+            0 \arrow[r]& T
+        \end{tikzcd}
+    \]
+    $T$は非特異曲線だから、$0 \to T$は有効Cartier因子である。
+    有効Cartier因子は平坦射で引き戻せる（  {\cite[\href{https://stacks.math.columbia.edu/tag/02OO}{Tag 02OO}]{stacks-project}}）から$k$も有効Cartier因子である。
+\end{proof}
+\begin{lemma}
+    $\cO_X(-Y) \cong \cO_X, \cO_{X \times_T X}(-Y\times Y) \cong \cO_{X \times_T X}$である。
+\end{lemma}
+\begin{proof}
+    $0 \to T$のイデアルが自明束であることから従う。
+\end{proof}
 \begin{proposition}
-    $i \colon Y \hookrightarrow X$を$X \to T$のファイバーとし、$E \in D^b(Y)$を$i$についての半球面対象とする。
+    $E \in D(\cO_Y)$とし、$E' = \CHom(E, a(\cO_Y))$とおく。このとき$E'\cong \CHom(E, \cO_Y)[-1] = E^\vee[-1]$である。さらに$E \in D_{\Coh}^-(\cO_Y)$ならば$i_*E' \cong (i_*E)^\vee$である。
+\end{proposition}
+\begin{proof}
+    命題\ref{prop:duality-for-Cartier-divisor}より$a(\cO_Y) \cong \cO_Y(-Y)[-1]$である。$\cO_Y(-Y) \cong \cO_Y$だから、$\CHom(E, a(\cO_Y)) \cong \CHom(E, \cO_Y)[-1]$である。
+    また定理\ref{thm:Grothendieck-Verdier-duality-for-complexes}より同型
+    \begin{equation}
+        i_*(E') = i_* \CHom(E, a(\cO_Y)) \cong \CHom(i_*E, \cO_X) = (i_*E)^\vee
+    \end{equation}
+    がある。
+\end{proof}
+$E \in D_{\QCoh}(\cO_Y)$とし、$E' \boxtimes E \cong E^\vee \boxtimes E[-1] \in D_{\QCoh}(\cO_{Y\times Y})$と$k \colon Y \times Y \hookrightarrow X \times_T X$に命題\ref{prop:triangle-for-push-pull}を適用すると
+\begin{equation}\label{eq:triangle-for-E-boxtimes-E}
+    (E' \boxtimes E) \otimes \cO_{Y \times Y}(-Y\times Y)[1] \to k^*k_*(E' \boxtimes E) \to E' \boxtimes E \xrightarrow{+1}
+\end{equation}
+という完全三角形を得る。この境界射を$\delta \colon E' \boxtimes E[-1] \to (E' \boxtimes E) \otimes \cO_{Y \times Y}(-Y\times Y)[1]$とおく。
+\begin{proposition}
+    $\delta$と$(E' \boxtimes E) \otimes \cO_{Y \times Y}(-Y\times Y)[1] \cong E^\vee \boxtimes E \xrightarrow{\tr} \cO_{\Delta_Y} = \Delta_{Y*}\cO_Y$の合成$\tr \circ \delta$は$0$である。
+\end{proposition}
+\begin{proof}
+    完全三角形\eqref{eq:triangle-for-E-boxtimes-E}にコホモロジー的関手$\Hom(-, \cO_{\Delta_Y})$を適用すると、完全列
+    \begin{equation}
+        \cdots \to \Hom(k^*k_*(E' \boxtimes E), \cO_{\Delta_Y}) \to \Hom((E' \boxtimes E) \otimes \cO_{Y \times Y}(-Y\times Y)[1], \cO_{\Delta_Y}) \xrightarrow{-\circ \delta} \Hom(E' \boxtimes E[-1], \cO_{\Delta_Y}) \to \cdots
+    \end{equation}
+    を得る。よって$\tr \circ \delta = 0$を示すには、$\tr$が$k^*k_*(E' \boxtimes E)$を経由することを示せば十分である（実際には同値）。
+    ここで
+    \begin{enumerate}
+        \item $\tr \colon(E' \boxtimes E) \otimes \cO_{Y \times Y}(-Y\times Y)[1] \to \cO_{\Delta_Y}$が$k^*k_*(E' \boxtimes E)$を経由する。
+        \item $E'\boxtimes E \to \cO_{\Delta_Y} \otimes  \cO_{Y \times Y}(Y\times Y)[-1] \cong a(d_*\cO_X)$が$k^*k_*(E' \boxtimes E) \otimes  \cO_{Y \times Y}(Y\times Y)[-1] \cong a(k_*(E' \boxtimes E))$を経由する。
+    \end{enumerate}
+    と同値変形する。$\cO_{\Delta_Y} = \Delta_{Y*}\cO_Y \cong \Delta_{Y*}i^*\cO_X \cong k^*d_*\cO_X$（最後の同型はtor-independent base change）から$\cO_{\Delta_Y} \otimes \cO_{Y \times Y}(Y\times Y)[-1] \cong a(d_*\cO_X)$が成り立つことに注意する。
+    (2)は図式
+    \[
+        \begin{tikzcd}
+            E' \boxtimes E \ar[r, "\eta"] \ar[rd, bend right] &a(k_*(E' \boxtimes E))\ar[d, dashed] \\
+            & a(d_*\cO_X)
+        \end{tikzcd}
+    \]
+    を可換にするような点線の射が存在するかという命題だが、$\eta$は随伴$k_* \dashv a$の単位射だったから、随伴で移すと
+    \[
+        \begin{tikzcd}
+            k_*(E' \boxtimes E) \ar[r, equal] \ar[rd, bend right] &k_*(E' \boxtimes E)\ar[d, dashed] \\
+            & d_*\cO_X
+        \end{tikzcd}
+    \]
+    という点線の射を作ることに帰着できる。これは自明である。
+\end{proof}
+
+ここで{\cite{MR4452435}}の議論を引用する。$\cD$を三角圏とし、$A \xrightarrow{f} B \xrightarrow{g} C$を$\cD$の複体、つまり$g \circ f=0$を満たす射の組とする。
+この複体に付随する左Postnikov系とは、可換図式
+\[
+    \begin{tikzcd}
+        A \ar[r, "f"] & B \ar[r, "g"]\ar[d] & C \\
+        & \Cone(f)\ar[lu, dashed, bend left, "+1"] \ar[ru, bend right, "m"] &
+    \end{tikzcd}
+\]
+のことである。$m$の取り方は一意的ではないため、左Postnikov系は一意ではない。$\Cone(m)$をこの左Postnikov系の畳み込みという。
+同様に右Postnikov系とその畳み込みを図式
+\[
+    \begin{tikzcd}
+        A \ar[r, "f"] \ar[rd, bend right, dashed, "j"]& B \ar[r, "g"] & C \ar[ld, bend left, "h"] \\
+        & \Cone(g)\ar[u, dashed, "+1"] &
+    \end{tikzcd}
+\]
+を使って定義する。
+
+$\cD$の複体$A \to B \to C$にたいし、その左もしくは右Postnikov系の畳み込みになっているような任意の対象$E \in \cD$を、その複体の畳み込みと呼ぶ。
+\begin{lemma}[{\cite{MR4452435}}]
+    $\Ext^{-1}_{\cD}(A, C) = 0$ならば、複体$A \to B \to C$の畳み込みは同型をのぞいて一意に存在する。
+\end{lemma}
+
+
+\begin{proposition}
+    $E \in D^b(Y)$を$i \colon Y \hookrightarrow X$についての半捻り対象とし、対応する半捻り関手を$H_E \in \Auteq(D^b(Y))$とする。
+    このとき$H_E$のFourier--向井核は$D_{\QCoh}(\cO_{Y \times Y})$の複体
+    \begin{equation}
+        E^\vee \boxtimes E[-2] \xrightarrow{\delta} E\boxtimes E \xrightarrow{\tr} \cO_{\Delta_Y}
+    \end{equation}
+    の（一意な）畳み込みである。
+\end{proposition}
+\begin{proof}
+    $H_E$のFourier--向井核は
+    \begin{equation}
+        \Cone(k_*k^*(E' \boxtimes E) \to \cO_{\Delta_Y})
+    \end{equation}
+    だった。
+    % TODO
+\end{proof}
+
+\begin{proposition}
+    $E \in D^b(Y)$を$i$についての半球面対象とする。
     さらに$L \in \Pic(Y)$を、$E \otimes L$も半球面対象となるような直線束とする。
     このとき
     \begin{equation}
