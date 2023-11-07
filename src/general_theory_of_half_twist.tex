@@ -103,6 +103,51 @@
     \item $X$がスキームのとき、$D_{\QCoh}(\cO_X) \subset D(\cO_X)$をコホモロジーが凖連接層であるような複体のなす充満部分圏とする。
     \item $X$がNoetherスキームのとき、$D_{\Coh}(\cO_X) \subset D(\cO_X)$をコホモロジーが連接層であるような複体のなす充満部分圏とする。また$D^b(X) = D_{\Coh}^b(\cO_X)$とする。（$X$がNoetherなのでこれは連接層の圏$\Coh(X)$の導来圏と同値である。）
 \end{itemize}
+\section{導来関手}
+\begin{definition}
+    $X$を環付き空間とし、$E \in D(\cO_X)$とする。このとき$E$の双対$E^\vee$を
+    \begin{equation}
+        E^\vee = \RHom(E, \cO_X)
+    \end{equation}
+    により定義する。
+\end{definition}
+\begin{proposition}
+    $f \colon X \to Y$を環付き空間の射とし、$K, M \in D(\cO_Y)$とする。このとき自然な射
+    \begin{equation}
+        f^*\CHom(K, M) \to \CHom(f^*K, f^*M)
+    \end{equation}
+    は以下のいずれかの状況で同型である。
+    \begin{enumerate}
+        \item $K$がperfect
+        \item $X, Y$がNoetherスキーム、$f$が平坦で、$K \in D_{\Coh}^-(\cO_Y), M \in D^+(\cO_Y)$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    {\cite[\href{https://stacks.math.columbia.edu/tag/0GM7}{Tag 0GM7}]{stacks-project}}より直ちに従う。
+\end{proof}
+\begin{corollary}\label{cor:pullback-and-dual}
+    $f \colon X \to Y$をNoetherスキームの間の平坦射とすると、任意の$E \in D_{\Coh}^-(\cO_Y)$について双対は引き戻しと交換する。つまり$f^*(E^\vee) \cong (f^*E)^\vee$である。
+\end{corollary}
+\begin{proposition}\label{prop:tensor-and-dual}
+    $X$を環付き空間とし、$L, E \in D(\cO_X)$とする。さらに$L$がperfectであるとする。このとき自然な同型
+    \begin{equation}
+        E^\vee \otimes L^\vee \cong (E \otimes L)^\vee
+    \end{equation}
+    が存在する。
+\end{proposition}
+\begin{proof}
+    {\cite[\href{https://stacks.math.columbia.edu/tag/0G40}{Tag 0G40}]{stacks-project}}より自然な同型
+    \begin{equation}
+        \CHom(E, \cO_X) \otimes L^\vee \cong \CHom(\CHom(L^\vee, E), \cO_X)
+    \end{equation}
+    がある。
+    特に$L^{\vee\vee} \cong L$もわかる。
+    そして {\cite[\href{https://stacks.math.columbia.edu/tag/08DQ}{Tag 08DQ}]{stacks-project}}より
+    \begin{equation}
+        \CHom(L^\vee, E) \cong E \otimes L^{\vee\vee} \cong E \otimes L
+    \end{equation}
+    なので命題が成り立つ。
+\end{proof}
 \section{Grothendieck--Verdier双対}
 \begin{theorem}[{\cite[\href{https://stacks.math.columbia.edu/tag/0A9E}{Tag 0A9E}]{stacks-project}}]
     $f \colon X \to Y$をqcqsスキームの間の射とする。このとき
@@ -485,7 +530,7 @@ $\cD$の複体$A \to B \to C$にたいし、その左もしくは右Postnikov系
     $E \in D^b(Y)$を$i \colon Y \hookrightarrow X$についての半捻り対象とし、対応する半捻り関手を$H_E \in \Auteq(D^b(Y))$とする。
     このとき$H_E$のFourier--向井核は$D_{\QCoh}(\cO_{Y \times Y})$の複体
     \begin{equation}
-        E^\vee \boxtimes E[-2] \xrightarrow{\delta} E\boxtimes E \xrightarrow{\tr} \cO_{\Delta_Y}
+        E^\vee \boxtimes E[-2] \xrightarrow{\delta} E^\vee \boxtimes E \xrightarrow{\tr} \cO_{\Delta_Y}
     \end{equation}
     の（一意な）畳み込みである。
 \end{proposition}
@@ -498,7 +543,7 @@ $\cD$の複体$A \to B \to C$にたいし、その左もしくは右Postnikov系
     % TODO
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}[証明できていない！]
     $E \in D^b(Y)$を$i$についての半球面対象とする。
     さらに$L \in \Pic(Y)$を、$E \otimes L$も半球面対象となるような直線束とする。
     このとき
@@ -508,7 +553,51 @@ $\cD$の複体$A \to B \to C$にたいし、その左もしくは右Postnikov系
     が成り立つ。
 \end{proposition}
 \begin{proof}
-    % TODO
+    $\Delta \colon Y \to Y \times Y$を対角射とする。
+    $(L \otimes -) \circ H_E \cong H_{E\otimes L} \circ (L \otimes -)$を示す。
+    \begin{align}
+        P & = \pi_1^*E^\vee \otimes \pi_2^* E \otimes \pi_{23}^*\Delta_*L                         \\
+        Q & = \pi_{12}^*\Delta_*L \otimes \pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L)
+    \end{align}
+    とおく。
+    これによりそれぞれのFourier--向井核は
+    \begin{align}
+        \Cone(\Cone(\pi_{13*}P[-2] \to \pi_{13*}P) \to \Delta_*L) \\
+        \Cone(\Cone(\pi_{13*}Q[-2] \to \pi_{13*}Q) \to \Delta_*L)
+    \end{align}
+    となる。
+
+    まず$\pi_{13*}P \cong \pi_{13*}Q$を示す。$l = \id \times \Delta \colon Y\times Y \to Y \times Y \times Y$とする。
+    \[
+        \begin{tikzcd}
+            Y & Y \times Y \ar[l, "p_1"]\ar[r, "l"] \ar[d, "p_2"]& Y \times Y \times Y \ar[d, "\pi_{23}"]\\
+            & Y \ar[r, "\Delta"] & Y \times Y
+        \end{tikzcd}
+    \]
+    上の図式は平坦射$\pi_{23}$によるbase changeだから、$\pi_{23}^*\Delta_*L \cong l_*p_2^*L$である。
+    また$p_1 = \pi_1 \circ l, p_2 = \pi_2 \circ l$であることに注意し、系\ref{cor:pullback-and-dual}や命題\ref{prop:tensor-and-dual}などを使うと
+    \begin{align}
+        P & =  \pi_1^*E^\vee \otimes \pi_2^* E \otimes \pi_{23}^*\Delta_*L \\
+          & \cong  \pi_1^*E^\vee \otimes \pi_2^* E \otimes l_*p_2^*L       \\
+          & \cong l_*(l^*(\pi_1^*E^\vee \otimes \pi_2^* E) \otimes p_2^*L) \\
+          & \cong l_*(p_1^*E^\vee \otimes p_2^*E \otimes p_2^*L)           \\
+          & \cong l_*(p_1^*E^\vee \otimes p_2^*(E \otimes L))
+    \end{align}
+    となる。同様に$m = \Delta \times \id \colon Y \times Y \to Y \times Y \times Y$とすると
+    \begin{align}
+        Q & = \pi_{12}^*\Delta_*L \otimes \pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L)  \\
+          & \cong m_*p_1^*L \otimes \pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L)        \\
+          & \cong m_*(p_1^*L \otimes m^*(\pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L))) \\
+          & \cong m_*(p_1^*L \otimes p_1^*(E \otimes L)^\vee \otimes p_2^* (E \otimes L))          \\
+          & \cong m_*(p_1^*E^\vee \otimes p_2^* (E \otimes L))
+    \end{align}
+    となる。さらに$\pi_{13} \circ l = \pi_{13} \circ m = \id_{Y \times Y}$だから、
+    \begin{align}
+        \pi_{13*}P & \cong p_1^*E^\vee \otimes p_2^*(E \otimes L) \\
+                   & \cong \pi_{13*}Q
+    \end{align}
+    となる。
 \end{proof}
+
 \printbibliography[title=参考文献]
 \end{document}

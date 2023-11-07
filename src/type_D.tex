@@ -34,6 +34,7 @@
 \DeclareMathOperator{\PMCG}{\mathrm{PMCG}}
 \DeclareMathOperator{\RHom}{\mathrm{RHom}}
 \DeclareMathOperator{\Ker}{\mathrm{Ker}}
+\DeclareMathOperator{\Coker}{\mathrm{Coker}}
 \DeclareMathOperator{\Image}{\mathrm{Im}}
 \DeclareMathOperator{\Aut}{\mathrm{Aut}}
 \DeclareMathOperator{\Inn}{\mathrm{Inn}}
@@ -55,6 +56,13 @@
 \DeclareMathOperator{\FM}{\mathrm{FM}}
 \DeclareMathOperator{\red}{\mathrm{red}}
 \DeclareMathOperator{\length}{\mathrm{length}}
+\DeclareMathOperator{\Div}{\mathrm{Div}}
+\DeclareMathOperator{\DivCl}{\mathrm{DivCl}}
+\DeclareMathOperator{\Cl}{\mathrm{Cl}}
+\DeclareMathOperator{\Sch}{\mathrm{Sch}}
+\DeclareMathOperator{\Set}{\mathrm{Set}}
+\DeclareMathOperator{\op}{\mathrm{op}}
+
 
 
 
@@ -74,6 +82,7 @@
 %% Blackboard letters
 \nc{\bA}{{\mathbb{A}}}
 \nc{\bC}{{\mathbb{C}}}
+\nc{\bG}{{\mathbb{G}}}
 \nc{\bP}{{\mathbb{P}}}
 \nc{\bQ}{{\mathbb{Q}}}
 \nc{\bR}{{\mathbb{R}}}
@@ -235,20 +244,131 @@ $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \b
     \end{itemize}
 \end{example}
 \section{小平ファイバーの導来圏}
+$X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーとする。
+その（被約とは限らない）既約成分を$G_0, \dots, G_n$とし、それらを被約化したものを$G_{0, \red}, \dots, G_{n, \red}$とする。
+\begin{lemma}\label{lem:cartier-divisor-on-projective-scheme}
+    Noether環$R$上の射影的スキーム$S$について（特に任意の小平ファイバーについて）$\Div(S) \to \Pic(S), D \mapsto \cO_S(D)$は全射であり、$\DivCl(S) \to \Pic(S)$は同型である。
+\end{lemma}
+\begin{proof}
+    $R$が無限体$k$ならば\cite{MR0155830}の主定理である（\cite{MR2095471}のCh.1で知った）。
+    一般の場合は\cite[Cor.11.28]{MR2675155}である。
+\end{proof}
 
-\begin{proposition}
-    $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーとする。
-    既約成分を$G_0, \dots, G_n$とし、
-    %既約成分のうち$G_0, G_1, G_{n-1}, G_n$が重複度$1$で他の既約成分が重複度$2$で現れるように番号づけしておく。
-    $G_i \setminus \bigcup_{j \neq i}G_j$の閉点$x_i$を任意に選ぶ。
-    さらに$x_i$に台を持つlci zero cycle $Z_i$（= lci zero cycle of $\Spec \cO_{X, x_i}$ supported on $x_i$）を任意に選ぶ。
+\begin{lemma}\label{lem:picard-group-of-type-d}
+    $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーとする。このとき完全列
+    \begin{equation}
+        0 \to \bC \to \Pic(X) \xrightarrow{\deg} \bZ^{n+1} \to 0
+    \end{equation}
+    がある。
+    特に群として（$\bC$上の群スキームとしても？→正しい。\cite{MR1045822}の9章を参照）$\Pic(X) \cong \bC \times \bZ^{n+1}$である。
+\end{lemma}
+\begin{proof}
+    例えば\cite{MR3713873}などより、$\Pic(X_{\red})  \xrightarrow{\deg} \bZ^{n+1}$は同型である。さらに$X_{\red}$の$X$でのイデアル$I$は$I^2 = 0$を満たすから、完全列
+    \begin{align}
+        0 \to I \to \cO_{X} \to \cO_{X_{\red}} \to 0 \\
+        0 \to I \to \cO_{X}^* \to \cO_{X_{\red}}^* \to 1
+    \end{align}
+    がある。2つ目の$I \to \cO_{X}^*$は$t \mapsto 1 + t$である（これが準同型になるという部分で$I^2=0$を使う）。1つ目の完全列より$H^1(I) = \bC$がわかり、2つ目の完全列より
+    \begin{equation}
+        0 \to H^1(I) \to \Pic(X) \to \Pic(X_{\red}) \to 0
+    \end{equation}
+    がわかるので示された。
+\end{proof}
+\begin{lemma}\label{lem:morphism-to-picard-group-scheme}
+    被約な既約成分（4つある）を任意にとり、$G$とおく。またちょうど1つある$G$と他の既約成分との交点を$s$とおく。このとき閉点$x \in G \setminus \{s\}$は非特異閉点で、写像
+    \begin{equation}
+        Z_0(G \setminus \{s\}) \to \Pic(X), x \mapsto \cO_X(x)
+    \end{equation}
+    は$\bC$スキームの射$G \setminus \{s\} \to \Pic_{X/\bC}$に一意に伸びる。
+\end{lemma}
+\begin{proof}
+    $U \cong \bP^1 \setminus\{\infty\} \cong \bA^1$だから任意の閉点は非特異閉点である。
+    以下$U = G \setminus \{s\}$とおく。これは$X$の開部分スキームである。$U \cong \bA^1$だから、対角線$U \hookrightarrow U \times U$は有効Cartier因子である。さらに$U \hookrightarrow X$のグラフ$\Delta \colon U \to X \times U$は閉埋め込みで、（局所的には$U \hookrightarrow U \times U$だから）これも有効Cartier因子である。
+    よって$X \times U$上の直線束$\cO(\Delta)$が定まり、これは$\cO(\Delta)\vert_{X \times \{x\}} \cong \cO_X(x)$を満たす。
+    そこで
+    \begin{align}
+        \Hom_{\Sch/\bC}(U, \Pic_{X/\bC}) & \cong \Pic_{X /\bC}(U)               \\
+                                         & \cong \Pic(X \times_{\bC} U)/\Pic(U) \\
+                                         & \cong \Pic(X \times_{\bC} U)
+    \end{align}
+    により$\cO(\Delta) \in \Pic(X \times_{\bC} U)$に対応する射$\varphi \colon U \to \Pic_{X/\bC}$をとれば命題の主張する射を得る。
+\end{proof}
+
+\begin{lemma}\label{lem:presentation-of-degree-zero-line-bundle}
+    被約な既約成分（4つある）を任意にとり、$G$とおく。またちょうど1つある$G$と他の既約成分との交点を$s$とおく。
+    また閉点$x_0 \in G\setminus \{s\}$を固定すると、
+    $\bC$スキームの射
+    \begin{equation}
+        \varphi \colon G \setminus \{s\} \to \Pic^0_{X/\bC}, x \mapsto \cO_X(x - x_0)
+    \end{equation}
+    は同型である。
+    とくに$\Pic^0(X)$の任意の元はある2つの閉点$x, y \in G \setminus\{s\}$により$\cO_X(x - y)$と表せる。
+\end{lemma}
+\begin{proof}
+    まず補題\ref{lem:morphism-to-picard-group-scheme}より主張にある$\bC$スキームの射$\varphi \colon G \setminus \{s\} \to \Pic^0_{X/\bC}$が存在する。定義域と値域はともに$\bA^1$と同型だから、この射が同型かどうかは閉点の間に全単射を誘導するかどうかと同値である。
+
+    $\cO_X(x - x_0) \in \Pic^0_{X/\bC} = \Ker(\deg)$なのはよい。
+    単射性、つまり$x \neq y$のとき$\cO_X(x) \ncong \cO_X(y)$であることを示す。Riemann-Rochより
+    \begin{equation}
+        \chi(\cO_X(x)) - \chi(\cO_X) = \sum_{i = 0}^n \deg_{G_{i, \red}}(\cO_X(x))\cdot \length_{\eta_i}(\cO_{\eta_i}) = 1
+    \end{equation}
+    であり、$\chi(\cO_X) = 0$だから$\chi(\cO_X(x)) = 1$である。また完全列
+    \begin{equation}
+        0 \to \cO_X(-x) \to \cO_X \to \cO_x \to 0
+    \end{equation}
+    の誘導する$H^0(\cO_X) \to H^0(\cO_x)$は同型だから、$H^1(\cO_X(x))^\vee = H^0(\cO_X(-x)) = 0$である。よって$\dim H^0(\cO_X(x)) = 1$である。
+    同様に$\dim H^0(\cO_X(y)) = 1$である。
+    よって、もし$f \colon \cO_X(x) \xrightarrow{\sim} \cO_X(y)$ならば、ある定数$c \in \bC^*$により可換図式
+    \[
+        \begin{tikzcd}
+            \cO_X \ar[r] \ar[d, equal] &\cO_X(x)\ar[d, "c \cdot f"]\\
+            \cO_X \ar[r] &\cO_X(y)
+        \end{tikzcd}
+    \]
+    がある（ここで横の射はcanonicalなものである）。これの$\Coker$を見ると$\cO_x \cong \cO_y$、$x = y$となり対偶が示せた。
+
+    単射性より$\varphi$の像は$1$次元である。値域の$\Pic_{X/\bC}^0 \cong \bA^1$は既約で$1$次元だから、$\varphi$は全射である。
+\end{proof}
+
+\begin{corollary}\label{cor:presentation-of-line-bundle}
+    $e_0, \dots, e_n \in \bZ^{n+1}$を標準基底とし、$G_j \setminus \bigcup_{k \neq j} G_k$の有効Cartier因子$Z_j \subset G_j$で$\deg(\cO_X(Z_j)) = e_j$となるようなものとする。
+    $L \in \Pic(X)$を直線束とし、$\deg(L) = \sum_i d_ie_i\in \bZ^{n+1}$とする。
+    \begin{enumerate}
+        \item ある被約な既約成分$G_i$上での次数$d_i$が$0$でないとき、$\{Z_j\}_j$をうまくとると、$L \cong \cO_X(\sum_i d_iZ_i)$と表せる。
+        \item 全ての被約な既約成分上での次数が$0$のとき、任意にとった$\{Z_j\}_j$たちに対し被約な既約成分$G_i$（どれでもよい）上の$Z_i'$をうまくとると、$L \cong \cO_X(\sum_{j \neq i} d_jZ_j + aZ_i - bZ_i'), a-b = d_i$と表せる。
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    まず$Z_i$を適当に選び、$L' = L \otimes \cO_X(-\sum_i d_iZ_i)$とおく。
+    \begin{enumerate}
+        \item 補題\ref{lem:presentation-of-degree-zero-line-bundle}より、$Z_i$を適当に取り替えることで$L' = \cO_X$とできる。
+        \item (1)と同様。
+    \end{enumerate}
+\end{proof}
+
+% \begin{definition}[ここだけの用語]
+%     $x \in X$を閉点とする。$X$の有効Cartier因子$Z \subset X$が含む閉点の集合が$\{x\}$であるとき、$Z$は$x$を台とする有効Cartier因子であるという。
+% \end{definition}
+\begin{lemma}\label{lem:automorphism-of-double-line}
+    $C$を二重に太った$\bP^1$、つまり$\{x_2 = 0\} \subset \bP^2$とする。$C = U_0 \cup U_\infty, U_0 = \Spec k[z][\varepsilon], U_\infty = \Spec k[w][\varepsilon]$とする。このとき$C$の自己同型であって$C_{\red} \cong \bP^1$上で$\id$になるものは定数$a \in k^*$により
+    \begin{align}
+        k[z][\varepsilon] & \to k[z][\varepsilon], z \mapsto z, \varepsilon \mapsto a\varepsilon \\
+        k[w][\varepsilon] & \to k[w][\varepsilon], w \mapsto w, \varepsilon \mapsto a\varepsilon
+    \end{align}
+    と表される。よって特に$C$の自己同型であって次数$1$の有効Cartier因子1つと、それに含まれない閉点2つを保つものは$\id$に限る。
+\end{lemma}
+\begin{proof}
+
+\end{proof}
+\begin{proposition}\label{prop:pointwise-criterion}
     $\Phi \in \Auteq D^b(X)$とし、$\Phi$は積分関手であると仮定する。
-    このとき$\Phi(\cO_X) \cong \cO_X$かつ全ての$i$について$\Phi(\cO_{Z_i}) \cong \cO_{Z_i}$ならば、ある$f \in \Aut(X)$が存在して$\Phi \cong f^*$である。
+    $G_i \setminus \bigcup_{j \neq i} G_j$の有効Cartier因子$Z_i \subset G_i$であって、$\deg(\cO_X(Z_i)) = e_i$となるようなものをとる。
+    このとき$\Phi(\cO_X) \cong \cO_X$かつ全ての$i$について$\Phi(\cO_{Z_i}) \cong \cO_{Z_i}$ならば、ある$f \in \Aut(X)$が存在して$\Phi \cong f^*$である。（$\cO_X$の代わりに任意の$\cO_X(\sum_i d_iZ_i)$でも正しい。）
 
-    さらに$\Phi$が無限個の閉点の構造層を保つならば、$\Phi = \id$である。（例えば、先に$\Phi$を固定した上で$x_i$をどのように選んでもよい場合などに適用できる。）
+    さらにこの$f$は$\id$である。
 \end{proposition}
 \begin{proof}
-    Cartier因子$Z_0 + \cdots + Z_n$が定める直線束$L = \cO_X(Z_0 + \cdots + Z_n)$は豊富な直線束である。（中井--Moishezonの判定法。非常に豊富なことまで言える？）
+    Cartier因子$Z_0 + \cdots + Z_n$が定める直線束$L = \cO_X(Z_0 + \cdots + Z_n)$は豊富な直線束である。（中井--Moishezonの判定法、もしくは\cite[Proposition 1.2.16]{MR2095471}。非常に豊富なことまで言える？）
     すると自然な全射$p$により
     \begin{equation}\label{eq:exact-triangle-of-very-ample-line-bundle}
         L^{-1} \to \cO_X \xrightarrow{p} \cO_{Z_0} \oplus \cdots \oplus \cO_{Z_n}\xrightarrow{+1}
@@ -272,48 +392,7 @@ $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \b
     \end{equation}
     を$f$とおく。すると$\Phi \cong f^*$である。（$f_*$かも。）
 
-    $m$を十分大きくとって$L^m$が非常に豊富になるようにし、これ改めて$L$とおく。以下この$f$が恒等写像であることを示す。まず$f$は$L$の定める埋め込み$X \hookrightarrow \bP(H^0(X, L)^\vee)$により射影空間の自己同型$\widetilde{f}$に延長される。
-    \[
-        \begin{tikzcd}
-            X \ar[r, hook] \ar[d, "f"] & \bP(H^0(X, L)^\vee) \ar[d, "\widetilde{f}"] \\
-            X \ar[r, hook] & \bP(H^0(X, L)^\vee)
-        \end{tikzcd}
-    \]
-    特に$\widetilde{f}$は線型写像で、$X_{\red}$を含む最小の線形部分空間$V$を保つ。よって$\Phi$が$X$の無限個の閉点の構造層を保つならば$\widetilde{f}$は$V$上$\id$となり、特に$f$は$\id$となる。
-
-    ちなみに$L$が非常に豊富なことまで言えたとすると、無限個の閉点についての仮定なしに$\Phi = \id$が言える。以下のようにする。
-
-    まずRiemann--Rochより
-    \begin{equation}
-        \chi(L) - \chi(\cO_X) = \sum_{i=0}^n \deg_{G_{i,\red}}(L) \cdot \length_{\eta_i}(\cO_{\eta_i})
-    \end{equation}
-    が成り立つ。ここで$\eta_i$は$G_i$の生成点である。
-    さらに完全列\eqref{eq:exact-triangle-of-very-ample-line-bundle}より長完全列
-    \begin{equation}
-        0 \to H^0(L^{-1}) \to H^0(\cO_X) \to \bigoplus_{i=0}^n H^0(\cO_{Z_i}) \to \cdots
-    \end{equation}
-    があり、$\bC \cong H^0(\cO_X) \to \bigoplus_{i=0}^n H^0(\cO_{Z_i})$は$0$でない定数関数を$0$でない元に送るから単射である。
-    よって（Serre双対から）$H^0(L^{-1}) \cong H^1(L)^\vee = 0$となる。
-    以上を合わせると
-    \begin{equation}
-        \dim H^0(L) = 1 + 1 + 2(n-3) + 1 + 1 = 2n-2
-    \end{equation}
-    だから、$X$は$\bP^{2n-3}$に埋め込まれる。
-    よって$X_{\red}$を含む最小の線形部分空間$V$は$\bP^{m}$（$m \leq 2n-3$）と同型である。$V$は$x_0, \dots, x_n$と既約成分の交点$\{s_j\}_{j \in J}$（$|J| = n$）でも生成されるが、$\widetilde{f}$はこれらの$2n+1 >2n-3$個の点を動かさない。よって$\widetilde{f}$は$V$上$\id$でなければならない。
-    % \cite{MR3182005}のLemma 3.3と同様の議論をする。アファイン$A$型Dynkin図形に対応する小平ファイバーについては\cite{MR3182005}ですでに示されているので、$D$と$E$の場合を確かめる。
-
-    % $D$型の場合、既約成分のうち$G_0, G_1, G_{n-1}, G_n$が重複度$1$で他の既約成分が重複度$2$で現れるように番号づけしておく。$X$上の非常に豊富な直線束$L$を
-    % \begin{equation}
-    %     L^{-1} = \Ker(\cO_X \to \cO_{x_0}\oplus \cO_{x_1} \oplus E_2 \oplus \cdots \oplus E_{n-2}\oplus \cO_{x_{n-1}} \oplus \cO_{x_n})
-    % \end{equation}
-    % となるようにとる。ただし$E_i$は$x_i$を台に持つ長さ$2$のArtin加群である。
-    % このとき$\Phi(E_i) \cong E_i$が成り立つ。なぜなら$E_i$は$\cO_{x_i}$を$\cO_{x_i}$で拡大することで得られるが、
-    % \begin{equation}
-    %     \Ext_X^1(\cO_{x_i}, \cO_{x_i}) \cong \Hom(\cO_{x_i}, \cO_{x_i})^* \cong \bC
-    % \end{equation}
-    % より$E_i$はそのような加群として同型をのぞいて一意に定まるからである。（$\cO_{x_i}$は具体的に射影分解を作ることでperfectだとわかる。）
-    % すると$\Phi$は$L^{-1}$を保つ。あとは\cite{MR3182005}と同様。
-
+    次に$f = \id$を示す。まず$f$がそれぞれの既約成分$G_i$の自己同型を誘導することがわかる。すると被約でない既約成分上では有効Cartier因子と隣り合う既約成分との2つの交点を保つので、$\id$になることが補題\ref{lem:automorphism-of-double-line}からわかる。すると被約な既約成分上でも2点を保ちそのうち1点での微分が$1$になることがわかるから、$\id$となる。よって$f = \id$である。
 \end{proof}
 
 \begin{definition}
@@ -331,38 +410,58 @@ $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \b
     が成り立つ。
 \end{lemma}
 \begin{proof}
-
+    $\Pic(X)$については補題\ref{lem:conjugate-action-by-line-bundle}より正しい。
 \end{proof}
-\begin{lemma}
-    $L$を次数ベクトルが$0$の直線束とすると、任意の既約成分$G$について
+\begin{lemma}\label{lem:preserved-line-bundle}
+    $L$を$\deg(L)$の第$i$成分が$a+1$であるような直線束とすると、$H_{\cO_{G_i}(a)}(L) \cong L$である。
+\end{lemma}
+\begin{proof}
+    $X \to T$が代数多様体の平坦族で$\dim T= 1$のとき、ファイバー$Y \subset X$上の半捻り関手$H_E$と複体$F$について
     \begin{equation}
-        L\otimes H_{\cO_G(-1)}(-) \cong H_{\cO_G(-1)}(L\otimes -)
+        H_E(F) \cong \Cone\left(\Cone(\Hom^*_Y(E, F) \otimes F[-2] \to \Hom^*_Y(E, F) \otimes F) \to F\right)
+    \end{equation}
+    が成り立つから、$\Hom^*_Y(E, F) = 0$ならば$H_E(F) \cong F$である。$L$は$\deg(L)$の第$i$成分が$a+1$であるような直線束だから、
+    \begin{align}
+        \Hom^*_Y(\cO_{G_i}(a), L) & \cong \Hom^*_Y(\cO_{G_i}(a)\otimes L^{-1}, \cO_Y) \\
+                                  & \cong \Hom_Y^*(\cO_{G_i}(-1), \cO_Y)              \\
+                                  & \cong 0
+    \end{align}
+    である。よって$H_{\cO_{G_i}(a)}(L) \cong L$である。
+\end{proof}
+
+\begin{lemma}\label{lem:conjugate-action-by-line-bundle}
+    $L$を直線束とすると、任意の既約成分$G$について
+    \begin{equation}
+        L\otimes H_{\cO_G(a)}(-) \cong H_{\cO_G(a) \otimes L}(L\otimes -)
     \end{equation}
     である。
 \end{lemma}
 \begin{proof}
-    $G = G_0$のとき、$\cO_{X}, \cO_{Z_i} (i > 0)$を保つのは明らか。$\cO_{Z_0} = \cO_{x_0}$を保つことを示す。
+    （アイデア：楕円曲面$S$上の直線束の場合を経由して示す。）
+    \begin{enumerate}
+        \item まず$L$が$X$をファイバーとしてもつ楕円曲面$S$上の直線束の制限で得られている場合は、自明である。例えば$L = \cO_X(G)$などについて成り立つ。
+        \item 一般の場合、$G = G_i$とする。命題\ref{prop:pointwise-criterion}のように$Z_0, \dots, Z_n$を任意にとる。まず補題\ref{lem:preserved-line-bundle}より$\cO_X((a+1)Z_i)$を両辺に代入した値は同型である。同様に$\cO_{Z_k}, k \neq i$を代入しても同型である。$\cO_{Z_i}$について
+              \begin{equation}
+                  L \otimes H_{\cO_G(a)}(\cO_{Z_i}) \cong H_{\cO_G(a) \otimes L}(\cO_{Z_i})
+              \end{equation}
+              を示す。$\deg(L) = \sum_{k}d_ke_k$とし、 $G_j$を$G_i$と隣り合う既約成分、$L' = L\otimes (\cO_X(-d_iG_j))$とすると
+              \begin{equation}
+                  \deg(L') = \sum_{k \neq i} d_k'e_k
+              \end{equation}
+              となる。よって系\ref{cor:presentation-of-line-bundle}より$X\setminus G_i$のCartier因子$D$によって\begin{equation}
+                  L'' \cong \cO_X(D)
+              \end{equation}
+              と表せる。$D = D_1 - D_2$と$X \setminus G_i$の有効Cartier因子の差で表し$U = X \setminus (D_1 \cup D_2)$とすると、$H_{\cO_{G}(a)}(\cO_{Z_0})$は$U$上の複体の押し出しだから$L' \otimes H_{\cO_{G}(a)}(\cO_{Z_i}) \cong H_{\cO_{G}(a)}(\cO_{Z_i})$である。よって$\cO_X(d_iG_j)$が$S$上の直線束の制限であることと合わせると
+              \begin{align}
+                  L \otimes H_{\cO_{G_i}(a)}(\cO_{Z_i}) & \cong \cO_X(d_iG_j) \otimes L' \otimes H_{\cO_{G_i}(a)}(\cO_{Z_i}) \\
+                                                        & \cong \cO_X(d_iG_j) \otimes H_{\cO_{G_i}(a)}(\cO_{Z_i})            \\
+                                                        & \cong H_{\cO_{G_i}(a) \otimes \cO_X(d_iG_j)}(\cO_{Z_i})            \\
+                                                        & \cong H_{\cO_{G_i}(a) \otimes L}(\cO_{Z_i})
+              \end{align}
+              となる。以上と命題\ref{prop:pointwise-criterion}より主張が成り立つ。
+    \end{enumerate}
 \end{proof}
 
-\begin{lemma}\label{lem:picard-group-of-type-d}
-    $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーとする。このとき完全列
-    \begin{equation}
-        0 \to \bC \to \Pic(X) \xrightarrow{\deg} \bZ^{n+1} \to 0
-    \end{equation}
-    がある。特に群として（代数群 or 群スキームとして？）$\Pic(X) \cong \bC \times \bZ^{n+1}$である。
-\end{lemma}
-\begin{proof}
-    例えば\cite{MR3713873}などより、$\Pic(X_{\red})  \xrightarrow{\deg} \bZ^{n+1}$は同型である。さらに$X_{\red}$の$X$でのイデアル$I$は$I^2 = 0$を満たすから、完全列
-    \begin{align}
-        0 \to I \to \cO_{X} \to \cO_{X_{\red}} \to 0 \\
-        0 \to I \to \cO_{X}^* \to \cO_{X_{\red}}^* \to 1
-    \end{align}
-    がある。2つ目の$I \to \cO_{X}^*$は$t \mapsto 1 + t$である。1つ目の完全列より$H^(I) = \bC$がわかり、2つ目の完全列より
-    \begin{equation}
-        0 \to H^1(I) \to \Pic(X) \to \Pic(X_{\red}) \to 0
-    \end{equation}
-    がわかるので示された。
-\end{proof}
 \begin{lemma}\label{lem:special-line-bundles}
     $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーとし、$G_i$たちを既約成分とする。このとき$X$上の直線束$L_i$たちで次の条件を満たすものが存在する。
     \begin{enumerate}
@@ -474,5 +573,40 @@ $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \b
     \end{enumerate}
     そして$X_i$の行き先を$i \neq 2$のとき$L_0^{-1}L_i \otimes-$、$i=2$のとき$L_0^{-2}L_2 \otimes -$とする。
 \end{example}
+
+\section{Picard関手とPicardスキーム（自分用まとめ）}
+\cite{MR1045822}の8章と9章を参考にした。
+\begin{definition}[Picard関手]
+    $X$を$S$上のスキームとする。関手
+    \begin{equation}
+        P_{X/S} \colon (\Sch/S)^{\op} \to (\Set), T \mapsto \Pic(X \times_S T)
+    \end{equation}
+    をfppf位相で層化して得られる関手
+    \begin{equation}
+        \Pic_{X/S} \colon (\Sch/S)^{\op} \to (\Set)
+    \end{equation}
+    をPicard関手という。
+\end{definition}
+\begin{proposition}
+    $X$を体$k$上qcqsなスキームとし、$X(k) \neq \emptyset$とする。このとき$\Pic_{X/k}$は関手
+    \begin{equation}
+        (\Sch/k)^{\op} \to (\Set), \mapsto \Pic(X \times_k T)/ \Pic(T)
+    \end{equation}
+    と自然同型である。
+    特に$\Pic_{X/k}(k) = \Pic(X)$である。
+\end{proposition}
+\begin{proof}
+    \cite[Proposition 8.1.4]{MR1045822}で$S = \Spec k$としたものである。
+\end{proof}
+\begin{theorem}
+    $X$を体$k$上の固有スキームとすると、$\Pic_{X/k}$は$k$上局所有限型なスキーム（特に$k$上のAbel群スキーム）で表現可能である。
+\end{theorem}
+\begin{proposition}\cite[Proposition 9.2.5]{MR1045822}
+    $X$を体$k$上固有な1次元スキームとする。このとき自然な射
+    \begin{equation}
+        \Pic_{X/k} \to \Pic_{X_{\red}/k}
+    \end{equation}
+    はエタール層の全射である。その$\Ker$は滑らかで連結な冪単群で、$\bG_a$の何回かの拡大で得られる。
+\end{proposition}
 \printbibliography[title=参考文献]
 \end{document}
