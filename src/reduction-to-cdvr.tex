@@ -166,7 +166,7 @@
     \end{enumerate}
 \end{proof}
 
-\section{半捻りと局所化・完備化}
+\section{完備局所環への帰着}
 \begin{itemize}
     \item $k$を標数$0$の代数閉体とする。
     \item 登場するスキームはすべて$k$上のものとする。
@@ -209,6 +209,12 @@
              (g \times g)^*(h \times h)^*k_*(E' \boxtimes E) & \to (g \times g)^*(h \times h)^*\cO_{\Delta_X}\end{align}
           が対応する。
 \end{itemize}
+
+% \begin{remark}
+%     この命題をもって$X$を完全に$X_{\widehat{R}}$に置き換えてしまうのは難しいと思われる。なぜなら、（私が）球面捻りを$X_{\widehat{R}}$の導来圏で定式化できていないからである（実はできるのかもしれない）。例えば\cite{MR3692883}による定式化では積分関手の随伴が必要であり、そのためには$p \colon X_{\widehat{R}} \to \Spec k$についてGrothendieck双対が必要である。しかし現状知られているGrothendieck双対の最も一般的な設定は、（本質的）有限型な射についてのものである。
+
+%     アイデア：\cite[Theorem 3.1.1]{MR1996800}によると、qcqsスキーム$X$について$D_{\QCoh}(\cO_X)$はcompact generatorを持つ。\cite[Corollary 4.23]{MR2434186}によると、余完備でcompact generatorを持つ体上の三角圏はRouquier functorを持つ。これと\cite{MR1831820}の定式化を使って、$X_{\widehat{R}}$の導来圏の球面捻りを定式化できるかもしれない。
+% \end{remark}
 
 \subsection{1つ目の証明}
 $k = (h \times h) \circ (g \times g) \circ (f \times f)$だから、1つ目を示すには$(h \times h)^*(h \times h)_* \cong \id, (g \times g)^*(g \times g)_* \cong \id$を示せばよい。
@@ -307,7 +313,7 @@ $k = (h \times h) \circ (g \times g) \circ (f \times f)$だから、1つ目を�
     \end{itemize}
     $M \otimes_A (A \otimes_R \widehat{R}) \cong M \otimes_R \widehat{R}$だから、$M$を$\widehat{R}$加群とみなして補題\ref{lem:forget-and-extension}を使えばよい。
 \end{proof}
-これにより完備化についての主張がわかる。
+あとは局所化と同様にして完備化についての主張がわかる。
 \subsection{2つ目の証明}
 flat base changeである。
 \subsection{3つ目の証明}
