@@ -62,6 +62,7 @@
 \DeclareMathOperator{\Sch}{\mathrm{Sch}}
 \DeclareMathOperator{\Set}{\mathrm{Set}}
 \DeclareMathOperator{\op}{\mathrm{op}}
+\DeclareMathOperator{\Coh}{\mathrm{Coh}}
 
 
 
@@ -244,8 +245,23 @@ $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \b
     \end{itemize}
 \end{example}
 \section{小平ファイバーの導来圏}
-$X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーとする。
-その（被約とは限らない）既約成分を$G_0, \dots, G_n$とし、それらを被約化したものを$G_{0, \red}, \dots, G_{n, \red}$とする。
+$\pi \colon S \to C$を楕円曲面とし、$X$を既約でない小平ファイバーとする。その（被約とは限らない）既約成分を$G_0, \dots, G_n$とし、それらを被約化したものを$G_{0, \red}, \dots, G_{n, \red}$とする。
+\[
+    \begin{tikzcd}
+        X \ar[r, hookrightarrow, "i"] \ar[d] & S \ar[d, "\pi"] \\
+        0 \ar[r, hookrightarrow] \ar[r] & C
+    \end{tikzcd}
+\]
+\subsection{半捻り関手}
+
+\begin{definition}
+    $S$の$C$上の相対Fourier--向井変換全体のなす群を$\FM_C(D^b(S))$とする。$X$を$S$のファイバーとし、$E \in D^b(X)$を$i \colon X \to S$で押し出したとき$D^b(S)$の球面対象になるようなものとする。このとき捻り関手$T_{i_*E} \in \Auteq D^b(S)$は$\FM_C(D^b(S))$の元となる（\cite{2023arXiv230212501A}）。自然な群準同型
+    \begin{equation}
+        \FM_C(D^b(S)) \to \Auteq D^b(X)
+    \end{equation}
+    による$T_{i_*E}$の像を$H_E$と書き、$E$に付随する半捻り関手と呼ぶ。
+\end{definition}
+\subsection{直線束による共役作用}
 \begin{lemma}\label{lem:cartier-divisor-on-projective-scheme}
     Noether環$R$上の射影的スキーム$S$について（特に任意の小平ファイバーについて）$\Div(S) \to \Pic(S), D \mapsto \cO_S(D)$は全射であり、$\DivCl(S) \to \Pic(S)$は同型である。
 \end{lemma}
@@ -361,6 +377,7 @@ $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーと
 
 \end{proof}
 \begin{proposition}\label{prop:pointwise-criterion}
+    $e_0, \dots, e_n \in \bZ^{n+1}$を標準基底とする。
     $\Phi \in \Auteq D^b(X)$とし、$\Phi$は積分関手であると仮定する。
     $G_i \setminus \bigcup_{j \neq i} G_j$の有効Cartier因子$Z_i \subset G_i$であって、$\deg(\cO_X(Z_i)) = e_i$となるようなものをとる。
     このとき$\Phi(\cO_X) \cong \cO_X$かつ全ての$i$について$\Phi(\cO_{Z_i}) \cong \cO_{Z_i}$ならば、ある$f \in \Aut(X)$が存在して$\Phi \cong f^*$である。（$\cO_X$の代わりに任意の$\cO_X(\sum_i d_iZ_i)$でも正しい。）
@@ -380,7 +397,7 @@ $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーと
             \Phi(L^{-1}) \ar[r] & \Phi(\cO_X) \ar[r, "\Phi(p)"] & \Phi(\cO_{Z_0}) \oplus \cdots \oplus \Phi(\cO_{Z_n}) \ar[r, "+1"] &{}\\
         \end{tikzcd}
     \]
-    右側の縦の射を成分ごとに適切に定数倍で置き換えることで、これを可換図式にすることができる。よって$\Phi(L^{-1}) \cong L^{-1}$が成り立つ。$L$や一般の$L^m$についてもやはり\cite{MR3182005}と同様に$\Phi$で保たれることがわかる。
+    （$\Hom(\cO_X, \cO_{Z_i}) \cong \Hom(\cO_{Z_i}, \cO_{Z_i})$だから）右側の縦の同型射を成分ごとに適切に置き換えることで、これを可換図式にすることができる。よって$\Phi(L^{-1}) \cong L^{-1}$が成り立つ。$L$や一般の$L^m$についてもやはり\cite{MR3182005}と同様に$\Phi$で保たれることがわかる。
 
     よって$\Phi$は次数付きベクトル空間の同型
     \begin{equation}
@@ -395,23 +412,6 @@ $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーと
     次に$f = \id$を示す。まず$f$がそれぞれの既約成分$G_i$の自己同型を誘導することがわかる。すると被約でない既約成分上では有効Cartier因子と隣り合う既約成分との2つの交点を保つので、$\id$になることが補題\ref{lem:automorphism-of-double-line}からわかる。すると被約な既約成分上でも2点を保ちそのうち1点での微分が$1$になることがわかるから、$\id$となる。よって$f = \id$である。
 \end{proof}
 
-\begin{definition}
-    $\pi \colon S \to C$を楕円曲面とし、$C$上の相対Fourier--向井変換全体のなす群を$\FM_C(D^b(S))$とする。$X$を$S$のファイバーとし、$E \in D^b(X)$を$i \colon X \to S$で押し出したとき$D^b(S)$の球面対象になるようなものとする。このとき捻り関手$T_{i_*E} \in \Auteq D^b(S)$は$\FM_C(D^b(S))$の元となる（\cite{2023arXiv230212501A}）。自然な群準同型
-    \begin{equation}
-        \FM_C(D^b(S)) \to \Auteq D^b(X)
-    \end{equation}
-    による$T_{i_*E}$の像を$H_E$と書き、$E$に付随する半捻り関手と呼ぶ。
-\end{definition}
-\begin{lemma}\label{lem:conjugate-action}
-    $X$を既約でない小平ファイバーとし、$G$を既約成分の1つとする。また$\Phi \in \Aut(X) \ltimes \Pic(X) \subset \Auteq D^b(X)$とする。このとき
-    \begin{equation}
-        \Phi \circ H_{\cO_G(a)}\circ \Phi^{-1} = H_{\Phi(\cO_G(a))}
-    \end{equation}
-    が成り立つ。
-\end{lemma}
-\begin{proof}
-    $\Pic(X)$については補題\ref{lem:conjugate-action-by-line-bundle}より正しい。
-\end{proof}
 \begin{lemma}\label{lem:preserved-line-bundle}
     $L$を$\deg(L)$の第$i$成分が$a+1$であるような直線束とすると、$H_{\cO_{G_i}(a)}(L) \cong L$である。
 \end{lemma}
@@ -461,7 +461,49 @@ $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーと
               となる。以上と命題\ref{prop:pointwise-criterion}より主張が成り立つ。
     \end{enumerate}
 \end{proof}
+% \begin{lemma}
+%     $f \in \Aut(X)$とし、既約成分$G$について$G' = f^{-1}(G)$を$f$による引き戻しで得られる既約成分とする。このとき$f^*\cO_X(G) \cong \cO_X(G')$が成り立つ。
+% \end{lemma}
+% \begin{proof}
+%     $i \colon X \hookrightarrow S$とおくと、完全列
+%     \begin{equation}
+%         0 \to \cO_S \to \cO_S(G) \to i_*\cO_G \to 0
+%     \end{equation}
+%     があるから、これを$i$で引き戻して
+%     \begin{equation}
+%         \cO_X \to \cO_X(G) \to i^*i_*\cO_G \xrightarrow{+1}
+%     \end{equation}
+%     という$D_{\Coh}^b(X)$の完全三角形を得る。
+%     さらにこれを$f$で引き戻して$\cO_G = f_*\cO_{G'}$を使うと
+%     \begin{equation}
+%         \cO_X \to f^*\cO_X(G) \to f^*i^*i_*f_*\cO_{G'} \xrightarrow{+1}
+%     \end{equation}
+%     となる。一方
+%     \begin{equation}
+%         \cO_X \to \cO_X(G') \to i^*i_*\cO_{G'} \xrightarrow{+1}
+%     \end{equation}
+%     ここで
+%     \begin{align}
+%         \Ext_X^1(i^*i_*\cO_G, \cO_X) & \cong \Ext_S^1(i_*\cO_G, i_*\cO_X) \\
+%                                      & \cong \bC
+%     \end{align}
+%     \begin{align}
+%         \Ext_X^1(f^*i^*i_*\cO_G, \cO_X) & \cong \Ext_S^1(i_*\cO_G, i_*f_*\cO_X) \\
+%                                         & \cong \Ext_S^1(i_*\cO_G, i_*\cO_X)    \\
+%                                         & \cong \bC
+%     \end{align}
+%     だから、$f^*\cO_X(G) \cong \cO_X(G)$となる。
+% \end{proof}
+\begin{lemma}
+    $f \in \Aut(X)$とすると、任意の既約成分$G$について
+    \begin{equation}
+        f^* \circ H_{\cO_G(a)} \cong H_{\cO_G(a) \otimes L}\circ f^*
+    \end{equation}
+    である。
+\end{lemma}
+\begin{proof}
 
+\end{proof}
 \begin{lemma}\label{lem:special-line-bundles}
     $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーとし、$G_i$たちを既約成分とする。このとき$X$上の直線束$L_i$たちで次の条件を満たすものが存在する。
     \begin{enumerate}
@@ -476,8 +518,8 @@ $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーと
 \begin{proof}
     $n=4$で示す。一般の場合も同様。補題\ref{lem:picard-group-of-type-d}により、$\Pic(X) \cong \bC \times \bZ^{n+1}$となる。これにより$L_i = (\lambda_i, e_i)$と同一視し、$\lambda_i$についての方程式を解く。まず既約成分に$G_0, G_1, G_{3}, G_4$が重複度$1$で$G_2$が重複度$2$になるような番号づけをしておく。すると同型により$\sum_i \mu_i = 0$を満たす（これは$\Pic(S)$の中で$\cO_S(X) = \cO_S$であることによる）$\mu_i \in \bC$によって
     \begin{align}
-        \cO(G_i)\vert_X & = (\mu_i, -2e_i + e_2)                  \\
-        \cO(G_2)\vert_X & = (\mu_2, e_0 + e_1 -2e_2 + e_23 + e_4)
+        \cO(G_i)\vert_X & = (\mu_i, -2e_i + e_2)                 \\
+        \cO(G_2)\vert_X & = (\mu_2, e_0 + e_1 -2e_2 + e_3 + e_4)
     \end{align}
     と同一視できる。すると$\lambda_i$の満たすべき方程式は
     \begin{equation}
@@ -504,7 +546,7 @@ $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーと
             \lambda_4 \\
         \end{pmatrix}
     \end{equation}
-    となる。この行列はアファイン$D_4$型のCartan行列だから、ランクは$4$である。$\sum_i \mu_i = 0$だったので、この一次方程式は解ける。
+    となる。この行列はアファイン$D_4$型のCartan行列だから、ランクは$4$である。$\sum_i \mu_i = 0$だったので、この一次方程式は解を持つ。
 \end{proof}
 \begin{lemma}[{\cite{MR2198807}, Lemma 4.15}]\label{lem:composition-of-twists}
     $S$が非特異曲面で$G \subset S$が$(-2)$曲線、$a \in \bZ$のとき、
@@ -514,7 +556,7 @@ $X$をアファイン$D_n$型Dynkin図形に対応する小平ファイバーと
     が成り立つ。
 \end{lemma}
 \begin{lemma}
-    $X$を楕円曲面$S$の既約でない小平ファイバーとし、$L_i$を$i$番目の既約成分$G_i$上で次数$1$、他の既約成分上で次数$0$をもつ任意の直線束とする。また$H_i = H_{\cO_{G_i}(-1)} \in \Auteq D^b(X)$とする。（補題\ref{lem:conjugate-action}が正しいと仮定すると）このとき全ての$i$について
+    $X$を楕円曲面$S$の既約でない小平ファイバーとし、$L_i$を$i$番目の既約成分$G_i$上で次数$1$もつ任意の直線束とする。また$H_i = H_{\cO_{G_i}(-1)} \in \Auteq D^b(X)$とする。（補題\ref{lem:conjugate-action}が正しいと仮定すると）このとき全ての$i$について
     \begin{equation}
         H_iL_iH_i = -\otimes \cO_S(G_i)\vert_Y \otimes L_i
     \end{equation}

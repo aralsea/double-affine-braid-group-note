@@ -502,102 +502,102 @@ $E \in D_{\QCoh}(\cO_Y)$とし、$E' \boxtimes E \cong E^\vee \boxtimes E[-1] \i
     という点線の射を作ることに帰着できる。これは自明である。
 \end{proof}
 
-ここで{\cite{MR4452435}}の議論を引用する。$\cD$を三角圏とし、$A \xrightarrow{f} B \xrightarrow{g} C$を$\cD$の複体、つまり$g \circ f=0$を満たす射の組とする。
-この複体に付随する左Postnikov系とは、可換図式
-\[
-    \begin{tikzcd}
-        A \ar[r, "f"] & B \ar[r, "g"]\ar[d] & C \\
-        & \Cone(f)\ar[lu, dashed, bend left, "+1"] \ar[ru, bend right, "m"] &
-    \end{tikzcd}
-\]
-のことである。$m$の取り方は一意的ではないため、左Postnikov系は一意ではない。$\Cone(m)$をこの左Postnikov系の畳み込みという。
-同様に右Postnikov系とその畳み込みを図式
-\[
-    \begin{tikzcd}
-        A \ar[r, "f"] \ar[rd, bend right, dashed, "j"]& B \ar[r, "g"] & C \ar[ld, bend left, "h"] \\
-        & \Cone(g)\ar[u, dashed, "+1"] &
-    \end{tikzcd}
-\]
-を使って定義する。
+% ここで{\cite{MR4452435}}の議論を引用する。$\cD$を三角圏とし、$A \xrightarrow{f} B \xrightarrow{g} C$を$\cD$の複体、つまり$g \circ f=0$を満たす射の組とする。
+% この複体に付随する左Postnikov系とは、可換図式
+% \[
+%     \begin{tikzcd}
+%         A \ar[r, "f"] & B \ar[r, "g"]\ar[d] & C \\
+%         & \Cone(f)\ar[lu, dashed, bend left, "+1"] \ar[ru, bend right, "m"] &
+%     \end{tikzcd}
+% \]
+% のことである。$m$の取り方は一意的ではないため、左Postnikov系は一意ではない。$\Cone(m)$をこの左Postnikov系の畳み込みという。
+% 同様に右Postnikov系とその畳み込みを図式
+% \[
+%     \begin{tikzcd}
+%         A \ar[r, "f"] \ar[rd, bend right, dashed, "j"]& B \ar[r, "g"] & C \ar[ld, bend left, "h"] \\
+%         & \Cone(g)\ar[u, dashed, "+1"] &
+%     \end{tikzcd}
+% \]
+% を使って定義する。
 
-$\cD$の複体$A \to B \to C$にたいし、その左もしくは右Postnikov系の畳み込みになっているような任意の対象$E \in \cD$を、その複体の畳み込みと呼ぶ。
-\begin{lemma}[{\cite{MR4452435}}]
-    $\Ext^{-1}_{\cD}(A, C) = 0$ならば、複体$A \to B \to C$の畳み込みは同型をのぞいて一意に存在する。
-\end{lemma}
+% $\cD$の複体$A \to B \to C$にたいし、その左もしくは右Postnikov系の畳み込みになっているような任意の対象$E \in \cD$を、その複体の畳み込みと呼ぶ。
+% \begin{lemma}[{\cite{MR4452435}}]
+%     $\Ext^{-1}_{\cD}(A, C) = 0$ならば、複体$A \to B \to C$の畳み込みは同型をのぞいて一意に存在する。
+% \end{lemma}
 
 
-\begin{proposition}
-    $E \in D^b(Y)$を$i \colon Y \hookrightarrow X$についての半捻り対象とし、対応する半捻り関手を$H_E \in \Auteq(D^b(Y))$とする。
-    このとき$H_E$のFourier--向井核は$D_{\QCoh}(\cO_{Y \times Y})$の複体
-    \begin{equation}
-        E^\vee \boxtimes E[-2] \xrightarrow{\delta} E^\vee \boxtimes E \xrightarrow{\tr} \cO_{\Delta_Y}
-    \end{equation}
-    の（一意な）畳み込みである。
-\end{proposition}
-\begin{proof}
-    $H_E$のFourier--向井核は
-    \begin{equation}
-        \Cone(k_*k^*(E' \boxtimes E) \to \cO_{\Delta_Y})
-    \end{equation}
-    だった。
-    % TODO
-\end{proof}
+% \begin{proposition}
+%     $E \in D^b(Y)$を$i \colon Y \hookrightarrow X$についての半捻り対象とし、対応する半捻り関手を$H_E \in \Auteq(D^b(Y))$とする。
+%     このとき$H_E$のFourier--向井核は$D_{\QCoh}(\cO_{Y \times Y})$の複体
+%     \begin{equation}
+%         E^\vee \boxtimes E[-2] \xrightarrow{\delta} E^\vee \boxtimes E \xrightarrow{\tr} \cO_{\Delta_Y}
+%     \end{equation}
+%     の（一意な）畳み込みである。
+% \end{proposition}
+% \begin{proof}
+%     $H_E$のFourier--向井核は
+%     \begin{equation}
+%         \Cone(k_*k^*(E' \boxtimes E) \to \cO_{\Delta_Y})
+%     \end{equation}
+%     だった。
+%     % TODO
+% \end{proof}
 
-\begin{proposition}[証明できていない！]
-    $E \in D^b(Y)$を$i$についての半球面対象とする。
-    さらに$L \in \Pic(Y)$を、$E \otimes L$も半球面対象となるような直線束とする。
-    このとき
-    \begin{equation}
-        (L \otimes -) \circ H_E \circ (L \otimes -)^{-1} \cong H_{E\otimes L}
-    \end{equation}
-    が成り立つ。
-\end{proposition}
-\begin{proof}
-    $\Delta \colon Y \to Y \times Y$を対角射とする。
-    $(L \otimes -) \circ H_E \cong H_{E\otimes L} \circ (L \otimes -)$を示す。
-    \begin{align}
-        P & = \pi_1^*E^\vee \otimes \pi_2^* E \otimes \pi_{23}^*\Delta_*L                         \\
-        Q & = \pi_{12}^*\Delta_*L \otimes \pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L)
-    \end{align}
-    とおく。
-    これによりそれぞれのFourier--向井核は
-    \begin{align}
-        \Cone(\Cone(\pi_{13*}P[-2] \to \pi_{13*}P) \to \Delta_*L) \\
-        \Cone(\Cone(\pi_{13*}Q[-2] \to \pi_{13*}Q) \to \Delta_*L)
-    \end{align}
-    となる。
+% \begin{proposition}[証明できていない！]
+%     $E \in D^b(Y)$を$i$についての半球面対象とする。
+%     さらに$L \in \Pic(Y)$を、$E \otimes L$も半球面対象となるような直線束とする。
+%     このとき
+%     \begin{equation}
+%         (L \otimes -) \circ H_E \circ (L \otimes -)^{-1} \cong H_{E\otimes L}
+%     \end{equation}
+%     が成り立つ。
+% \end{proposition}
+% \begin{proof}
+%     $\Delta \colon Y \to Y \times Y$を対角射とする。
+%     $(L \otimes -) \circ H_E \cong H_{E\otimes L} \circ (L \otimes -)$を示す。
+%     \begin{align}
+%         P & = \pi_1^*E^\vee \otimes \pi_2^* E \otimes \pi_{23}^*\Delta_*L                         \\
+%         Q & = \pi_{12}^*\Delta_*L \otimes \pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L)
+%     \end{align}
+%     とおく。
+%     これによりそれぞれのFourier--向井核は
+%     \begin{align}
+%         \Cone(\Cone(\pi_{13*}P[-2] \to \pi_{13*}P) \to \Delta_*L) \\
+%         \Cone(\Cone(\pi_{13*}Q[-2] \to \pi_{13*}Q) \to \Delta_*L)
+%     \end{align}
+%     となる。
 
-    まず$\pi_{13*}P \cong \pi_{13*}Q$を示す。$l = \id \times \Delta \colon Y\times Y \to Y \times Y \times Y$とする。
-    \[
-        \begin{tikzcd}
-            Y & Y \times Y \ar[l, "p_1"]\ar[r, "l"] \ar[d, "p_2"]& Y \times Y \times Y \ar[d, "\pi_{23}"]\\
-            & Y \ar[r, "\Delta"] & Y \times Y
-        \end{tikzcd}
-    \]
-    上の図式は平坦射$\pi_{23}$によるbase changeだから、$\pi_{23}^*\Delta_*L \cong l_*p_2^*L$である。
-    また$p_1 = \pi_1 \circ l, p_2 = \pi_2 \circ l$であることに注意し、系\ref{cor:pullback-and-dual}や命題\ref{prop:tensor-and-dual}などを使うと
-    \begin{align}
-        P & =  \pi_1^*E^\vee \otimes \pi_2^* E \otimes \pi_{23}^*\Delta_*L \\
-          & \cong  \pi_1^*E^\vee \otimes \pi_2^* E \otimes l_*p_2^*L       \\
-          & \cong l_*(l^*(\pi_1^*E^\vee \otimes \pi_2^* E) \otimes p_2^*L) \\
-          & \cong l_*(p_1^*E^\vee \otimes p_2^*E \otimes p_2^*L)           \\
-          & \cong l_*(p_1^*E^\vee \otimes p_2^*(E \otimes L))
-    \end{align}
-    となる。同様に$m = \Delta \times \id \colon Y \times Y \to Y \times Y \times Y$とすると
-    \begin{align}
-        Q & = \pi_{12}^*\Delta_*L \otimes \pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L)  \\
-          & \cong m_*p_1^*L \otimes \pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L)        \\
-          & \cong m_*(p_1^*L \otimes m^*(\pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L))) \\
-          & \cong m_*(p_1^*L \otimes p_1^*(E \otimes L)^\vee \otimes p_2^* (E \otimes L))          \\
-          & \cong m_*(p_1^*E^\vee \otimes p_2^* (E \otimes L))
-    \end{align}
-    となる。さらに$\pi_{13} \circ l = \pi_{13} \circ m = \id_{Y \times Y}$だから、
-    \begin{align}
-        \pi_{13*}P & \cong p_1^*E^\vee \otimes p_2^*(E \otimes L) \\
-                   & \cong \pi_{13*}Q
-    \end{align}
-    となる。
-\end{proof}
+%     まず$\pi_{13*}P \cong \pi_{13*}Q$を示す。$l = \id \times \Delta \colon Y\times Y \to Y \times Y \times Y$とする。
+%     \[
+%         \begin{tikzcd}
+%             Y & Y \times Y \ar[l, "p_1"]\ar[r, "l"] \ar[d, "p_2"]& Y \times Y \times Y \ar[d, "\pi_{23}"]\\
+%             & Y \ar[r, "\Delta"] & Y \times Y
+%         \end{tikzcd}
+%     \]
+%     上の図式は平坦射$\pi_{23}$によるbase changeだから、$\pi_{23}^*\Delta_*L \cong l_*p_2^*L$である。
+%     また$p_1 = \pi_1 \circ l, p_2 = \pi_2 \circ l$であることに注意し、系\ref{cor:pullback-and-dual}や命題\ref{prop:tensor-and-dual}などを使うと
+%     \begin{align}
+%         P & =  \pi_1^*E^\vee \otimes \pi_2^* E \otimes \pi_{23}^*\Delta_*L \\
+%           & \cong  \pi_1^*E^\vee \otimes \pi_2^* E \otimes l_*p_2^*L       \\
+%           & \cong l_*(l^*(\pi_1^*E^\vee \otimes \pi_2^* E) \otimes p_2^*L) \\
+%           & \cong l_*(p_1^*E^\vee \otimes p_2^*E \otimes p_2^*L)           \\
+%           & \cong l_*(p_1^*E^\vee \otimes p_2^*(E \otimes L))
+%     \end{align}
+%     となる。同様に$m = \Delta \times \id \colon Y \times Y \to Y \times Y \times Y$とすると
+%     \begin{align}
+%         Q & = \pi_{12}^*\Delta_*L \otimes \pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L)  \\
+%           & \cong m_*p_1^*L \otimes \pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L)        \\
+%           & \cong m_*(p_1^*L \otimes m^*(\pi_2^*(E \otimes L)^\vee \otimes \pi_3^* (E \otimes L))) \\
+%           & \cong m_*(p_1^*L \otimes p_1^*(E \otimes L)^\vee \otimes p_2^* (E \otimes L))          \\
+%           & \cong m_*(p_1^*E^\vee \otimes p_2^* (E \otimes L))
+%     \end{align}
+%     となる。さらに$\pi_{13} \circ l = \pi_{13} \circ m = \id_{Y \times Y}$だから、
+%     \begin{align}
+%         \pi_{13*}P & \cong p_1^*E^\vee \otimes p_2^*(E \otimes L) \\
+%                    & \cong \pi_{13*}Q
+%     \end{align}
+%     となる。
+% \end{proof}
 
 \printbibliography[title=参考文献]
 \end{document}
