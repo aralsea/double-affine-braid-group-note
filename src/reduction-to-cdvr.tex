@@ -1,0 +1,315 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, dvipdfmx]{jsarticle}
+\usepackage[backend=biber, style=alphabetic, sorting=nyt]{biblatex}
+\addbibresource{../bib/double-affine-braid-group.bib} 
+
+\usepackage{amsthm}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{tikz-cd}
+\usepackage{dynkin-diagrams}
+
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{fact}[theorem]{事実}
+\newtheorem{example}[theorem]{例}
+\newtheorem{remark}[theorem]{補足}
+
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+\DeclareMathOperator{\CHom}{\mathcal{H}\!\mathit{om}}
+\DeclareMathOperator{\CTor}{\mathcal{T}\!\mathit{or}}
+\DeclareMathOperator{\Auteq}{\mathrm{Auteq}}
+\DeclareMathOperator{\Cone}{\mathrm{Cone}}
+\DeclareMathOperator{\ev}{\mathrm{ev}}
+\DeclareMathOperator{\id}{\mathrm{id}}
+\DeclareMathOperator{\depth}{\mathrm{depth}}
+\DeclareMathOperator{\Pic}{\mathrm{Pic}}
+\DeclareMathOperator{\MCG}{\mathrm{MCG}}
+\DeclareMathOperator{\PMCG}{\mathrm{PMCG}}
+\DeclareMathOperator{\RHom}{\mathrm{RHom}}
+\DeclareMathOperator{\Ker}{\mathrm{Ker}}
+\DeclareMathOperator{\Coker}{\mathrm{Coker}}
+\DeclareMathOperator{\Image}{\mathrm{Im}}
+\DeclareMathOperator{\Aut}{\mathrm{Aut}}
+\DeclareMathOperator{\Inn}{\mathrm{Inn}}
+\DeclareMathOperator{\Out}{\mathrm{Out}}
+\DeclareMathOperator{\Supp}{\mathrm{Supp}}
+\DeclareMathOperator{\SL}{\mathrm{SL}}
+\DeclareMathOperator{\GL}{\mathrm{GL}}
+\DeclareMathOperator{\Spec}{\mathrm{Spec}}
+\DeclareMathOperator{\Proj}{\mathrm{Proj}}
+\DeclareMathOperator{\Perf}{\mathrm{Perf}}
+\DeclareMathOperator{\NS}{\mathrm{NS}}
+\DeclareMathOperator{\Ext}{\mathrm{Ext}}
+\DeclareMathOperator{\Hilb}{\mathrm{Hilb}}
+\DeclareMathOperator{\res}{\mathrm{res}}
+\DeclareMathOperator{\Ch}{\mathrm{Ch}}
+\DeclareMathOperator{\coh}{\mathrm{coh}}
+\DeclareMathOperator{\Ann}{\mathrm{Ann}}
+\DeclareMathOperator{\Aff}{\mathrm{Aff}}
+\DeclareMathOperator{\FM}{\mathrm{FM}}
+\DeclareMathOperator{\red}{\mathrm{red}}
+\DeclareMathOperator{\length}{\mathrm{length}}
+\DeclareMathOperator{\Div}{\mathrm{Div}}
+\DeclareMathOperator{\DivCl}{\mathrm{DivCl}}
+\DeclareMathOperator{\Cl}{\mathrm{Cl}}
+\DeclareMathOperator{\Sch}{\mathrm{Sch}}
+\DeclareMathOperator{\Set}{\mathrm{Set}}
+\DeclareMathOperator{\op}{\mathrm{op}}
+\DeclareMathOperator{\Coh}{\mathrm{Coh}}
+\DeclareMathOperator{\QCoh}{\mathrm{QCoh}}
+\DeclareMathOperator{\Mod}{\mathrm{Mod}}
+
+
+
+
+\newcommand{\nc}{\newcommand}
+
+%% Calligraphic letters
+
+\nc{\cF}{{\mathcal{F}}}
+\nc{\cG}{{\mathcal{G}}}
+\nc{\cH}{{\mathcal{H}}}
+\nc{\cJ}{{\mathcal{J}}}
+\nc{\cM}{{\mathcal{M}}}
+\nc{\cO}{{\mathcal{O}}}
+\nc{\cU}{{\mathcal{U}}}
+\nc{\cW}{{\mathcal{W}}}
+
+%% Blackboard letters
+\nc{\bA}{{\mathbb{A}}}
+\nc{\bC}{{\mathbb{C}}}
+\nc{\bG}{{\mathbb{G}}}
+\nc{\bP}{{\mathbb{P}}}
+\nc{\bQ}{{\mathbb{Q}}}
+\nc{\bR}{{\mathbb{R}}}
+\nc{\bZ}{{\mathbb{Z}}}
+
+
+%% Fraktur letters
+\nc{\fg}{{\mathfrak{g}}}
+\nc{\fp}{{\mathfrak{p}}}
+\nc{\fu}{{\mathfrak{u}}}
+
+% hyperref
+\usepackage[urlcolor=blue]{hyperref}
+
+
+\title{メモ}
+\author{荒井 勇人}
+\date{\today}
+\begin{document}
+\maketitle
+\section{記法}
+\begin{itemize}
+    \item $S, X, Y, Z$はすべてスキームとする。
+    \item $X$に対し、$\cO_X$加群のAbel圏の導来圏を$D(\cO_X)$、そのうち準連接なコホモロジーを持つ複体の充満部分圏を$D_{\QCoh}(\cO_X)$と書く。
+    \item $S$上のスキーム$X, Y$と$P \in D(\cO_{X \times_S Y})$に対し、$$\Phi_P(-) = \Phi_P^{X \to Y}(-) = \pi_{Y*}(P \otimes \pi_X^*(-)) \colon D(\cO_X) \to D(\cO_Y)$$を$P$を核とする積分関手とする。
+\end{itemize}
+
+\section{積分関手とその合成}
+\begin{definition}
+    $X, Y, Z$を$S$上平坦かつqcqsなスキームとする。このとき{\cite[\href{https://stacks.math.columbia.edu/tag/0FYS}{Tag 0FYS}]{stacks-project}}より、$P \in D_{\QCoh}(\cO_{X \times_S Y}), P' \in D_{\QCoh}(\cO_{Y \times_S Z})$のとき
+    \begin{equation}
+        P'' = \pi_{XZ*}(\pi_{XY}^*P \otimes \pi_{YZ}^*P')
+    \end{equation}
+    とおくと、
+    \begin{equation}
+        \Phi_{P'} \circ \Phi_P = \Phi_{P''}\colon D_{\QCoh}(\cO_X) \to D_{\QCoh}(\cO_Z)
+    \end{equation}
+    である。この$P''$を$P' * P$と書く。
+\end{definition}
+\begin{proposition}[押し出しと引き戻し]\label{ex:push-pull-as-integral-functor}
+    $X, Y$を$S$上分離的なスキーム、$f \colon X \to Y$を$S$上の射とする。$f$のグラフを$\Gamma_f \subset X \times_S Y$とすると、
+    \begin{align}
+        \Phi_{\cO_{\Gamma_f}}^{X \to Y} = f_* & \colon D(\cO_X) \to D(\cO_Y) \\
+        \Phi_{\cO_{\Gamma_f}}^{Y \to X} = f_* & \colon D(\cO_Y) \to D(\cO_X)
+    \end{align}
+    である。
+\end{proposition}
+\begin{proof}
+    射影公式がスキームの任意の閉埋め込みについて成り立つこと（{\cite[\href{https://stacks.math.columbia.edu/tag/08EU}{Tag 08EU}]{stacks-project}}）と、分離性より$\Gamma_f \subset X \times_S Y$が閉埋め込みであることを用いると、普通の証明が回ることがわかる。
+\end{proof}
+\begin{proposition}
+    $X, Y, Z$を$S$平坦かつqcかつ分離的なスキームとする。
+    \begin{enumerate}
+        \item $f \colon X \to Y$が$S$上の射で$P \in D_{\QCoh}(\cO_{Y \times_S Z})$のとき、$P * \cO_{\Gamma_f} \cong (f \times \id_Z)^*P \in D_{\QCoh}(\cO_{X \times_S Z})$である。
+        \item $P \in D_{\QCoh}(\cO_{X \times_S Y})$で$g \colon Y \to X$が$S$上の射のとき、$\cO_{\Gamma_g} * P \cong (\id_Z \times g)_*P \in D_{\QCoh}(\cO_{X \times_S Z})$である。
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    以下$\Gamma_f, \Gamma_g$を$\Gamma$と略記する。$\times_S$も$\times$と略記する。
+    \begin{enumerate}
+        \item \[
+                  \begin{tikzcd}
+                      & Y \times Z\\
+                      X \times Z \ar[r, "\varphi"] \ar[rd, bend right, "\id"] \ar[ru, "f \times \id", bend left]& X \times Y \times Z \ar[d, "\pi_{XZ}"] \ar[u, "\pi_{YZ}"]\\
+                      &X \times Z
+                  \end{tikzcd}
+              \]
+              $\varphi \colon X \times Z \to X \times Y \times Z$を$\varphi(x, z) = (x, f(x), z)$と定めると、上のような可換図式を得る。
+              \begin{align}
+                  P * \cO_\Gamma & = \pi_{XZ*}(\pi_{XY}^*\cO_{\Gamma} \otimes \pi_{YZ}^*P)        \\
+                                 & \cong \pi_{XZ*}(\cO_{\Gamma \times Z}\otimes\pi_{YZ}^*P)       \\
+                                 & \cong \pi_{XZ*}(\varphi_*(\cO_{X \times Z})\otimes\pi_{YZ}^*P) \\
+                                 & \cong \pi_{XZ*}\varphi_*\varphi^*\pi_{YZ}^*P                   \\
+                                 & \cong (f \times \id_Z)^*P
+              \end{align}
+              となる。(7)は$\varphi$と$\Gamma$の定義、(8)は射影公式である。
+        \item 同様。
+    \end{enumerate}
+\end{proof}
+
+\section{半捻りと局所化・完備化}
+\begin{itemize}
+    \item $k$を標数$0$の代数閉体とする。
+    \item 登場するスキームはすべて$k$上のものとする。
+    \item $D^b(X)$を$X$上の連接層の有界導来圏とする。
+    \item 導来関手の$L, R$は基本的に省略する。
+\end{itemize}
+
+\begin{definition}
+    $\pi \colon X \to T$を非特異準射影多様体の間の平坦射とする。
+    $i \colon Y \hookrightarrow X$をの閉点$0 \in T$でのファイバーとし、$k \colon Y \times Y \hookrightarrow X \times_T X$とする。$E \in D^b(Y)$が$i_*$で送って$D^b(X)$の球面対象になっているとき、以下のようにして$D^b(Y)$の自己同値$H_E$が定まる。
+    \begin{enumerate}
+        \item $E' = \CHom(E, i^!\cO_X) \cong \CHom(E, \cO_Y[-1])$とする。
+        \item 自然な射$k_*(E' \boxtimes E) \to \cO_{\Delta} \in D(\cO_{X \times_T X})$がある。
+        \item $P = \Cone(k_*(E' \boxtimes E) \to \cO_{\Delta})$とする。
+        \item $H_E = \Phi_{k^*P} \colon D^b(Y) \to D^b(Y)$とする。
+    \end{enumerate}
+\end{definition}
+この節の目的は、$X \to T$を$\Spec \widehat{\cO_{T, 0}}$でbase changeしても$H_E$が変わらないことを示すことである。以下$R = \cO_{T, 0}$とし、$\widehat{R}$を$R$の（極大イデアルによる）完備化とする。以下のように射を定める。
+\[
+    \begin{tikzcd}
+        Y \ar[r, "f"] \ar[d]&X_{\widehat{R}} \ar[r, "g"] \ar[d]& X_R \ar[r, "h"] \ar[d]& X \ar[d]\\
+        \{0\} \ar[r]& \Spec \widehat{R} \ar[r] & \Spec R \ar[r] & T
+    \end{tikzcd}
+\]
+\[
+    \begin{tikzcd}
+        Y \times Y \ar[r, "f \times f"] \ar[rrr, "k", bend left]& X_{\widehat{R} \times_{\widehat{R}}} X_{\widehat{R}} \ar[r, "g \times g"] & X_R \times_R X_R \ar[r, "h \times h"] & X \times_T X
+    \end{tikzcd}
+\]
+以下のことを示したい。
+\begin{proposition}
+    $P_{\widehat{R}} = \Cone((f \times f)_*(E' \boxtimes E) \to \cO_{\Delta_{X_{\widehat{R}}}}) \in D_{\QCoh}(\cO_{X_{\widehat{R} \times_{\widehat{R}}} X_{\widehat{R}}})$とすると、$P_{\widehat{R}} \cong (g \times g)^*(h \times h)^*P$である。
+\end{proposition}
+そのために以下を示す必要がある。
+\begin{itemize}
+    \item $(f \times f)_*(E' \boxtimes E) \cong (g \times g)^*(h \times h)^*k_*(E' \boxtimes E)$である。
+    \item $\cO_{\Delta_{X_{\widehat{R}}}} \cong (g \times g)^*(h \times h)^*\cO_{\Delta_X}$である。
+    \item 上の2つの同型により、射
+          \begin{align}(f \times f)_*(E' \boxtimes E)                  & \to \cO_{\Delta_{X_{\widehat{R}}}},            \\
+             (g \times g)^*(h \times h)^*k_*(E' \boxtimes E) & \to (g \times g)^*(h \times h)^*\cO_{\Delta_X}\end{align}
+          が対応する。
+\end{itemize}
+
+\subsection{1つ目の証明}
+$k = (h \times h) \circ (g \times g) \circ (f \times f)$だから、1つ目を示すには$(h \times h)^*(h \times h)_* \cong \id, (g \times g)^*(g \times g)_* \cong \id$を示せばよい。
+\subsubsection{局所化について}
+\begin{lemma}\label{lem:base-change-by-localizaion}
+    $X, T$をスキーム、$t \in T$とし、以下のbase changeの図式を考える。
+    \[
+        \begin{tikzcd}
+            X \times_T \Spec \cO_{T, t} \ar[r, "i"] \ar[d]& X \ar[d]\\
+            \Spec \cO_{T, t} \ar[r]& T
+        \end{tikzcd}
+    \]
+    このとき
+    \begin{enumerate}
+        \item $i$は平坦である。
+        \item $i_* \colon \QCoh(X \times_T \Spec \cO_{T, t}) \to \QCoh(X)$は完全関手である。
+        \item （随伴の余単位射によって）$i^*i_* \cong \id \colon \QCoh( X \times_T \Spec \cO_{T, t}) \to \QCoh( X \times_T \Spec \cO_{T, t})$である。
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}
+        \item $\Spec \cO_{T, t} \to T$が平坦だからよい。
+        \item 開埋め込みによる押し出しが完全なので、$T$をアファインに置き換えてよい。さらに$X$について局所的に確かめればよいので、$X = \Spec A, T = \Spec R, t = \fp, X \times_T \Spec \cO_{T, t} = \Spec A_{\fp}$としてよい。このとき$i_*$は係数忘却する関手$\Mod(A_p) \to \Mod(A)$と同一視でき、これは完全である。
+        \item (2)と同様に$X = \Spec A, T = \Spec R, t = \fp, X \times_T \Spec \cO_{T, t} = \Spec A_{\fp}$としてよい。すると$i^*i_*$は$(-)\otimes_A A_{\fp} \colon \Mod(A_{\fp}) \to \Mod(A_{\fp})$と同一視でき、これは$\id$である。
+    \end{enumerate}
+\end{proof}
+\begin{lemma}
+    補題\ref{lem:base-change-by-localizaion}の設定で、$X, T$はNoetherとし$Y =  X \times_T \Spec \cO_{T, t}$とおく。
+    このとき（随伴の余単位によって）
+    \begin{equation}
+        Li^* \circ Ri_* \cong \id \colon D_{\QCoh}(\cO_Y) \to D_{\QCoh}(\cO_Y)
+    \end{equation}
+    である。（$D(\cO_X)$でも正しいかは不明。）
+\end{lemma}
+\begin{proof}
+    ここでは導来関手の$L, R$は省略しない。
+
+    まず$i_* \colon \QCoh(Y) \to \QCoh(Y)$の右導来関手は、単に複体の各項に$i_*$をあてる関手$i_* \colon D(\QCoh(X)) \to D(\QCoh(Y))$である。
+    \cite[\href{https://stacks.math.columbia.edu/tag/09T3}{Tag 09T3}]{stacks-project}（ここにNoether性を使う）と合わせると、横向きの関手が自然な圏同値であるような可換図式
+    \[
+        \begin{tikzcd}
+            D(\QCoh(Y)) \ar[r] \ar[d, "i_*"] & D_{\QCoh}(\cO_Y) \ar[d, "Ri_*"]\\
+            D(\QCoh(X)) \ar[r]& D_{\QCoh}(\cO_X) \ar[d, "Li^*"]\\
+            & D_{\QCoh}(\cO_Y)
+        \end{tikzcd}
+    \]
+    を得る。$i$は平坦だから、$Li^*$も複体の各項に$i^*$をあてる関手である。よって図式の横向きの関手$D(\QCoh(Y)) \to D_{\QCoh}(\cO_Y)$に$Li^* \circ Ri_*$を合成したものは、再び$D(\QCoh(Y)) \to D_{\QCoh}(\cO_Y)$になる。よって$Li^* \circ Ri_* \cong \id$である。
+\end{proof}
+この補題を$X \times_T X \to T$に適用することで$(h \times h)^*(h \times h)_* \cong \id$がわかる。
+
+\subsubsection{完備化について}
+局所化についての証明と同様のことをする。
+\begin{lemma}\label{lem:forget-and-extension}
+    $R$をNoether局所環、$\widehat{R}$をその完備化、$M$を$\widehat{R}$加群とする。このとき自然な射
+    \begin{align}
+        M \to M \otimes_R \widehat{R} & ,\quad m \mapsto m \otimes 1                    \\
+        M \otimes_R \widehat{R} \to M & ,\quad m \otimes \hat{r} \mapsto \hat{r}\cdot m
+    \end{align}
+    は互いに逆な同型である。
+\end{lemma}
+\begin{proof}
+    まず$M = \widehat{R}$とする。このとき$\widehat{R}$は有限生成だから$\widehat{R} \otimes_R \widehat{R}\cong \widehat{\widehat{R}}$であり（ここでNoether性を使った）、完備性より$\widehat{\widehat{R}} \cong \widehat{R}$である。
+
+    一般の$M$については完全列
+    \begin{equation}
+        0 \to N \to \widehat{R}^{\oplus I} \to M \to 0
+    \end{equation}
+    をとる。すると命題の2つ目の射は完全列の間の射
+    \[
+        \begin{tikzcd}
+            &N \otimes_R \widehat{R} \ar[r]\ar[d]& \widehat{R}^{\oplus I} \otimes_R \widehat{R} \ar[r]\ar[d]& M \otimes_R \widehat{R} \ar[r]\ar[d]& 0\\
+            0 \ar[r] &N \ar[r] & \widehat{R}^{\oplus I}  \ar[r] & M  \ar[r] & 0
+        \end{tikzcd}
+    \]
+    を与える。定義より左の射は全射で、テンソル積が任意個数の直和と可換であることと$M = \widehat{R}$の場合より中央の射は同型となる。よって蛇の補題より右側の射は同型である。
+\end{proof}
+\begin{lemma}
+    $R$をNoether局所環、$X$をNoetherスキーム、$X \to \Spec R$を任意の射とする。$R$の完備化を$\widehat{R}$とし、以下のbase changeの図式を考える。
+    \[
+        \begin{tikzcd}
+            X_{\widehat{R}} \ar[r, "i"] \ar[d]& X \ar[d]\\
+            \Spec \widehat{R} \ar[r]& \Spec R
+        \end{tikzcd}
+    \]
+    このとき
+    \begin{enumerate}
+        \item $i$は平坦である。
+        \item $i_* \colon \QCoh(X_{\widehat{R}}) \to \QCoh(X)$は完全関手である。
+        \item $i^*i_* \cong \id \colon \QCoh(X_{\widetilde{R}}) \to  \QCoh(X_{\widetilde{R}})$である。
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    (1)と(2)は局所化のときと同様である。(3)については、以下を示せばよい。
+    \begin{itemize}
+        \item $A$を$R$代数とし$M$を$A \otimes_R \widehat{R}$加群とする。このとき（自然な射により）$M \otimes_A (A \otimes_R \widehat{R}) \cong M$である。
+    \end{itemize}
+    $M \otimes_A (A \otimes_R \widehat{R}) \cong M \otimes_R \widehat{R}$だから、$M$を$\widehat{R}$加群とみなして補題\ref{lem:forget-and-extension}を使えばよい。
+\end{proof}
+これにより完備化についての主張がわかる。
+\subsection{2つ目の証明}
+flat base changeである。
+\subsection{3つ目の証明}
+\printbibliography[title=参考文献]
+\end{document}
