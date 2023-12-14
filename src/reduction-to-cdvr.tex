@@ -101,7 +101,7 @@
 \usepackage[urlcolor=blue]{hyperref}
 
 
-\title{メモ}
+\title{完備局所環への帰着}
 \author{荒井 勇人}
 \date{\today}
 \begin{document}
@@ -125,6 +125,16 @@
     \end{equation}
     である。この$P''$を$P' * P$と書く。
 \end{definition}
+\begin{proposition}
+    $X, Y, Z$を$S$上平坦かつqcqsなスキームとし、$T \to S$を任意の射とする。$P \in D_{\QCoh}(\cO_{X \times_S Y}), P' \in D_{\QCoh}(\cO_{Y \times_S Z})$のとき
+    \begin{equation}
+        (P' * P)_T \cong (P'_T * P_T)
+    \end{equation}
+    である。
+\end{proposition}
+\begin{proof}
+    TODO
+\end{proof}
 \begin{proposition}[押し出しと引き戻し]\label{ex:push-pull-as-integral-functor}
     $X, Y$を$S$上分離的なスキーム、$f \colon X \to Y$を$S$上の射とする。$f$のグラフを$\Gamma_f \subset X \times_S Y$とすると、
     \begin{align}
@@ -137,10 +147,10 @@
     射影公式がスキームの任意の閉埋め込みについて成り立つこと（{\cite[\href{https://stacks.math.columbia.edu/tag/08EU}{Tag 08EU}]{stacks-project}}）と、分離性より$\Gamma_f \subset X \times_S Y$が閉埋め込みであることを用いると、普通の証明が回ることがわかる。
 \end{proof}
 \begin{proposition}
-    $X, Y, Z$を$S$平坦かつqcかつ分離的なスキームとする。
+    $X, Y, Z$を$S$上平坦かつqcかつ分離的なスキームとする。
     \begin{enumerate}
         \item $f \colon X \to Y$が$S$上の射で$P \in D_{\QCoh}(\cO_{Y \times_S Z})$のとき、$P * \cO_{\Gamma_f} \cong (f \times \id_Z)^*P \in D_{\QCoh}(\cO_{X \times_S Z})$である。
-        \item $P \in D_{\QCoh}(\cO_{X \times_S Y})$で$g \colon Y \to X$が$S$上の射のとき、$\cO_{\Gamma_g} * P \cong (\id_Z \times g)_*P \in D_{\QCoh}(\cO_{X \times_S Z})$である。
+        \item $P \in D_{\QCoh}(\cO_{X \times_S Y})$で$g \colon Y \to Z$が$S$上の射のとき、$\cO_{\Gamma_g} * P \cong (\id_Z \times g)_*P \in D_{\QCoh}(\cO_{X \times_S Z})$である。
     \end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -176,24 +186,24 @@
 
 \begin{definition}
     $\pi \colon X \to T$を非特異準射影多様体の間の平坦射とする。
-    $i \colon Y \hookrightarrow X$をの閉点$0 \in T$でのファイバーとし、$k \colon Y \times Y \hookrightarrow X \times_T X$とする。$E \in D^b(Y)$が$i_*$で送って$D^b(X)$の球面対象になっているとき、以下のようにして$D^b(Y)$の自己同値$H_E$が定まる。
+    $i \colon X_0 \hookrightarrow X$をの閉点$0 \in T$でのファイバーとし、$k \colon X_0 \times X_0 \hookrightarrow X \times_T X$とする。$E \in D^b(X_0)$が$i_*$で送って$D^b(X)$の球面対象になっているとき、以下のようにして$D^b(Y)$の自己同値$H_E$が定まる。
     \begin{enumerate}
-        \item $E' = \CHom(E, i^!\cO_X) \cong \CHom(E, \cO_Y[-1])$とする。
+        \item $E' = \CHom(E, i^!\cO_X) \cong \CHom(E, \cO_{X_0}[-1])$とする。
         \item 自然な射$k_*(E' \boxtimes E) \to \cO_{\Delta} \in D(\cO_{X \times_T X})$がある。
         \item $P = \Cone(k_*(E' \boxtimes E) \to \cO_{\Delta})$とする。
-        \item $H_E = \Phi_{k^*P} \colon D^b(Y) \to D^b(Y)$とする。
+        \item $H_E = \Phi_{k^*P} \colon D^b(X_0) \to D^b(X_0)$とする。
     \end{enumerate}
 \end{definition}
 この節の目的は、$X \to T$を$\Spec \widehat{\cO_{T, 0}}$でbase changeしても$H_E$が変わらないことを示すことである。以下$R = \cO_{T, 0}$とし、$\widehat{R}$を$R$の（極大イデアルによる）完備化とする。以下のように射を定める。
 \[
     \begin{tikzcd}
-        Y \ar[r, "f"] \ar[d]&X_{\widehat{R}} \ar[r, "g"] \ar[d]& X_R \ar[r, "h"] \ar[d]& X \ar[d]\\
+        X_0 \ar[r, "f"] \ar[d]&X_{\widehat{R}} \ar[r, "g"] \ar[d]& X_R \ar[r, "h"] \ar[d]& X \ar[d]\\
         \{0\} \ar[r]& \Spec \widehat{R} \ar[r] & \Spec R \ar[r] & T
     \end{tikzcd}
 \]
 \[
     \begin{tikzcd}
-        Y \times Y \ar[r, "f \times f"] \ar[rrr, "k", bend left]& X_{\widehat{R} \times_{\widehat{R}}} X_{\widehat{R}} \ar[r, "g \times g"] & X_R \times_R X_R \ar[r, "h \times h"] & X \times_T X
+        X_0 \times X_0 \ar[r, "f \times f"] \ar[rrr, "k", bend left]& X_{\widehat{R} \times_{\widehat{R}}} X_{\widehat{R}} \ar[r, "g \times g"] & X_R \times_R X_R \ar[r, "h \times h"] & X \times_T X
     \end{tikzcd}
 \]
 以下のことを示したい。
@@ -210,39 +220,33 @@
           が対応する。
 \end{itemize}
 
-% \begin{remark}
-%     この命題をもって$X$を完全に$X_{\widehat{R}}$に置き換えてしまうのは難しいと思われる。なぜなら、（私が）球面捻りを$X_{\widehat{R}}$の導来圏で定式化できていないからである（実はできるのかもしれない）。例えば\cite{MR3692883}による定式化では積分関手の随伴が必要であり、そのためには$p \colon X_{\widehat{R}} \to \Spec k$についてGrothendieck双対が必要である。しかし現状知られているGrothendieck双対の最も一般的な設定は、（本質的）有限型な射についてのものである。
-
-%     アイデア：\cite[Theorem 3.1.1]{MR1996800}によると、qcqsスキーム$X$について$D_{\QCoh}(\cO_X)$はcompact generatorを持つ。\cite[Corollary 4.23]{MR2434186}によると、余完備でcompact generatorを持つ体上の三角圏はRouquier functorを持つ。これと\cite{MR1831820}の定式化を使って、$X_{\widehat{R}}$の導来圏の球面捻りを定式化できるかもしれない。
-% \end{remark}
-
 \subsection{1つ目の証明}
 $k = (h \times h) \circ (g \times g) \circ (f \times f)$だから、1つ目を示すには$(h \times h)^*(h \times h)_* \cong \id, (g \times g)^*(g \times g)_* \cong \id$を示せばよい。
 \subsubsection{局所化について}
 \begin{lemma}\label{lem:base-change-by-localizaion}
-    $X, T$をスキーム、$t \in T$とし、以下のbase changeの図式を考える。
+    $X, T$をスキーム、$0 \in T$を任意の点とし、以下のbase changeの図式を考える。
     \[
         \begin{tikzcd}
-            X \times_T \Spec \cO_{T, t} \ar[r, "i"] \ar[d]& X \ar[d]\\
-            \Spec \cO_{T, t} \ar[r]& T
+            X \times_T \Spec \cO_{T, 0} \ar[r, "i"] \ar[d]& X \ar[d]\\
+            \Spec \cO_{T, 0} \ar[r]& T
         \end{tikzcd}
     \]
     このとき
     \begin{enumerate}
         \item $i$は平坦である。
         \item $i_* \colon \QCoh(X \times_T \Spec \cO_{T, t}) \to \QCoh(X)$は完全関手である。
-        \item （随伴の余単位射によって）$i^*i_* \cong \id \colon \QCoh( X \times_T \Spec \cO_{T, t}) \to \QCoh( X \times_T \Spec \cO_{T, t})$である。
+        \item （随伴の余単位射によって）$i^*i_* \cong \id \colon \QCoh( X \times_T \Spec \cO_{T, 0}) \to \QCoh( X \times_T \Spec \cO_{T, 0})$である。
     \end{enumerate}
 \end{lemma}
 \begin{proof}
     \begin{enumerate}
-        \item $\Spec \cO_{T, t} \to T$が平坦だからよい。
-        \item 開埋め込みによる押し出しが完全なので、$T$をアファインに置き換えてよい。さらに$X$について局所的に確かめればよいので、$X = \Spec A, T = \Spec R, t = \fp, X \times_T \Spec \cO_{T, t} = \Spec A_{\fp}$としてよい。このとき$i_*$は係数忘却する関手$\Mod(A_p) \to \Mod(A)$と同一視でき、これは完全である。
-        \item (2)と同様に$X = \Spec A, T = \Spec R, t = \fp, X \times_T \Spec \cO_{T, t} = \Spec A_{\fp}$としてよい。すると$i^*i_*$は$(-)\otimes_A A_{\fp} \colon \Mod(A_{\fp}) \to \Mod(A_{\fp})$と同一視でき、これは$\id$である。
+        \item $\Spec \cO_{T, 0} \to T$が平坦だからよい。
+        \item 開埋め込みによる押し出しが完全なので、$T$をアファインに置き換えてよい。さらに$X$について局所的に確かめればよいので、$X = \Spec A, T = \Spec R, 0 = \fp, X \times_T \Spec \cO_{T, 0} = \Spec A_{\fp}$としてよい。このとき$i_*$は係数忘却する関手$\Mod(A_p) \to \Mod(A)$と同一視でき、これは完全である。
+        \item (2)と同様に$X = \Spec A, T = \Spec R, 0 = \fp, X \times_T \Spec \cO_{T, 0} = \Spec A_{\fp}$としてよい。すると$i^*i_*$は$(-)\otimes_A A_{\fp} \colon \Mod(A_{\fp}) \to \Mod(A_{\fp})$と同一視でき、これは$\id$である。
     \end{enumerate}
 \end{proof}
 \begin{lemma}
-    補題\ref{lem:base-change-by-localizaion}の設定で、$X, T$はNoetherとし$Y =  X \times_T \Spec \cO_{T, t}$とおく。
+    補題\ref{lem:base-change-by-localizaion}の設定で、$X, T$はNoetherとし$Y =  X \times_T \Spec \cO_{T, 0}$とおく。
     このとき（随伴の余単位によって）
     \begin{equation}
         Li^* \circ Ri_* \cong \id \colon D_{\QCoh}(\cO_Y) \to D_{\QCoh}(\cO_Y)
@@ -317,5 +321,52 @@ $k = (h \times h) \circ (g \times g) \circ (f \times f)$だから、1つ目を�
 \subsection{2つ目の証明}
 flat base changeである。
 \subsection{3つ目の証明}
+TODO
+\section{半捻り関手の関係式}
+$X \to T$を非特異準射影多様体の間の平坦射とし、$0 \in T$を閉点、その局所環を$R = \cO_{T, 0}$、その完備化を$\widehat{R}$とする。
+\[
+    \begin{tikzcd}
+        X_0 \ar[r, "i"] \ar[d]&X_{\widehat{R}} \ar[r] \ar[d]& X \ar[d]\\
+        \{0\} \ar[r]& \Spec \widehat{R} \ar[r] & T
+    \end{tikzcd}
+\]
+また$f \in \Aut_{\widehat{R}}(X_{\widehat{R}})$とし、$f_0 \in \Aut(X_0)$を$f$の$X_0$への制限とする。$E \in D^b(X_0)$に対し、$P_E = \Cone(k_*(E' \boxtimes E) \to \cO_{\Delta_{X_{\widehat{R}}}})$とする。
+
+\[
+    \begin{tikzcd}
+        X_0 \ar[r, "i"] \ar[d, "\Gamma_{f_0}"]& X_{\widehat{R}} \ar[d, "\Gamma_f"]\\
+        X_0 \times X_0 \ar[r, "k"]& X_{\widehat{R}} \times_{\widehat{R}} X_{\widehat{R}}
+    \end{tikzcd}
+\]
+\begin{proposition}
+    任意の$E \in D^b(Y)$について
+    \begin{equation}
+        \cO_{\Gamma_f} * P_E \cong P_{f_{0*}E} * \cO_{\Gamma_f}
+    \end{equation}
+    が成り立つ。特に
+    \begin{equation}
+        f_{0*}\circ H_E \cong H_{f_{0*}E} \circ f_{0*}
+    \end{equation}
+    である。
+\end{proposition}
+\begin{proof}
+    左辺は
+    \begin{align}
+        \cO_{\Gamma_f} * P_E & = (\id \times f)_* P_E                                                                                         \\
+                             & \cong \Cone\left((\id \times f)_*k_*(E' \boxtimes E) \to (\id \times f)_*\cO_{\Delta_{X_{\widehat{R}}}}\right) \\
+                             & \cong \Cone\left(k_*(\id \times f_0)_*(E' \boxtimes E) \to \cO_{\Gamma_f}\right)                               \\
+                             & \cong \Cone\left(k_*(E' \boxtimes f_{0*E}) \to \cO_{\Gamma_f}\right)
+    \end{align}
+    であり、右辺は
+    \begin{align}
+        P_{f_{0*}E} * \cO_{\Gamma_f} & = (f \times \id)^*P_{f_{0*}E}                                        \\
+                                     & = (f^{-1} \times \id)_*P_{f_{0*}E}                                   \\
+                                     & \cong \Cone\left(k_*(E' \boxtimes f_{0*}E) \to \cO_{\Gamma_f}\right)
+    \end{align}
+    である。$\Cone$の中の射が一致することもわかる(TODO)。よって主張が従う。
+\end{proof}
+\begin{remark}
+    $X_{\widehat{R}}$上の捻り関手の理論を展開してもいいが、大掛かりになりそうなのでやめた。
+\end{remark}
 \printbibliography[title=参考文献]
 \end{document}

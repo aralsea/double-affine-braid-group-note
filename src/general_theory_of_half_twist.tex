@@ -96,333 +96,8 @@
 \date{\today}
 \begin{document}
 \maketitle
-\section{記法}
-\begin{itemize}
-    \item 導来関手の$R$と$L$は原則省略する。
-    \item $X$が環付き空間のとき$\Mod(\cO_X)$を$\cO_X$加群の圏、$D(\cO_X)$を$\Mod(\cO_X)$の導来圏とする。$+, -, b$をつけて有界導来圏を表す。
-    \item $X$がスキームのとき、$D_{\QCoh}(\cO_X) \subset D(\cO_X)$をコホモロジーが凖連接層であるような複体のなす充満部分圏とする。
-    \item $X$がNoetherスキームのとき、$D_{\Coh}(\cO_X) \subset D(\cO_X)$をコホモロジーが連接層であるような複体のなす充満部分圏とする。また$D^b(X) = D_{\Coh}^b(\cO_X)$とする。（$X$がNoetherなのでこれは連接層の圏$\Coh(X)$の導来圏と同値である。）
-\end{itemize}
-\section{導来関手}
-\begin{definition}
-    $X$を環付き空間とし、$E \in D(\cO_X)$とする。このとき$E$の双対$E^\vee$を
-    \begin{equation}
-        E^\vee = \RHom(E, \cO_X)
-    \end{equation}
-    により定義する。
-\end{definition}
-\begin{proposition}
-    $f \colon X \to Y$を環付き空間の射とし、$K, M \in D(\cO_Y)$とする。このとき自然な射
-    \begin{equation}
-        f^*\CHom(K, M) \to \CHom(f^*K, f^*M)
-    \end{equation}
-    は以下のいずれかの状況で同型である。
-    \begin{enumerate}
-        \item $K$がperfect
-        \item $X, Y$がNoetherスキーム、$f$が平坦で、$K \in D_{\Coh}^-(\cO_Y), M \in D^+(\cO_Y)$
-    \end{enumerate}
-\end{proposition}
-\begin{proof}
-    {\cite[\href{https://stacks.math.columbia.edu/tag/0GM7}{Tag 0GM7}]{stacks-project}}より直ちに従う。
-\end{proof}
-\begin{corollary}\label{cor:pullback-and-dual}
-    $f \colon X \to Y$をNoetherスキームの間の平坦射とすると、任意の$E \in D_{\Coh}^-(\cO_Y)$について双対は引き戻しと交換する。つまり$f^*(E^\vee) \cong (f^*E)^\vee$である。
-\end{corollary}
-\begin{proposition}\label{prop:tensor-and-dual}
-    $X$を環付き空間とし、$L, E \in D(\cO_X)$とする。さらに$L$がperfectであるとする。このとき自然な同型
-    \begin{equation}
-        E^\vee \otimes L^\vee \cong (E \otimes L)^\vee
-    \end{equation}
-    が存在する。
-\end{proposition}
-\begin{proof}
-    {\cite[\href{https://stacks.math.columbia.edu/tag/0G40}{Tag 0G40}]{stacks-project}}より自然な同型
-    \begin{equation}
-        \CHom(E, \cO_X) \otimes L^\vee \cong \CHom(\CHom(L^\vee, E), \cO_X)
-    \end{equation}
-    がある。
-    特に$L^{\vee\vee} \cong L$もわかる。
-    そして {\cite[\href{https://stacks.math.columbia.edu/tag/08DQ}{Tag 08DQ}]{stacks-project}}より
-    \begin{equation}
-        \CHom(L^\vee, E) \cong E \otimes L^{\vee\vee} \cong E \otimes L
-    \end{equation}
-    なので命題が成り立つ。
-\end{proof}
-\section{Grothendieck--Verdier双対}
-\begin{theorem}[{\cite[\href{https://stacks.math.columbia.edu/tag/0A9E}{Tag 0A9E}]{stacks-project}}]
-    $f \colon X \to Y$をqcqsスキームの間の射とする。このとき
-    \begin{equation}
-        f_* \colon D_{\QCoh}(\cO_X) \to D_{\QCoh}(\cO_Y)
-    \end{equation}
-    は右随伴$a \colon D_{\QCoh}(\cO_Y) \to D_{\QCoh}(\cO_X)$を持つ。さらにこれは$D_{\QCoh}^+$を保つ。
-\end{theorem}
-\begin{theorem}[{\cite[\href{https://stacks.math.columbia.edu/tag/0GEW}{Tag 0GEW}]{stacks-project}}]\label{thm:Grothendieck-Verdier-duality-for-complexes}
-    $f \colon X \to Y$をNoetherスキームの間の固有射とする。このとき任意の$L \in D_{\Coh}^-(\cO_X), K \in D_{\QCoh}^+(\cO_Y)$に対して自然な同型
-    \begin{equation}
-        f_* \CHom(L, a(K)) \xrightarrow{\sim} \CHom(f_*L, K)
-    \end{equation}
-    がある。
-\end{theorem}
-\begin{definition}[{\cite[\href{https://stacks.math.columbia.edu/tag/0A74}{Tag 0A74}]{stacks-project}}]
-    $i \colon Z \to X$をスキームの閉埋め込みとする。$\cO_X$加群$F$に対して、層$\CHom_{\cO_X}(i_*\cO_Z, F)$は自然に$\cO_Z$加群とみなせる。
-    これにより定まる関手$\Mod(\cO_X) \to \Mod(\cO_Z)$を$\CHom(\cO_Z, -)$と書く。
-\end{definition}
-\begin{proposition}[{\cite[\href{https://stacks.math.columbia.edu/tag/0A74}{Tag 0A74}]{stacks-project}}]\label{prop:Grothendieck-Verdier-duality-for-closed-immersion}
-    $i \colon Z \to X$をスキームの閉埋め込みとする。このとき
-    \begin{enumerate}
-        \item 関手$\CHom(\cO_Z, -) \colon \Mod(\cO_X) \to \Mod(\cO_Z)$は左完全である。
-        \item その右導来関手を$R\CHom(\cO_Z, -) \colon D(\cO_X) \to D(\cO_Z)$とおくと、これは$(L i_* = )i_* = R i_* \colon D(\cO_Z) \to D(\cO_X)$の右随伴である。
-        \item $R\CHom(\cO_Z, -)$は$D_{\QCoh}^+$を保つ。
-        \item $i_* \colon D_{\QCoh}(\cO_Z) \to D_{\QCoh}(\cO_X)$の右随伴$a$と$R\CHom(\cO_Z, -)$は$D_{\QCoh}^+$へ制限したときに一致する。
-    \end{enumerate}
-\end{proposition}
-\section{射影公式}
-\begin{proposition}[射影公式]\label{prop:projection-formula-for-modules}
-    $f \colon X \to Y$を環付き空間の射とし、$E \in D(\cO_X), K \in D(\cO_Y)$とする。このとき自然な射
-    \begin{equation}
-        f_*E \otimes K \to f_*(E \otimes f^*K)
-    \end{equation}
-    は以下の状況で同型である。
-    \begin{enumerate}
-        \item $K$がperfect（{\cite[\href{https://stacks.math.columbia.edu/tag/0B54}{Tag 0B54}]{stacks-project}}）
-        \item $f$が閉集合への同相（{\cite[\href{https://stacks.math.columbia.edu/tag/0B55}{Tag 0B55}]{stacks-project}}）
-    \end{enumerate}
-\end{proposition}
-\section{Fourier--Mukai変換}
-$X, Y$を$S$上のスキームとし、$K \in D(\cO_{X \times_S Y})$とする。
-\begin{equation}
-    \Phi_K = p_{Y*}(p_{X,*}(-)\otimes_{\cO_{X \times_S Y}} K) \colon D(\cO_X) \to D(\cO_Y)
-\end{equation}
-を$K$に付随するFourier--向井関手という。$D_{\QCoh}$などの部分圏の間の関手になっているとき、それもFourier--向井関手という。
 
-\begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0FYR}{Tag 0FYR}]{stacks-project}}]
-    $X \to S$がqcqs射で$K \in D_{\QCoh}$なら$\Phi_K \colon D_{\QCoh}(\cO_X) \to D_{\QCoh}(\cO_Y)$である。
-\end{lemma}
-\begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0FYS}{Tag 0FYS}]{stacks-project}}]
-    $X, Y, Z$が$S$上qcqsなスキームで、$X$と$Z$が$S$上tor independentかつ$Y$が$S$上平坦だとする。$K, K' \in D_{\QCoh}$のとき
-    \begin{equation}
-        K'' = p_{XZ,*}(p_{XY}^*K \otimes p_{YZ}^*K'')
-    \end{equation}
-    とおくと、
-    \begin{equation}
-        \Phi_{K'} \circ \Phi_K = \Phi_{K''}\colon D_{\QCoh}(\cO_X) \to D_{\QCoh}(\cO_Z)
-    \end{equation}
-    である。
-\end{lemma}
-\begin{example}\label{ex:composition-of-Fourier-Mukai-over-field}
-    $S$が体$k$で$X, Y, Z$が$k$上qcqsなら使える。
-\end{example}
-\begin{example}\label{ex:push-pull-as-Fourier-Mukai}
-    $f \colon X \to Y$を$S$上分離的なスキームの間の射とする。このとき以下で定まる$f$のグラフ$\Gamma_f \colon X \to X \times_S Y$は閉埋め込みである。
-    \[
-        \begin{tikzcd}
-            X \ar[rd, "\Gamma_f"] \ar[rdd, bend right, "\id_X"] \ar[rrd, bend left, "f"]& & \\
-            & X \times_S Y \ar[r] \ar[d] & Y \ar[d]\\
-            & X            \ar[r]        & S
-        \end{tikzcd}
-    \]
-    そして
-    \begin{align}
-        \Phi_{\cO_{\Gamma_f}}^{X \to Y} = f_* & \colon D(\cO_X) \to D(\cO_Y) \\
-        \Phi_{\cO_{\Gamma_f}}^{Y \to X} = f_* & \colon D(\cO_Y) \to D(\cO_X)
-    \end{align}
-    である。
-\end{example}
-\begin{proof}
-    $\Gamma_f$は閉埋め込みなので、\ref{prop:projection-formula-for-modules}より射影公式が使える。
-    よって
-    \begin{align}
-        \Phi_{\cO_{\Gamma_f}}^{X \to Y}(-) & = p_{Y*}(p_X^*(-) \otimes \cO_{\Gamma_f})               \\
-                                           & = p_{Y*}(p_X^*(-) \otimes \Gamma_{f*}\cO_X)             \\
-                                           & = p_{Y*}\Gamma_{f*}(\Gamma_{f}^*p_X^*(-) \otimes \cO_X) \\
-                                           & = f_*(-)
-    \end{align}
-    \begin{align}
-        \Phi_{\cO_{\Gamma_f}}^{X \to Y}(-) & = p_{X*}(p_Y^*(-) \otimes \cO_{\Gamma_f})               \\
-                                           & = p_{X*}(p_Y^*(-) \otimes \Gamma_{f*}\cO_X)             \\
-                                           & = p_{X*}\Gamma_{f*}(\Gamma_{f}^*p_Y^*(-) \otimes \cO_X) \\
-                                           & = f^*(-)
-    \end{align}
-    となる。
-\end{proof}
-\begin{example}\label{ex:line-bundle-as-Fourier-Mukai}
-    $X$を$S$上分離的なスキームとし、$L$を$X$上の可逆層とする。このとき
-    \begin{equation}
-        \Phi_{\Delta_*L}(-) = L \otimes f^*(-) \colon D(\cO_X) \to D(\cO_Y)
-    \end{equation}
-    である。
-\end{example}
-\begin{proof}
-    $\Delta$は閉埋め込みなので、\ref{prop:projection-formula-for-modules}より射影公式が使える。
-    よって
-    \begin{align}
-        \Phi_{\Delta_*L}(-) & = p_{Y*}(p_X^*(-) \otimes \Delta_* L)        \\
-                            & = p_{Y*}\Delta_*(\Delta^*p_X^*(-) \otimes L) \\
-                            & = (-) \otimes L
-    \end{align}
-    である。
-\end{proof}
-
-\section{Cartier因子}
-\begin{definition}
-    $X$をスキームとする。閉部分スキーム$D \subset X$が有効Cartier因子であるとは、$D$の定義イデアル$I$が可逆層であることをいう。
-    このとき$\cO_X(-D) = I, \cO_X(D) = \cO_X(-D)^{-1}$と定める。
-    定義から完全列
-    \begin{equation}
-        0 \to \cO_X(-D) \to \cO_X \to \cO_D \to 0
-    \end{equation}
-    が存在する。
-
-\end{definition}
-\begin{proposition}
-    $X$をスキームとし、$D \subset X$を閉部分スキームとする。このとき以下は同値である。
-    \begin{enumerate}
-        \item $D$は有効Cartier因子である。
-        \item $D$の定義イデアルは局所的に非零因子で生成される。
-    \end{enumerate}
-\end{proposition}
-\begin{proposition}\label{prop:duality-for-Cartier-divisor}
-    $X$をスキームとし、$i \colon D\hookrightarrow X$を有効Cartier因子とする。
-    このとき関手
-    \begin{equation}
-        i^*(-)\otimes \cO_D(D)[-1] \colon D(\cO_X) \to D(\cO_D)
-    \end{equation}
-    は関手$i_* \colon D(\cO_D) \to D(\cO_X)$の右随伴である。
-    さらにこれは$D_{\QCoh}$を保ち、
-    特に$i_* \colon D_{\QCoh}(\cO_D) \to D_{\QCoh}(\cO_X)$の右随伴$a$と一致する。
-\end{proposition}
-\begin{proof}
-    まず{\cite[\href{https://stacks.math.columbia.edu/tag/0AA4}{Tag 0AA4}]{stacks-project}}より$i^*(-)\otimes \cO_D(D)[-1] \cong R\CHom(\cO_D, -)$だから、命題\ref{prop:Grothendieck-Verdier-duality-for-closed-immersion}より$i^*(-)\otimes \cO_D(D)[-1]$は$i_*$の右随伴である。
-    さらに$i^*(-)\otimes \cO_D(D)[-1]$は明らかに$D_{\QCoh}$を保つ。
-    よって誘導される関手$i^*(-)\otimes \cO_D(D)[-1] \colon D_{\QCoh}(\cO_X) \to D_{\QCoh}(\cO_D)$も$i_*$の右随伴であり、特に$a$と一致する。
-\end{proof}
-
-\begin{proposition}\label{prop:triangle-for-push-pull}
-    $k$を体とし、$X$を$k$上分離的なNoetherスキーム、$i \colon D \hookrightarrow X$を有効Cartier因子とする。
-    このとき任意の$F \in D_{\QCoh}(\cO_D)$に対して、$D_{\QCoh}(\cO_Y)$の完全三角形
-    \begin{equation}
-        F \otimes \cO_D(-D)[1] \to i^*i_*F \to F \xrightarrow{+1}
-    \end{equation}
-    が存在する。ここで$i^*i_*F \to F$は随伴$i^* \dashv i_*$の余単位射、$F \otimes \cO_D(-D)[1] \to i^*i_*F$は
-    \begin{equation}
-        \Hom(F \otimes \cO_D(-D)[1], i^*i_*F) \cong \Hom(F, i^*i_*F\otimes \cO_D(D)[-1]) = \Hom(F, a(i_*F))
-    \end{equation}
-    によって随伴$i_* \dashv a$の単位射に対応するものである。
-
-    $F = \cO_D$のときはより強く、
-    \begin{equation}
-        i^*i_*\cO_D \cong \cO_D \oplus \cO_D(-D)[-1]
-    \end{equation}
-    が成り立つ。
-\end{proposition}
-\begin{proof}
-    \cite[corollary 11.4]{MR2244106}の証明がこの場合に使えることを確かめる。
-
-    まず$F = \cO_D$のときに示す。
-    完全列
-    \begin{equation}\label{eq:koszul-resolution}
-        0 \to \cO_X(-D) \to \cO_X \to i_*\cO_D \to 0
-    \end{equation}
-    が$i_*\cO_D$の平坦分解を与えるから、これにより$i^*$を計算すればよい。
-
-    次に$F$が（一般の複体ではなく）準連接層のときに成立することを示す。
-    射影公式よりと分解\eqref{eq:koszul-resolution}より
-    \begin{align}
-        i_*i^*i_*F & \cong i_*\cO_D \otimes i_*F                                     \\
-                   & \cong (0 \to i_*F\otimes\cO_X(-D) \xrightarrow{d} i_*F \to 0)   \\
-                   & \cong (0 \to i_*(F\otimes\cO_D(-D)) \xrightarrow{d} i_*F \to 0)
-    \end{align}
-    となり、微分$d$は$D$に制限されているので$0$となる。よって$i^*i_*F$のコホモロジーは（$i_*$してから計算できるので）
-    \[
-        \cH^j(i^*i_*F) \cong \begin{cases}
-            F                   & (j = 0)            \\
-            F \otimes \cO_D(-D) & (j = -1)           \\
-            0                   & (\text{otherwise})
-        \end{cases}
-    \]
-    となる。
-    特に$i^*i_*F$は2項複体だから、完全三角形
-    \begin{equation}
-        \cH^{-1}[1] \to i^*i_*F \to \cH^0 \xrightarrow{+1}
-    \end{equation}
-    が存在する。
-    あとは
-    右端のコホモロジーへの自然な射$i^*i_*F \to \cH^0 \cong F$が随伴$i^*\dashv i_*$の余単位射に、
-    左端のコホモロジーからの自然な射$F \otimes \cO_D(-D)[1] \cong \cH^{-1}[1] \to i^*i_*F$が随伴$i_* \dashv a$の単位射に
-    対応することを示せばよい。
-    $P^\bullet \to i_*F$と$i_*F \to I^\bullet$をそれぞれ$i_*F$の平坦分解と単射分解とする。
-    このとき$\id_{i_*F}$は同型
-    \begin{equation}
-        \Hom(i_*F, i_*F) \cong \Hom(P^\bullet, i_*F) \cong \Hom(i^*P^\bullet, F)
-    \end{equation}
-    を通して$P^\bullet \to i_*F$の随伴
-    \[
-        \begin{tikzcd}
-            \cdots \ar[r] & i^*P^{-1} \ar[r] \ar[d] & i^*P^0 \ar[r] \ar[d] & 0 \ar[d]\ar[r]& \cdots \\
-            \cdots \ar[r] & 0 \ar[r]     & F \ar[r]     & 0\ar[r]& \cdots
-        \end{tikzcd}
-    \]
-    に対応する。これは右端のコホモロジーへの自然な射に他ならない。
-    同様に同型
-    \begin{equation}
-        \Hom(i_*F, i_*F) \cong \Hom(i_*F, I^\bullet) \cong \Hom(F, a(I^\bullet)) \cong \Hom(F, R\CHom(\cO_D, I^\bullet))
-    \end{equation}
-    により$\id_{i_*F}$は
-    \[
-        \begin{tikzcd}
-            \cdots \ar[r] & 0 \ar[r]  \ar[d]    & F \ar[r]\ar[d]     & 0\ar[r]\ar[d]& \cdots\\
-            \cdots \ar[r] & 0 \ar[r]  & R\CHom(\cO_D, I^0) \ar[r] & R\CHom(\cO_D, I^1)\ar[r]& \cdots
-        \end{tikzcd}
-    \]
-    に対応し、これは左端のコホモロジーからの自然な射に他ならない。
-
-    最後一般の$F \in D_{\QCoh}(\cO_D)$に対して示す。
-    $i \colon D \hookrightarrow X$のグラフを$\Gamma \subset D \times X$、その転置を$\overline{\Gamma} \subset X \times D$とする。
-    \[
-        \begin{tikzcd}
-            && D &\\
-            &\Gamma \times D \ar[r, hook, "\varphi"]\ar[d, "\pi"] &D \times D \times D \ar[d, hook, "\psi"] \ar[u, "\pi_2"] & D \times \overline{\Gamma} \ar[l, hook', "\overline{\varphi}"]\\
-            D  \ar[r, hook, "\Delta"] \ar[ru, bend left, "\eta"]&D \times D & D \times X \times D \ar[l, "\pi_{DD}"] &
-        \end{tikzcd}
-    \]
-    という可換図式を考える。ただし$\eta$は$D \xrightarrow{\sim} \Gamma$と$\id_D$の積である。
-    有効Cartier因子$\varphi \colon D \times D \times D \hookrightarrow D \times X \times D$と$D \times D \times D$上の準連接層$\overline{\varphi}_*\cO_{D \times \overline{\Gamma}}$に対して命題を適用すると、完全三角形
-    \begin{equation}\label{eq:triangle-on-DDD}
-        \overline{\varphi}_* \cO_{D \times \overline{\Gamma}}\otimes \pi_2^*\cO_D(-D)[1]\to \psi^*\psi_*\overline{\varphi}_*\cO_{D \times \overline{\Gamma}}\to \overline{\varphi}_*\cO_{D \times \overline{\Gamma}} \xrightarrow{+1}
-    \end{equation}
-    を得る。
-    $\eta \colon D \hookrightarrow D \times D \times D$を対角射とすると、
-    \begin{equation}
-        \varphi^*\overline{\varphi}_*\cO_{X \times \overline{\Gamma}} \cong \eta_*\cO_D
-    \end{equation}
-    かつ
-    \begin{equation}
-        \varphi^*(\overline{\varphi}_* \cO_{D \times \overline{\Gamma}}\otimes \pi_2^*\cO_D(-D)[1]) \cong \eta_*\cO_D(-D)[1]
-    \end{equation}
-    だから、\eqref{eq:triangle-on-DDD}を$\varphi$で引き戻すことで$D_{\QCoh}(\cO_{\Gamma \times D})$の完全三角形
-    \begin{equation}
-        \eta_*\cO_D(-D)[1] \to \varphi^*\psi^*\psi_*\overline{\varphi}_*\cO_{D \times \overline{\Gamma}} \to \eta_*\cO_D \xrightarrow{+1}
-    \end{equation}
-    を得る。
-    これをさらに$\pi$で押し出すと
-    \begin{equation}
-        \Delta_*\cO_D(-D)[1] \to \pi_*\varphi^*\psi^*\psi_*\overline{\varphi}_*\cO_{D \times \overline{\Gamma}} \to \Delta_*\cO_D \xrightarrow{+1}
-    \end{equation}
-    という$D_{\QCoh}(\cO_{D \times D})$の完全三角形となる。
-    ここで
-    \begin{align}
-        \pi_*\varphi^*\psi^*\psi_*\overline{\varphi}_*\cO_{D \times \overline{\Gamma}} & \cong \pi_{DD}((\psi \circ \varphi)_*\cO_{\Gamma \times D} \otimes (\psi \circ \overline{\varphi})_*\cO_{D \times \overline{\Gamma}}) \\
-                                                                                       & \cong \pi_{DD}(\pi_{DX}^*\cO_{\Gamma} \otimes \pi_{XD}\cO_{\overline{\Gamma}})
-    \end{align}
-    が成り立つ。1つ目の同型は$\psi \circ \varphi$についての射影公式（命題\ref{prop:projection-formula-for-modules}(2)）である。
-    以上より$D_{\QCoh}(\cO_{D \times D})$の完全三角形
-    \begin{equation}\label{eq:triangle-on-DD}
-        \Delta_*\cO_D(-D)[1] \to \pi_{DD}(\pi_{DX}^*\cO_{\Gamma} \otimes \pi_{XD}\cO_{\overline{\Gamma}}) \to \Delta_*\cO_D \xrightarrow{+1}
-    \end{equation}
-    を得る。これらは例\ref{ex:line-bundle-as-Fourier-Mukai},\ref{ex:composition-of-Fourier-Mukai-over-field},\ref{ex:push-pull-as-Fourier-Mukai}より（ここで体上であることと分離性を使う）それぞれ$(-)\otimes \cO_D(-D)[1], i^*i_*, \id$のFourier--向井核だから、命題の完全三角形を得る。
-    完全三角形の中の射の説明についても三角形\eqref{eq:triangle-on-DDD}の構成からわかる。
-\end{proof}
-
+\section{捻り関手}
 \section{共役作用}
 この節では$X \to T$を体$k$上の非特異多様体の間の平坦射とし、$\dim T = 1$とする。また$i \colon Y \hookrightarrow X$を$X \to T$の$0 \in T$でのファイバーとする。
 さらに以下のように射を定める。
@@ -598,6 +273,344 @@ $E \in D_{\QCoh}(\cO_Y)$とし、$E' \boxtimes E \cong E^\vee \boxtimes E[-1] \i
 %     \end{align}
 %     となる。
 % \end{proof}
+\section{Appendix}
+\subsection{記法}
+\begin{itemize}
+    \item 導来関手の$R$と$L$は原則省略する。
+    \item $X$が環付き空間のとき$\Mod(\cO_X)$を$\cO_X$加群の圏、$D(\cO_X)$を$\Mod(\cO_X)$の導来圏とする。$+, -, b$をつけて有界導来圏を表す。
+    \item $X$がスキームのとき、$D_{\QCoh}(\cO_X) \subset D(\cO_X)$をコホモロジーが凖連接層であるような複体のなす充満部分圏とする。
+    \item $X$がNoetherスキームのとき、$D_{\Coh}(\cO_X) \subset D(\cO_X)$をコホモロジーが連接層であるような複体のなす充満部分圏とする。また$D^b(X) = D_{\Coh}^b(\cO_X)$とする。（$X$がNoetherなのでこれは連接層の圏$\Coh(X)$の導来圏と同値である。）
+\end{itemize}
+
+\subsection{導来関手}
+\begin{definition}
+    $X$を環付き空間とし、$E \in D(\cO_X)$とする。このとき$E$の双対$E^\vee$を
+    \begin{equation}
+        E^\vee = \RHom(E, \cO_X)
+    \end{equation}
+    により定義する。
+\end{definition}
+\begin{proposition}
+    $f \colon X \to Y$を環付き空間の射とし、$K, M \in D(\cO_Y)$とする。このとき自然な射
+    \begin{equation}
+        f^*\CHom(K, M) \to \CHom(f^*K, f^*M)
+    \end{equation}
+    は以下のいずれかの状況で同型である。
+    \begin{enumerate}
+        \item $K$がperfect
+        \item $X, Y$がNoetherスキーム、$f$が平坦で、$K \in D_{\Coh}^-(\cO_Y), M \in D^+(\cO_Y)$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    {\cite[\href{https://stacks.math.columbia.edu/tag/0GM7}{Tag 0GM7}]{stacks-project}}より直ちに従う。
+\end{proof}
+\begin{corollary}\label{cor:pullback-and-dual}
+    $f \colon X \to Y$をNoetherスキームの間の平坦射とすると、任意の$E \in D_{\Coh}^-(\cO_Y)$について双対は引き戻しと交換する。つまり$f^*(E^\vee) \cong (f^*E)^\vee$である。
+\end{corollary}
+\begin{proposition}\label{prop:tensor-and-dual}
+    $X$を環付き空間とし、$L, E \in D(\cO_X)$とする。さらに$L$がperfectであるとする。このとき自然な同型
+    \begin{equation}
+        E^\vee \otimes L^\vee \cong (E \otimes L)^\vee
+    \end{equation}
+    が存在する。
+\end{proposition}
+\begin{proof}
+    {\cite[\href{https://stacks.math.columbia.edu/tag/0G40}{Tag 0G40}]{stacks-project}}より自然な同型
+    \begin{equation}
+        \CHom(E, \cO_X) \otimes L^\vee \cong \CHom(\CHom(L^\vee, E), \cO_X)
+    \end{equation}
+    がある。
+    特に$L^{\vee\vee} \cong L$もわかる。
+    そして {\cite[\href{https://stacks.math.columbia.edu/tag/08DQ}{Tag 08DQ}]{stacks-project}}より
+    \begin{equation}
+        \CHom(L^\vee, E) \cong E \otimes L^{\vee\vee} \cong E \otimes L
+    \end{equation}
+    なので命題が成り立つ。
+\end{proof}
+\subsection{Grothendieck--Verdier双対}
+\begin{theorem}[{\cite[\href{https://stacks.math.columbia.edu/tag/0A9E}{Tag 0A9E}]{stacks-project}}]
+    $f \colon X \to Y$をqcqsスキームの間の射とする。このとき
+    \begin{equation}
+        f_* \colon D_{\QCoh}(\cO_X) \to D_{\QCoh}(\cO_Y)
+    \end{equation}
+    は右随伴$a \colon D_{\QCoh}(\cO_Y) \to D_{\QCoh}(\cO_X)$を持つ。さらにこれは$D_{\QCoh}^+$を保つ。
+\end{theorem}
+\begin{theorem}[{\cite[\href{https://stacks.math.columbia.edu/tag/0GEW}{Tag 0GEW}]{stacks-project}}]\label{thm:Grothendieck-Verdier-duality-for-complexes}
+    $f \colon X \to Y$をNoetherスキームの間の固有射とする。このとき任意の$L \in D_{\Coh}^-(\cO_X), K \in D_{\QCoh}^+(\cO_Y)$に対して自然な同型
+    \begin{equation}
+        f_* \CHom(L, a(K)) \xrightarrow{\sim} \CHom(f_*L, K)
+    \end{equation}
+    がある。
+\end{theorem}
+\begin{definition}[{\cite[\href{https://stacks.math.columbia.edu/tag/0A74}{Tag 0A74}]{stacks-project}}]
+    $i \colon Z \to X$をスキームの閉埋め込みとする。$\cO_X$加群$F$に対して、層$\CHom_{\cO_X}(i_*\cO_Z, F)$は自然に$\cO_Z$加群とみなせる。
+    これにより定まる関手$\Mod(\cO_X) \to \Mod(\cO_Z)$を$\CHom(\cO_Z, -)$と書く。
+\end{definition}
+\begin{proposition}[{\cite[\href{https://stacks.math.columbia.edu/tag/0A74}{Tag 0A74}]{stacks-project}}]\label{prop:Grothendieck-Verdier-duality-for-closed-immersion}
+    $i \colon Z \to X$をスキームの閉埋め込みとする。このとき
+    \begin{enumerate}
+        \item 関手$\CHom(\cO_Z, -) \colon \Mod(\cO_X) \to \Mod(\cO_Z)$は左完全である。
+        \item その右導来関手を$R\CHom(\cO_Z, -) \colon D(\cO_X) \to D(\cO_Z)$とおくと、これは$(L i_* = )i_* = R i_* \colon D(\cO_Z) \to D(\cO_X)$の右随伴である。
+        \item $R\CHom(\cO_Z, -)$は$D_{\QCoh}^+$を保つ。
+        \item $i_* \colon D_{\QCoh}(\cO_Z) \to D_{\QCoh}(\cO_X)$の右随伴$a$と$R\CHom(\cO_Z, -)$は$D_{\QCoh}^+$へ制限したときに一致する。
+    \end{enumerate}
+\end{proposition}
+\subsection{射影公式}
+
+\begin{proposition}[{\cite[\href{https://stacks.math.columbia.edu/tag/08EU}{Tag 08EU}]{stacks-project}}]\label{prop:projection-formula-for-qcoh}
+    $f \colon X \to Y$をスキームの間のqcqs射とする。$E \in D_{\QCoh}(\cO_X), K \in D_{\QCoh}(\cO_Y)$とする。このとき自然な射
+    \begin{equation}
+        f_*E \otimes K \to f_*(E \otimes f^*K)
+    \end{equation}
+    は同型である。
+\end{proposition}
+\begin{proposition}\label{prop:projection-formula-for-modules}
+    $f \colon X \to Y$を環付き空間の射とし、$E \in D(\cO_X), K \in D(\cO_Y)$とする。このとき自然な射
+    \begin{equation}
+        f_*E \otimes K \to f_*(E \otimes f^*K)
+    \end{equation}
+    は以下の状況で同型である。
+    \begin{enumerate}
+        \item $K$がperfect（{\cite[\href{https://stacks.math.columbia.edu/tag/0B54}{Tag 0B54}]{stacks-project}}）
+        \item $f$が閉集合への同相（{\cite[\href{https://stacks.math.columbia.edu/tag/0B55}{Tag 0B55}]{stacks-project}}）
+    \end{enumerate}
+\end{proposition}
+
+\subsection{Fourier--Mukai変換}
+$X, Y$を$S$上のスキームとし、$K \in D(\cO_{X \times_S Y})$とする。
+\begin{equation}
+    \Phi_K = p_{Y*}(p_{X,*}(-)\otimes_{\cO_{X \times_S Y}} K) \colon D(\cO_X) \to D(\cO_Y)
+\end{equation}
+を$K$に付随するFourier--向井関手という。$D_{\QCoh}$などの部分圏の間の関手になっているとき、それもFourier--向井関手という。
+
+\begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0FYR}{Tag 0FYR}]{stacks-project}}]
+    $X \to S$がqcqs射で$K \in D_{\QCoh}$なら$\Phi_K \colon D_{\QCoh}(\cO_X) \to D_{\QCoh}(\cO_Y)$である。
+\end{lemma}
+\begin{lemma}[{\cite[\href{https://stacks.math.columbia.edu/tag/0FYS}{Tag 0FYS}]{stacks-project}}]
+    $X, Y, Z$が$S$上qcqsなスキームで、$X$と$Z$が$S$上tor independentかつ$Y$が$S$上平坦だとする。$K, K' \in D_{\QCoh}$のとき
+    \begin{equation}
+        K'' = p_{XZ,*}(p_{XY}^*K \otimes p_{YZ}^*K'')
+    \end{equation}
+    とおくと、
+    \begin{equation}
+        \Phi_{K'} \circ \Phi_K = \Phi_{K''}\colon D_{\QCoh}(\cO_X) \to D_{\QCoh}(\cO_Z)
+    \end{equation}
+    である。
+\end{lemma}
+\begin{example}\label{ex:composition-of-Fourier-Mukai-over-field}
+    $X, Y, Z$が$S$上qcqsで平坦なら使える。
+\end{example}
+\begin{example}\label{ex:push-pull-as-Fourier-Mukai}
+    $f \colon X \to Y$を$S$上分離的なスキームの間の射とする。このとき以下で定まる$f$のグラフ$\Gamma_f \colon X \to X \times_S Y$は閉埋め込みである。
+    \[
+        \begin{tikzcd}
+            X \ar[rd, "\Gamma_f"] \ar[rdd, bend right, "\id_X"] \ar[rrd, bend left, "f"]& & \\
+            & X \times_S Y \ar[r] \ar[d] & Y \ar[d]\\
+            & X            \ar[r]        & S
+        \end{tikzcd}
+    \]
+    そして
+    \begin{align}
+        \Phi_{\cO_{\Gamma_f}}^{X \to Y} = f_* & \colon D(\cO_X) \to D(\cO_Y) \\
+        \Phi_{\cO_{\Gamma_f}}^{Y \to X} = f_* & \colon D(\cO_Y) \to D(\cO_X)
+    \end{align}
+    である。
+\end{example}
+\begin{proof}
+    $\Gamma_f$は閉埋め込みなので、\ref{prop:projection-formula-for-qcoh}より射影公式が使える。
+    よって
+    \begin{align}
+        \Phi_{\cO_{\Gamma_f}}^{X \to Y}(-) & = p_{Y*}(p_X^*(-) \otimes \cO_{\Gamma_f})               \\
+                                           & = p_{Y*}(p_X^*(-) \otimes \Gamma_{f*}\cO_X)             \\
+                                           & = p_{Y*}\Gamma_{f*}(\Gamma_{f}^*p_X^*(-) \otimes \cO_X) \\
+                                           & = f_*(-)
+    \end{align}
+    \begin{align}
+        \Phi_{\cO_{\Gamma_f}}^{X \to Y}(-) & = p_{X*}(p_Y^*(-) \otimes \cO_{\Gamma_f})               \\
+                                           & = p_{X*}(p_Y^*(-) \otimes \Gamma_{f*}\cO_X)             \\
+                                           & = p_{X*}\Gamma_{f*}(\Gamma_{f}^*p_Y^*(-) \otimes \cO_X) \\
+                                           & = f^*(-)
+    \end{align}
+    となる。
+\end{proof}
+\begin{example}\label{ex:line-bundle-as-Fourier-Mukai}
+    $X$を$S$上分離的なスキームとし、$L$を$X$上の可逆層とする。このとき
+    \begin{equation}
+        \Phi_{\Delta_*L}(-) = L \otimes f^*(-) \colon D(\cO_X) \to D(\cO_Y)
+    \end{equation}
+    である。
+\end{example}
+\begin{proof}
+    $\Delta$は閉埋め込みなので、\ref{prop:projection-formula-for-modules}より射影公式が使える。
+    よって
+    \begin{align}
+        \Phi_{\Delta_*L}(-) & = p_{Y*}(p_X^*(-) \otimes \Delta_* L)        \\
+                            & = p_{Y*}\Delta_*(\Delta^*p_X^*(-) \otimes L) \\
+                            & = (-) \otimes L
+    \end{align}
+    である。
+\end{proof}
+
+\subsection{Cartier因子}
+\begin{definition}
+    $X$をスキームとする。閉部分スキーム$D \subset X$が有効Cartier因子であるとは、$D$の定義イデアル$I$が可逆層であることをいう。
+    このとき$\cO_X(-D) = I, \cO_X(D) = \cO_X(-D)^{-1}$と定める。
+    定義から完全列
+    \begin{equation}
+        0 \to \cO_X(-D) \to \cO_X \to \cO_D \to 0
+    \end{equation}
+    が存在する。
+
+\end{definition}
+\begin{proposition}
+    $X$をスキームとし、$D \subset X$を閉部分スキームとする。このとき以下は同値である。
+    \begin{enumerate}
+        \item $D$は有効Cartier因子である。
+        \item $D$の定義イデアルは局所的に非零因子で生成される。
+    \end{enumerate}
+\end{proposition}
+\begin{proposition}\label{prop:duality-for-Cartier-divisor}
+    $X$をスキームとし、$i \colon D\hookrightarrow X$を有効Cartier因子とする。
+    このとき関手
+    \begin{equation}
+        i^*(-)\otimes \cO_D(D)[-1] \colon D(\cO_X) \to D(\cO_D)
+    \end{equation}
+    は関手$i_* \colon D(\cO_D) \to D(\cO_X)$の右随伴である。
+    さらにこれは$D_{\QCoh}$を保ち、
+    特に$X$がqcqsスキームなら（$D$もqcqsで）$i_* \colon D_{\QCoh}(\cO_D) \to D_{\QCoh}(\cO_X)$の右随伴$i^\times$と一致する。
+\end{proposition}
+\begin{proof}
+    まず{\cite[\href{https://stacks.math.columbia.edu/tag/0AA4}{Tag 0AA4}]{stacks-project}}より$i^*(-)\otimes \cO_D(D)[-1] \cong R\CHom(\cO_D, -)$だから、命題\ref{prop:Grothendieck-Verdier-duality-for-closed-immersion}より$i^*(-)\otimes \cO_D(D)[-1]$は$i_*$の右随伴である。
+    さらに$i^*(-)\otimes \cO_D(D)[-1]$は$D_{\QCoh}$を保つ。
+    よって誘導される関手$i^*(-)\otimes \cO_D(D)[-1] \colon D_{\QCoh}(\cO_X) \to D_{\QCoh}(\cO_D)$も$i_*$の右随伴であり、特に$X$がqcqsスキームなら$i^\times$と一致する。
+\end{proof}
+
+\begin{proposition}\label{prop:triangle-for-push-pull}
+    $k$を体とし、$X$を$k$上分離的かつqcなスキーム、$i \colon D \hookrightarrow X$を有効Cartier因子とする。
+    このとき任意の$F \in D_{\QCoh}(\cO_D)$に対して、$D_{\QCoh}(\cO_Y)$の完全三角形
+    \begin{equation}
+        F \otimes \cO_D(-D)[1] \to i^*i_*F \to F \xrightarrow{+1}
+    \end{equation}
+    が存在する。ここで$i^*i_*F \to F$は随伴$i^* \dashv i_*$の余単位射、$F \otimes \cO_D(-D)[1] \to i^*i_*F$は
+    \begin{equation}
+        \Hom(F \otimes \cO_D(-D)[1], i^*i_*F) \cong \Hom(F, i^*i_*F\otimes \cO_D(D)[-1]) = \Hom(F, i^\times i_*F)
+    \end{equation}
+    によって随伴$i_* \dashv i^\times$の単位射に対応するものである。
+
+    $F = \cO_D$のときはより強く、
+    \begin{equation}
+        i^*i_*\cO_D \cong \cO_D \oplus \cO_D(-D)[-1]
+    \end{equation}
+    が成り立つ。
+\end{proposition}
+\begin{proof}
+    \cite[corollary 11.4]{MR2244106}の証明がこの場合に使えることを確かめる。
+
+    まず$F = \cO_D$のときに示す。
+    完全列
+    \begin{equation}\label{eq:koszul-resolution}
+        0 \to \cO_X(-D) \to \cO_X \to i_*\cO_D \to 0
+    \end{equation}
+    が$i_*\cO_D$の平坦分解を与えるから、これにより$i^*$を計算すればよい。
+
+    次に$F$が（一般の複体ではなく）準連接層のときに成立することを示す。
+    射影公式よりと分解\eqref{eq:koszul-resolution}より
+    \begin{align}
+        i_*i^*i_*F & \cong i_*\cO_D \otimes i_*F                                     \\
+                   & \cong (0 \to i_*F\otimes\cO_X(-D) \xrightarrow{d} i_*F \to 0)   \\
+                   & \cong (0 \to i_*(F\otimes\cO_D(-D)) \xrightarrow{d} i_*F \to 0)
+    \end{align}
+    となり、微分$d$は$D$に制限されているので$0$となる。よって$i^*i_*F$のコホモロジーは（$i_*$してから計算できるので）
+    \[
+        \cH^j(i^*i_*F) \cong \begin{cases}
+            F                   & (j = 0)            \\
+            F \otimes \cO_D(-D) & (j = -1)           \\
+            0                   & (\text{otherwise})
+        \end{cases}
+    \]
+    となる。
+    特に$i^*i_*F$は2項複体だから、完全三角形
+    \begin{equation}
+        \cH^{-1}[1] \to i^*i_*F \to \cH^0 \xrightarrow{+1}
+    \end{equation}
+    が存在する。
+    あとは
+    右端のコホモロジーへの自然な射$i^*i_*F \to \cH^0 \cong F$が随伴$i^*\dashv i_*$の余単位射に、
+    左端のコホモロジーからの自然な射$F \otimes \cO_D(-D)[1] \cong \cH^{-1}[1] \to i^*i_*F$が随伴$i_* \dashv i^\times$の単位射に
+    対応することを示せばよい。
+    $P^\bullet \to i_*F$と$i_*F \to I^\bullet$をそれぞれ$i_*F$の平坦分解と単射分解とする。
+    このとき$\id_{i_*F}$は同型
+    \begin{equation}
+        \Hom(i_*F, i_*F) \cong \Hom(P^\bullet, i_*F) \cong \Hom(i^*P^\bullet, F)
+    \end{equation}
+    を通して$P^\bullet \to i_*F$の随伴
+    \[
+        \begin{tikzcd}
+            \cdots \ar[r] & i^*P^{-1} \ar[r] \ar[d] & i^*P^0 \ar[r] \ar[d] & 0 \ar[d]\ar[r]& \cdots \\
+            \cdots \ar[r] & 0 \ar[r]     & F \ar[r]     & 0\ar[r]& \cdots
+        \end{tikzcd}
+    \]
+    に対応する。これは右端のコホモロジーへの自然な射に他ならない。
+    同様に同型
+    \begin{equation}
+        \Hom(i_*F, i_*F) \cong \Hom(i_*F, I^\bullet) \cong \Hom(F, a(I^\bullet)) \cong \Hom(F, R\CHom(\cO_D, I^\bullet))
+    \end{equation}
+    により$\id_{i_*F}$は
+    \[
+        \begin{tikzcd}
+            \cdots \ar[r] & 0 \ar[r]  \ar[d]    & F \ar[r]\ar[d]     & 0\ar[r]\ar[d]& \cdots\\
+            \cdots \ar[r] & 0 \ar[r]  & R\CHom(\cO_D, I^0) \ar[r] & R\CHom(\cO_D, I^1)\ar[r]& \cdots
+        \end{tikzcd}
+    \]
+    に対応し、これは左端のコホモロジーからの自然な射に他ならない。
+
+    最後に一般の$F \in D_{\QCoh}(\cO_D)$に対して示す。以下では$\times_k$を$\times$と略記する。
+    $i \colon D \hookrightarrow X$のグラフを$\Gamma \subset D \times X$、その転置を$\overline{\Gamma} \subset X \times D$とする。
+    \[
+        \begin{tikzcd}
+            && D &\\
+            &\Gamma \times D \ar[r, hook, "\varphi"]\ar[d, "\pi"] &D \times D \times D \ar[d, hook, "\psi"] \ar[u, "\pi_2"] & D \times \overline{\Gamma} \ar[l, hook', "\overline{\varphi}"]\\
+            D  \ar[r, hook, "\Delta"] \ar[ru, bend left, "\eta"]&D \times D & D \times X \times D \ar[l, "\pi_{DD}"] &
+        \end{tikzcd}
+    \]
+    という可換図式を考える。ただし$\eta$は$D \xrightarrow{\sim} \Gamma$と$\id_D$の積である。
+    有効Cartier因子$\varphi \colon D \times D \times D \hookrightarrow D \times X \times D$と$D \times D \times D$上の準連接層$\overline{\varphi}_*\cO_{D \times \overline{\Gamma}}$に対して命題を適用すると、完全三角形
+    \begin{equation}\label{eq:triangle-on-DDD}
+        \overline{\varphi}_* \cO_{D \times \overline{\Gamma}}\otimes \pi_2^*\cO_D(-D)[1]\to \psi^*\psi_*\overline{\varphi}_*\cO_{D \times \overline{\Gamma}}\to \overline{\varphi}_*\cO_{D \times \overline{\Gamma}} \xrightarrow{+1}
+    \end{equation}
+    を得る。
+    $\eta \colon D \hookrightarrow D \times D \times D$を対角射とすると、
+    \begin{equation}
+        \varphi^*\overline{\varphi}_*\cO_{X \times \overline{\Gamma}} \cong \eta_*\cO_D
+    \end{equation}
+    かつ
+    \begin{equation}
+        \varphi^*(\overline{\varphi}_* \cO_{D \times \overline{\Gamma}}\otimes \pi_2^*\cO_D(-D)[1]) \cong \eta_*\cO_D(-D)[1]
+    \end{equation}
+    だから、\eqref{eq:triangle-on-DDD}を$\varphi$で引き戻すことで$D_{\QCoh}(\cO_{\Gamma \times D})$の完全三角形
+    \begin{equation}
+        \eta_*\cO_D(-D)[1] \to \varphi^*\psi^*\psi_*\overline{\varphi}_*\cO_{D \times \overline{\Gamma}} \to \eta_*\cO_D \xrightarrow{+1}
+    \end{equation}
+    を得る。
+    これをさらに$\pi$で押し出すと
+    \begin{equation}
+        \Delta_*\cO_D(-D)[1] \to \pi_*\varphi^*\psi^*\psi_*\overline{\varphi}_*\cO_{D \times \overline{\Gamma}} \to \Delta_*\cO_D \xrightarrow{+1}
+    \end{equation}
+    という$D_{\QCoh}(\cO_{D \times D})$の完全三角形となる。
+    ここで
+    \begin{align}
+        \pi_*\varphi^*\psi^*\psi_*\overline{\varphi}_*\cO_{D \times \overline{\Gamma}} & \cong \pi_{DD}((\psi \circ \varphi)_*\cO_{\Gamma \times D} \otimes (\psi \circ \overline{\varphi})_*\cO_{D \times \overline{\Gamma}}) \\
+                                                                                       & \cong \pi_{DD}(\pi_{DX}^*\cO_{\Gamma} \otimes \pi_{XD}\cO_{\overline{\Gamma}})
+    \end{align}
+    が成り立つ。1つ目の同型は$\psi \circ \varphi$についての射影公式（命題\ref{prop:projection-formula-for-modules}(2)）である。
+    以上より$D_{\QCoh}(\cO_{D \times D})$の完全三角形
+    \begin{equation}\label{eq:triangle-on-DD}
+        \Delta_*\cO_D(-D)[1] \to \pi_{DD}(\pi_{DX}^*\cO_{\Gamma} \otimes \pi_{XD}\cO_{\overline{\Gamma}}) \to \Delta_*\cO_D \xrightarrow{+1}
+    \end{equation}
+    を得る。これらは例\ref{ex:line-bundle-as-Fourier-Mukai},\ref{ex:composition-of-Fourier-Mukai-over-field},\ref{ex:push-pull-as-Fourier-Mukai}より（ここで分離性と平坦性を使う）それぞれ$(-)\otimes \cO_D(-D)[1], i^*i_*, \id$のFourier--向井核だから、命題の完全三角形を得る。
+    完全三角形の中の射の説明についても三角形\eqref{eq:triangle-on-DDD}の構成からわかる。
+\end{proof}
+
 
 \printbibliography[title=参考文献]
 \end{document}

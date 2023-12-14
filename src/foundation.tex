@@ -1,0 +1,130 @@
+\RequirePackage{plautopatch}
+\documentclass[uplatex, a4paper, dvipdfmx]{jsarticle}
+\usepackage[backend=biber, style=alphabetic, sorting=nyt]{biblatex}
+\addbibresource{../bib/double-affine-braid-group.bib} 
+
+\usepackage{amsthm}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{tikz-cd}
+\usepackage{dynkin-diagrams}
+
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{fact}[theorem]{事実}
+\newtheorem{example}[theorem]{例}
+\newtheorem{remark}[theorem]{補足}
+
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+\DeclareMathOperator{\CHom}{\mathcal{H}\!\mathit{om}}
+\DeclareMathOperator{\CTor}{\mathcal{T}\!\mathit{or}}
+\DeclareMathOperator{\Auteq}{\mathrm{Auteq}}
+\DeclareMathOperator{\Cone}{\mathrm{Cone}}
+\DeclareMathOperator{\ev}{\mathrm{ev}}
+\DeclareMathOperator{\id}{\mathrm{id}}
+\DeclareMathOperator{\depth}{\mathrm{depth}}
+\DeclareMathOperator{\Pic}{\mathrm{Pic}}
+\DeclareMathOperator{\MCG}{\mathrm{MCG}}
+\DeclareMathOperator{\PMCG}{\mathrm{PMCG}}
+\DeclareMathOperator{\RHom}{\mathrm{RHom}}
+\DeclareMathOperator{\Ker}{\mathrm{Ker}}
+\DeclareMathOperator{\Image}{\mathrm{Im}}
+\DeclareMathOperator{\Aut}{\mathrm{Aut}}
+\DeclareMathOperator{\Inn}{\mathrm{Inn}}
+\DeclareMathOperator{\Out}{\mathrm{Out}}
+\DeclareMathOperator{\Supp}{\mathrm{Supp}}
+\DeclareMathOperator{\SL}{\mathrm{SL}}
+\DeclareMathOperator{\GL}{\mathrm{GL}}
+\DeclareMathOperator{\Spec}{\mathrm{Spec}}
+\DeclareMathOperator{\Proj}{\mathrm{Proj}}
+\DeclareMathOperator{\Perf}{\mathrm{Perf}}
+\DeclareMathOperator{\NS}{\mathrm{NS}}
+\DeclareMathOperator{\Ext}{\mathrm{Ext}}
+\DeclareMathOperator{\Hilb}{\mathrm{Hilb}}
+\DeclareMathOperator{\res}{\mathrm{res}}
+\DeclareMathOperator{\Ch}{\mathrm{Ch}}
+\DeclareMathOperator{\Coh}{\mathrm{Coh}}
+\DeclareMathOperator{\QCoh}{\mathrm{QCoh}}
+\DeclareMathOperator{\Ann}{\mathrm{Ann}}
+\DeclareMathOperator{\Aff}{\mathrm{Aff}}
+\DeclareMathOperator{\FM}{\mathrm{FM}}
+\DeclareMathOperator{\red}{\mathrm{red}}
+\DeclareMathOperator{\length}{\mathrm{length}}
+\DeclareMathOperator{\Mod}{\mathrm{Mod}}
+\DeclareMathOperator{\tr}{\mathrm{tr}}
+
+
+
+\newcommand{\nc}{\newcommand}
+
+%% Calligraphic letters
+\nc{\cD}{{\mathcal{D}}}
+\nc{\cF}{{\mathcal{F}}}
+\nc{\cG}{{\mathcal{G}}}
+\nc{\cH}{{\mathcal{H}}}
+\nc{\cJ}{{\mathcal{J}}}
+\nc{\cM}{{\mathcal{M}}}
+\nc{\cO}{{\mathcal{O}}}
+\nc{\cU}{{\mathcal{U}}}
+\nc{\cW}{{\mathcal{W}}}
+
+%% Blackboard letters
+\nc{\bA}{{\mathbb{A}}}
+\nc{\bC}{{\mathbb{C}}}
+\nc{\bP}{{\mathbb{P}}}
+\nc{\bQ}{{\mathbb{Q}}}
+\nc{\bR}{{\mathbb{R}}}
+\nc{\bZ}{{\mathbb{Z}}}
+
+
+%% Fraktur letters
+\nc{\fg}{{\mathfrak{g}}}
+\nc{\fu}{{\mathfrak{u}}}
+
+% hyperref
+\usepackage[urlcolor=blue]{hyperref}
+
+
+\title{半捻り関手}
+\author{荒井 勇人}
+\date{\today}
+\begin{document}
+\maketitle
+\section{記法}
+\section{Fourier-Mukai変換}
+\begin{definition}
+    qq
+\end{definition}
+\begin{proposition}
+    $K$を体、$T$を$k$上分離的なスキーム、$X$を$k$上の非特異準射影的多様体、$X \to T$を平坦射とする。このとき
+    \begin{enumerate}
+        \item $\FM_{T}(D^b(X)) \to \FM(D^b(X))$
+        \item $\FM (D^b(X)) \to \Auteq D^b(X)$
+    \end{enumerate}
+    は単射である。
+\end{proposition}
+\begin{proof}
+    \begin{enumerate}
+        \item $\iota \colon X \times_T X \to X \times_k X$は$T$の分離性より塀埋め込みである。$P \in \FM_T (D^b(X))$が$\iota_*P \cong \cO_\Delta$を満たすと仮定すると、$P$は$D^b(X \times_T X)$の連接層になる。よって$\iota$で押し出す前の時点で$P \cong \cO_\Delta$である。
+        \item $X$が射影的ならばOrlovの結果である。準射影的な場合は\cite[Theorem 1.5]{MR3556457}からわかる。
+    \end{enumerate}
+\end{proof}
+\section{半捻り関手}
+\begin{proposition}
+    $X$を$k$上の多様体、$T$を$k$上の非特異多様体とする。$T' \subset T$を非特異閉部分多様体で法束が自明なものとする。$i \colon X' = X \times_T T' \to X$とすると、任意の$F \in D^b(X')$について以下は同値である。
+    \begin{enumerate}
+        \item $\Hom^{<0}(i_*F, i_*F) = 0$
+        \item $\Hom^{<0}(F, F) = 0$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+
+\end{proof}
+\printbibliography[title=参考文献]
+\end{document}

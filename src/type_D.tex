@@ -131,7 +131,7 @@ $(V,(-, -))$を$n$次元ユークリッド空間とする。
         \item $a, b \in R^a$について$(a^\vee, b) \in \bZ$である。
         \item $W^a = \langle s_a \mid a \in R^a \rangle$の$V$への作用は固有不連続である。
     \end{enumerate}
-    $W$を$R^a$のWeyl群という。
+    $W^a$を$R^a$のWeyl群という。
 \end{definition}
 
 \begin{theorem}
@@ -163,7 +163,7 @@ $(V,(-, -))$を$n$次元ユークリッド空間とする。
 \begin{definition}
     \begin{enumerate}
         \item  $W^{ae} = W \ltimes t(P^\vee)$を$R$に付随する拡大アファインWeyl群という。これは自然に$V$にアファイン変換として作用する。
-        \item $\Omega = \{w \in W^{ae} \mid l(w) = 0\} = \{w \in W \mid wA = A\}$を、基本アルコーブ$A$を保つ$w$たちのなす部分群とする。
+        \item $\Omega = \{w \in W^{ae} \mid l(w) = 0\} = \{w \in W^{ae} \mid wA = A\}$を、基本アルコーブ$A$を保つ$w$たちのなす部分群とする。
     \end{enumerate}
 \end{definition}
 \begin{proposition}
@@ -188,7 +188,7 @@ $(V,(-, -))$を$n$次元ユークリッド空間とする。
         \item  $R = \{\pm e_i \pm e_j \mid 1 \leq i < j \leq 4\}$を$D_4$型の既約有限ルート系とする。
         \item $\alpha_1 = e_1 - e_2, \alpha_2 = e_2 - e_3, \alpha_3 = e_3 - e_4, \alpha_4 = e_3 + e_4$がルート系の基底（のひとつ）をなす。
         \item 最高ルートは$\theta = e_1 + e_2 = \alpha_1 + 2\alpha_2 + \alpha_3 + \alpha_4$である。
-        \item $Q = Q^\vee = \bigoplus_{i=1}^4 \bZ e_i = \{(x_1, x_2, x_3, x_4) \in \bZ^4\mid \sum_i x_i \in 2 \bZ\}$である。
+        \item $Q = Q^\vee = \bigoplus_{i=1}^4 \bZ \alpha_i = \{(x_1, x_2, x_3, x_4) \in \bZ^4\mid \sum_i x_i \in 2 \bZ\}$である。
         \item $\omega_1 = e_1, \omega_2 = e_1 + e_2, \omega_3 = \frac{1}{2}(e_1 + e_2 + e_3 - e_4), \omega_4 = \frac{1}{2}(e_1 + e_2 + e_3 + e_4)$が基本ウェイトで、$P = P^\vee = \bigoplus_{i=1}^4 \bZ \omega_i$である。
         \item $s_i$ を$\alpha_i$に付随する鏡映とする。$s_1, s_2, s_3 \in W$はそれぞれ$e_1$と$e_2$、$e_2$と$e_3$、$e_3$と$e_4$を交換することで$V$に作用する。$s_4$は$e_3$を$-e_4$に、$e_4$を$-e_3$に送る。これらにより$W$は生成され、座標の入れ替えおよび偶数個の座標を$-1$倍するように$V$に忠実に作用し、$S_4 \ltimes (\bZ/2\bZ)^3$と同型である。
         \item $\alpha_0 = -\theta + \delta$
@@ -204,7 +204,7 @@ $\tau =\{\tau_0, \dots, \tau_n\}$を不定元の集合とする。ただし$s_i$
 次に$e \in \bZ>0$を$(P, P^\vee) = \frac{1}{e}\bZ$となるような整数と定め、格子$P \oplus \bZ \frac{\delta}{e} \subset F = \Aff(V)$への$W^{ae}$の作用を
 $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \bZ$について
 \begin{equation}
-    w\left(\mu + \frac{k}{e} \delta\right) = v(\mu) +\left(k/e - (\lambda, \mu)\right)\delta
+    w\left(\mu + \frac{k}{e} \delta\right) = v(\mu) +\left(k/e - (\lambda, v(\mu))\right)\delta
 \end{equation}
 あるいは$\mu + \frac{k}{e} \delta$を乗法的に$q^{k/e} X^\mu$と書いて
 \begin{equation}
