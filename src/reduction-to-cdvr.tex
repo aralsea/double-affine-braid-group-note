@@ -178,7 +178,7 @@
 
 \section{完備局所環への帰着}
 \begin{itemize}
-    \item $k$を標数$0$の代数閉体とする。
+    \item $k$を体とする。
     \item 登場するスキームはすべて$k$上のものとする。
     \item $D^b(X)$を$X$上の連接層の有界導来圏とする。
     \item 導来関手の$L, R$は基本的に省略する。
@@ -234,7 +234,7 @@ $k = (h \times h) \circ (g \times g) \circ (f \times f)$だから、1つ目を�
     このとき
     \begin{enumerate}
         \item $i$は平坦である。
-        \item $i_* \colon \QCoh(X \times_T \Spec \cO_{T, t}) \to \QCoh(X)$は完全関手である。
+        \item $i_* \colon \QCoh(X \times_T \Spec \cO_{T, 0}) \to \QCoh(X)$は完全関手である。
         \item （随伴の余単位射によって）$i^*i_* \cong \id \colon \QCoh( X \times_T \Spec \cO_{T, 0}) \to \QCoh( X \times_T \Spec \cO_{T, 0})$である。
     \end{enumerate}
 \end{lemma}
@@ -321,7 +321,13 @@ $k = (h \times h) \circ (g \times g) \circ (f \times f)$だから、1つ目を�
 \subsection{2つ目の証明}
 flat base changeである。
 \subsection{3つ目の証明}
-TODO
+\begin{proposition}
+    $\Hom((f \times f)_*(E' \boxtimes E), \cO_{\Delta_{X_{\widehat{R}}}}) = k$
+\end{proposition}
+\begin{proof}
+
+\end{proof}
+この命題より、2つの射は定数倍を除いて一致する。どちらも$0$ではないので、$\Cone$は同型である。
 \section{半捻り関手の関係式}
 $X \to T$を非特異準射影多様体の間の平坦射とし、$0 \in T$を閉点、その局所環を$R = \cO_{T, 0}$、その完備化を$\widehat{R}$とする。
 \[
@@ -368,5 +374,16 @@ $X \to T$を非特異準射影多様体の間の平坦射とし、$0 \in T$を�
 \begin{remark}
     $X_{\widehat{R}}$上の捻り関手の理論を展開してもいいが、大掛かりになりそうなのでやめた。
 \end{remark}
+\section{Appendix}
+\subsection{相対Fourier--向井変換と共役作用}
+$X \to T$を平坦射とする。
+\begin{proposition}
+    $E \in D(X_0)$とする。$Q \in D(X \times_T X)$とする。このとき
+    \begin{equation}
+        Q * P_E * Q_R \cong P_{\Phi(E)}
+    \end{equation}
+    である。
+\end{proposition}
+
 \printbibliography[title=参考文献]
 \end{document}
