@@ -116,13 +116,6 @@
 \end{proof}
 
 \begin{proposition}
-    $T$をNoetherスキーム、$\pi \colon X \to T$を有限型分離的平坦な射とする。このとき群準同型
-    \begin{equation}
-        \FM_T(X) \to \Auteq D^b(X), \quad P \mapsto \Phi_P
-    \end{equation}
-    が存在する。
-\end{proposition}
-\begin{proposition}
     $T$をNoetherスキーム、$\pi \colon X \to T$を有限型分離的平坦な射とする。$\varphi \colon T' \hookrightarrow T$を閉埋め込みとし、$k \colon X' = X \times_T T \hookrightarrow X$とする。このとき群準同型
     \begin{equation}
         \FM_T(X) \to \FM_{T'}(X'), \quad P \mapsto k^*P
@@ -144,14 +137,34 @@
     $\iota \colon X \times_T X \to X \times_S X$は$T \to S$の分離性より閉埋め込みである。$P \in \FM_T (X)$が$\iota_*P \cong \iota_*\cO_\Delta$を満たすと仮定すると、$P$は$D^b(X \times_T X)$の連接層になる。よって$\iota$で押し出す前の時点で$P \cong \cO_\Delta$である。
 \end{proof}
 \section{捻り関手}
-\begin{proposition}
-    $X$を$k$上の非特異射影多様体とする。このとき$\FM_k(X) \to \Auteq D^b(X)$
-    は単射である。
+\begin{proposition}\label{prop:kernel-to-functor}
+    $X$を$k$上の準射影的スキームとする。このとき単射準同型
+    \begin{equation}
+        \FM_k(X) \to \Auteq D^b(X), \quad P \mapsto \Phi_P
+    \end{equation}
+    がある。
 \end{proposition}
 \begin{proof}
-    $X$が射影的ならばOrlovの結果である。
-    % 準射影的な場合は\cite[Theorem 1.5]{MR3556457}からわかる。
+    $X$が非特異射影的ならばOrlovの結果である。
+    準射影的な場合は\cite{MR2434186}と\cite{MR3556457}の結果を使う。
+
+    まずwell-definednessを示す。群準同型
+    \begin{equation}
+        \FM_k(X) \to \Auteq D_{\QCoh}(\cO_X), \quad P \mapsto \Phi_P
+    \end{equation}
+    がwell-definedなので$\Phi_P$が$D^b(X)$を保つことを示せばよいが、\cite[Lemma 6.11, Proposition 6.12]{MR2434186}より$D^b(X) \subset D_{\QCoh}(\cO_X)$は$k$線形な三角圏同値で不変だからよい。
+
+    次に単射性を示す。
+    \cite[Remark 1.3, Theorem 1.5]{MR3556457}によると、$X$と$Y$が$k$上準射影的スキームで$E, E' \in D(\QCoh(X \times_k Y))$が$\Phi_E \cong \Phi_{E'} = \Phi \colon \Perf(X) \to D(\QCoh(Y))$を満たし、さらに任意の$m, n$について$\Hom^{<0}(\Phi(\cO_X(m)), \Phi(\cO_X(n))) = 0$ならば、$E \cong E'$である。
+    $P, P' \in \FM_k(X)$が$\Phi_P \cong \Phi_{P'} \in \Auteq D^b(X)$を満たすとする。このとき$\Phi_P, \Phi_{P'}$を関手$\Perf(X) \to D(\QCoh(X))$とみなしたものも自然同型で、仮定より$\Hom^{<0}(\Phi_P(\cO_X(m)), \Phi_P(\cO_X(n))) = 0$である。よって$P \cong P'$である。
 \end{proof}
+\begin{remark}
+    $X$が$k$上の準射影的スキームのとき、$\FM_k(X)$は以下のようにかける。
+    \begin{equation}
+        \FM_k(X) = \{P \in D^b(X \times_k X) \mid P \text{は$\pi_1$-perfectかつ$\pi_2$-perfectで、$\Phi_P$は圏同値$D^b(X) \to D^b(X)$を誘導する}\}/\cong
+    \end{equation}
+    右辺の元$P$がconvolutionについて可逆であることを示せばよい。\cite{MR3720794}より、$\Phi_P$の右随伴は$P_R = \CHom(P, \pi_1^!\cO_X)$で与えられ、仮定より$\Phi_{P * P_R} \cong \Phi_P \circ \Phi_{P_R} \cong \id \cong \Phi_{\cO_{\Delta}}$である。よって命題\ref{prop:kernel-to-functor}の証明より$P * P_R \cong \cO_{\Delta}$である。同様に$P_L * P \cong \cO_{\Delta}$でもあるから、$P$はconvolutionについて可逆である。
+\end{remark}
 \begin{definition}
     $X$を$k$上の非特異準射影的多様体とする。$E \in D^b(X)$が以下の条件を満たすとき、球面対象という。
     \begin{enumerate}
