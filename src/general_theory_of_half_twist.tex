@@ -100,41 +100,84 @@
 \section{相対Fourier--Mukai変換}
 \begin{definition}
     $T$をNoetherスキーム、$\pi \colon X \to T$を有限型分離的平坦な射とする。
-    $\FM_T(X)$を以下で定まる群とする。
+    $\FM_T(X)$を以下で定まる集合とする。
     \begin{equation}
-        \FM_T(X) = \{P \in D^b(X \times_T X) \mid P \text{は$\pi_1$-perfectかつ$\pi_2$-perfectで、convolutionについて可逆}\}/\cong
+        \FM_T(X) = \{P \in D^b(X \times_T X) \mid P \text{は$\pi_1$-perfectかつ$\pi_2$-perfectで、畳み込みについて可逆}\}/\cong
     \end{equation}
+    これは畳み込みを積、$\cO_{\Delta}$を単位元として群になる。
 \end{definition}
 \begin{proposition}
     $\FM_T(X)$はwell-definedである。
 \end{proposition}
 \begin{proof}
-    convolutionで閉じていることと、単位元があることを示せばよい。
+    畳み込みで閉じていることと、単位元があることを示せばよい。
     $P, Q \in \FM_T(X)$をとる。$P*Q$が$\pi_i$-perfectであることを示す。まず$\pi_{12}, \pi_{23}$は平坦だから$\pi_{12}^*P, \pi_{23}^*Q \in D^b(X \times_T X \times_T X)$である。さらにTor-independent base changeより、$\pi_{12}^*P$は$\pi_{23}$-perfectである。すると\cite[Lemma 5.1]{MR3720794}より$\pi_{12}^*P \otimes \pi_{23}^*Q \in D^b(X \times_T X \times_T X)$である。次にこれが$\pi_1, \pi_3$-perfectであることを示す。そのためには再び\cite[Lemma 5.1]{MR3720794}より任意の$F \in D^b(X)$について$\pi_{12}^*P \otimes \pi_{23}^*Q \otimes \pi_i^*F \in D^b(X \times_T X \times_T X)$であることを見ればよい。$i=3$なら$\pi_{12}^*P$の$\pi_{23}$-perfectnessから、$i=1$なら$\pi_{23}^*Q$の$\pi_{12}$-perfectnessから従う。最後に$P * Q = \pi_{13*}(\pi_{12}^*P \otimes \pi_{23}^*Q)$が$D^b(X\times_T X)$に入っていて$\pi_{i}$-perfectであることを示す。これは\cite[Proposition 2.7]{MR3720794}からわかる。
 
     単位元は$\cO_\Delta$である。
 \end{proof}
 
-\begin{proposition}
-    $T$をNoetherスキーム、$\pi \colon X \to T$を有限型分離的平坦な射とする。$\varphi \colon T' \hookrightarrow T$を閉埋め込みとし、$k \colon X' = X \times_T T \hookrightarrow X$とする。このとき群準同型
+
+
+
+\begin{proposition}\label{prop:forget-base}
+    $S$をNoetherスキーム、$T \to S$と$X \to T$を有限型分離的平坦な射とする。$\iota \colon X \times_T X \to X \times_S X$とおくと、単射準同型
     \begin{equation}
-        \FM_T(X) \to \FM_{T'}(X'), \quad P \mapsto k^*P
+        \FM_T(X) \to \FM_{S}(X), \quad P \mapsto \iota_*P
     \end{equation}
-    が存在する。
-\end{proposition}
-\begin{proof}
-    平坦性とTor-independent base change からわかる。
-\end{proof}
-
-
-\begin{proposition}
-    $S$をNoetherスキーム、$T \to S$と$X \to T$を有限型分離的平坦な射とする。このとき射$X \times_T X \to X \times_S X$は単射準同型
-    $\FM_{T}(X) \to \FM_{S}(X)$
-    を誘導する。
+    がある。
 \end{proposition}
 \begin{proof}
     まず射影公式より準同型であることがわかる。単射性を示す。
     $\iota \colon X \times_T X \to X \times_S X$は$T \to S$の分離性より閉埋め込みである。$P \in \FM_T (X)$が$\iota_*P \cong \iota_*\cO_\Delta$を満たすと仮定すると、$P$は$D^b(X \times_T X)$の連接層になる。よって$\iota$で押し出す前の時点で$P \cong \cO_\Delta$である。
+\end{proof}
+
+
+\begin{proposition}
+    $T$を（局所）Noetherスキーム、$T' \subset T$を正則閉埋め込み、$X \to T$を平坦射、$X' = X \times_T T'$とする。このとき以下はTor-independent base changeである。
+    \[
+        \begin{tikzcd}
+            X' \ar[r]\ar[d, "\Delta_{X'}"] &X \ar[d, "\Delta_X"]\\
+            X' \times_{T'} X' \ar[r] & X \times_T X
+        \end{tikzcd}
+    \]
+\end{proposition}
+\begin{proof}
+    \[
+        \begin{tikzcd}
+            X' \ar[r]\ar[d, "\Delta_{X'}"] &X \ar[d, "\Delta_X"]\\
+            X' \times_{T'} X' \ar[r] \ar[d] & X \times_T X \ar[d]\\
+            T' \ar[r] & T\\
+        \end{tikzcd}
+    \]
+    $T = \Spec R, T' = \Spec (R/I), X = \Spec A$としてよい。$i > 0$に対して
+    \begin{equation}
+        \Tor^{A \otimes_R A}_i((A \otimes_R A) \otimes_R (R/I), A) = 0
+    \end{equation}
+    を示す。
+    $T' \subset T$は正則埋め込みだから、正則列$(f_1, \dots, f_r)$で$I = (f_1, \dots, f_r)$となるものが存在する。この正則列に付随するKoszul複体$K_{\bullet}(f_1, \dots, f_r; R)$は、$A \otimes_R A$が$R$上平坦だから$(A \otimes_R A) \otimes_R (R/I)$の$A \otimes_R A$加群としての自由分解$K_{\bullet}(f_1, \dots, f_r; A \otimes_R A) \cong K_{\bullet}(f_1, \dots, f_r; R) \otimes_R (A \otimes_R A)$を誘導する。よって
+    \begin{align}
+        \Tor^{A \otimes_R A}_i((A \otimes_R A) \otimes_R (R/I), A) & \cong H^{-i}(K_{\bullet}(f_1, \dots, f_r; A \otimes_R A) \otimes_{A \otimes_R A} A)               \\
+                                                                   & \cong H^{-i}(K_{\bullet}(f_1, \dots, f_r; R) \otimes_R (A \otimes_R A) \otimes_{A \otimes_R A} A) \\
+                                                                   & \cong H^{-i}(K_{\bullet}(f_1, \dots, f_r; R) \otimes_R A)
+    \end{align}
+    となるが、$A$は$R$上平坦だから右辺は$i > 0$について$0$である。
+\end{proof}
+\begin{proposition}
+    $T$をNoetherスキーム、$\pi \colon X \to T$を有限型分離的平坦な射とする。$\varphi \colon T' \to T$をNoetherスキームの射とし、$\psi \colon X' = X \times_T T \to X$とする。さらに以下がTor-independent base changeだと仮定する（例えば$\varphi$が平坦ならよい）。
+    \[
+        \begin{tikzcd}
+            X' \ar[r] \ar[d, "\Delta_{X'}"'] & X \ar[d, "\Delta_X"]\\
+            X' \times_{T'} X' \ar[r] & X \times_T X
+        \end{tikzcd}
+    \]
+    このとき群準同型
+    \begin{equation}
+        \FM_T(X) \to \FM_{T'}(X'), \quad P \mapsto \psi^*P
+    \end{equation}
+    がある。
+\end{proposition}
+\begin{proof}
+    平坦性とTor-independent base change からわかる。
 \end{proof}
 \section{捻り関手}
 \begin{proposition}\label{prop:kernel-to-functor}
@@ -163,8 +206,9 @@
     \begin{equation}
         \FM_k(X) = \{P \in D^b(X \times_k X) \mid P \text{は$\pi_1$-perfectかつ$\pi_2$-perfectで、$\Phi_P$は圏同値$D^b(X) \to D^b(X)$を誘導する}\}/\cong
     \end{equation}
-    右辺の元$P$がconvolutionについて可逆であることを示せばよい。\cite{MR3720794}より、$\Phi_P$の右随伴は$P_R = \CHom(P, \pi_1^!\cO_X)$で与えられ、仮定より$\Phi_{P * P_R} \cong \Phi_P \circ \Phi_{P_R} \cong \id \cong \Phi_{\cO_{\Delta}}$である。よって命題\ref{prop:kernel-to-functor}の証明より$P * P_R \cong \cO_{\Delta}$である。同様に$P_L * P \cong \cO_{\Delta}$でもあるから、$P$はconvolutionについて可逆である。
+    右辺の元$P$が畳み込みについて可逆であることを示せばよい。\cite{MR3720794}より、$\Phi_P$の右随伴は$P_R = \CHom(P, \pi_1^!\cO_X)$で与えられ、仮定より$\Phi_{P * P_R} \cong \Phi_P \circ \Phi_{P_R} \cong \id \cong \Phi_{\cO_{\Delta}}$である。よって命題\ref{prop:kernel-to-functor}の証明より$P * P_R \cong \cO_{\Delta}$である。同様に$P_L * P \cong \cO_{\Delta}$でもあるから、$P$は畳み込みについて可逆である。
 \end{remark}
+
 \begin{definition}
     $X$を$k$上の非特異準射影的多様体とする。$E \in D^b(X)$が以下の条件を満たすとき、球面対象という。
     \begin{enumerate}
@@ -226,18 +270,26 @@
 \end{proof}
 
 \subsection{体上有限型の場合}
+$X \to T$を代数閉体$k$上の非特異多様体の間の平坦射とし、$X$は準射影的とする。また$0 \in T$を閉点とし、$X_0$をそのファイバーとする。このとき以下の群準同型がある。
 
+\[
+    \begin{tikzcd}
+        \FM_k(X_0) \ar[d, hookrightarrow]& \FM_T(X) \ar[l] \ar[r, hookrightarrow]& \FM_k(X) \ar[d, hookrightarrow]\\
+        \Auteq D^b(X_0)& & \Auteq D^b(X)
+    \end{tikzcd}
+\]
+ファイバーから来る球面対象の定める捻り関手が$\FM_T(X)$に入っていることを示す。
 \begin{proposition}
-    $X, T$を$k$上の代数多様体、$X \to T$を平坦射とし、$T$は非特異で$n$次元とする。$i \colon X_0 \to X$を閉点$0 \in T$のファイバーとし、$E \in D^b(X)$とする。
+    $X, T$を$k$上の非特異代数多様体、$X \to T$を平坦射とする。$i \colon X_0 \to X$を閉点$0 \in T$のファイバーとし、$E \in D^b(X)$とする。
 
     \[
         \begin{tikzcd}
-            Y \arrow[r,"i"]\arrow[d, "\Delta_Y"] & X \arrow[d,"d"]\arrow[rdd, bend left, "\Delta_X"]&\\
-            Y \times Y \arrow[r, "k"]\arrow[rrd, bend right, "j=i \times i"]& X \times_T X\arrow[rd, "\iota"]&\\
-            & & X \times X.
+            X_0 \arrow[r,"i"]\arrow[d, "\Delta_{X_0}"] & X \arrow[d,"d"]\arrow[rdd, bend left, "\Delta_X"]&\\
+            X_0 \times X_0 \arrow[r, "k"]\arrow[rrd, bend right, "j=i \times i"]& X \times_T X\arrow[rd, "\iota"]&\\
+            & & X \times X
         \end{tikzcd}
     \]
-    このとき（球面対象とは限らない）$i_*E$に付随する捻り関手$T_{i_*E}$の積分核
+    このとき、$i_*E$に付随する捻り関手$T_{i_*E}$の積分核
     \begin{equation}
         P_{i_*E} = \Cone((i_*E)^\vee \boxtimes (i_*E) \to \Delta_{X*}\cO_X)
     \end{equation}
@@ -245,12 +297,27 @@
     \begin{equation}
         P_{E} = \Cone(k_*(E' \boxtimes E)\to d_*\cO_X)
     \end{equation}
-    の$\iota$による押し出しと同型である。
+    の$\iota$による押し出しと同型であり、$P_E$は$\pi_1, \pi_2$-perfectである。
+    さらに$i_*E$が球面対象なら、$P_E \in \FM_T(X)$である。
 \end{proposition}
 \begin{proof}
-    \cite{2023arXiv230212501A}の議論からわかる。
-\end{proof}
+    前半は\cite{2023arXiv230212501A}の議論からわかる。
+    $\pi_1, \pi_2$-perfectであることを示す。two-out-of-threeより$k_*(E' \boxtimes E)$が$\pi_1, \pi_2$-perfectであることを示せば十分である。
 
+    \[
+        \begin{tikzcd}
+            X_0 \times X_0 \arrow[r, "k"]\arrow[d, "p_1"] & X \times_T X\arrow[d, "\pi_1"]\\
+            X_0 \arrow[r, "i"] & X
+        \end{tikzcd}
+    \]
+    \cite[Proposition 2.7]{MR3720794}より、$E' \boxtimes E$が$\pi_1 \circ k$-perfectであることを示せば$k_*(E' \times E)$が$\pi_1$-perfectなことがわかる。$F \in D^b(X)$とすると
+    \begin{align}
+        (\pi_1 \circ k)^*F \otimes (E' \boxtimes E) & \cong (i^*F \otimes E') \boxtimes E
+    \end{align}
+    で、これが$D^b(X_0 \times X_0)$に入ることを見ればよい。$j$で押し出すとKunneth formulaより$i_*(i^*F \otimes E') \boxtimes i_*E \cong (F \otimes i_*(E'))\boxtimes i_*E$となるから$X$の非特異性より$D^b(X \times_T X)$に入る。$j$は閉埋め込みだから元の$(i^*F \otimes E') \boxtimes E$も$D^b(X_0 \times X_0)$に入り、これは$E' \boxtimes E$が$\pi_1 \circ k$-perfectであることを意味する。$\pi_2$についても同様。
+
+    さらに$i_*E$が球面対象なら、命題\ref{prop:forget-base}の証明より$P_E$は畳み込みについて可逆である。
+\end{proof}
 
 \section{Appendix}
 \subsection{記法}
