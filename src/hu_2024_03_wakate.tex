@@ -132,7 +132,7 @@
 %%%%%%%% 以下の本文はご自由にお書きください。 %%%%%%%%
 
 \section{導入}
-本稿では代数多様体は$\bC$上のものとする。
+本稿で扱う代数多様体は$\bC$上のものとする。
 \subsection{楕円曲線と小平ファイバー}
 
 平面上の三次式で表される代数曲線のうち、特異点を持たないものを\textbf{楕円曲線}という。
@@ -262,8 +262,8 @@ $D^b(X)$の対象は連接層の複体であり、射の空間は$\Ext$群によ
                 \draw(7, 2) node[above]{$\beta$};
             \end{tikzpicture}
         \end{displaymath}
-        \label{fig:mirror-for-elliptic-curve}
         \caption{楕円曲線とトーラスのミラー対称性}
+        \label{fig:mirror-for-elliptic-curve}
     \end{figure}
 \end{example}
 \subsection{Fourier--向井関手と捻り関手}
@@ -310,7 +310,8 @@ $A(X)$以外の自己同値を具体的に構成する方法として、Seidel�
     \end{equation}
     が存在する。ここで$\ev$は自然なペアリング写像である。
 \end{corollary}
-この定義のモチベーションについて少し説明する。実曲面$\Sigma$上の閉曲線$\gamma$に対し、その\textbf{Dehn捻り}という$\Sigma$の自己同相が以下の図のように「$\gamma$に沿って$\Sigma$を切断し、180度捻って再接着する」ものとして定義されていた。
+この定義のモチベーションについて少し説明する。実曲面$\Sigma$上の閉曲線$\gamma$に対し、その\textbf{Dehn捻り}という$\Sigma$の自己同相が以下の図のように「$\gamma$に沿って$\Sigma$を切断し、180度捻って再接着する」ものとして定義されていた（図\ref{fig:dehn-twist}）。
+
 
 \begin{figure}[h]
     \centering
@@ -350,9 +351,8 @@ $A(X)$以外の自己同値を具体的に構成する方法として、Seidel�
         \end{tikzpicture}
     \end{displaymath}
     \caption{閉曲線$\gamma$に沿ったDehn捻り}
-    \label{Dehn_twist}
+    \label{fig:dehn-twist}
 \end{figure}
-
 
 
 
@@ -380,19 +380,23 @@ Lagrange球面$S^n \subset M$の、$D^b\Fuk(M)$の対象としての（次数付
 ブレイド群（組み紐群, braid group）$B_n$は、$n$本の紐の絡まり方（組み紐）を元とし、それらを上下に接着することを演算として定義される群である。
 ここで連続的に変形できる組み紐は同じ元とみなす。
 例えば下図の組み紐は$B_3$の元の1つを表している。
-\[
-    \vcenter{\xy 0;/r1pc/:
-    @={(0.5,-0.5),(0,0)}, @@{*{\vtwistneg}},(0,-2),\vtwist,
-    @i@={(0,-1),(2,0),(2,-2)} @@{="save";"save"-(0,1),**@{-}}\endxy}
-    \quad = \quad
-    \vcenter{\xy 0;/r1pc/:
-    @={(0.5,0),(0,-0.5),(0.5,-1)}, @@{*{\vtwistneg}},
-    @i@={(0,0),(2,-1),(0,-2)} @@{="save";"save"-(0,1),**@{-}}\endxy}
-\]
+\begin{figure}[h]
+    \[
+        \vcenter{\xy 0;/r2pc/:
+        @={(0.5,-0.5),(0,0)}, @@{*{\vtwistneg}},(0,-2),\vtwist,
+        @i@={(0,-1),(2,0),(2,-2)} @@{="save";"save"-(0,1),**@{-}}\endxy}
+        \quad = \quad
+        \vcenter{\xy 0;/r2pc/:
+        @={(0.5,0),(0,-0.5),(0.5,-1)}, @@{*{\vtwistneg}},
+        @i@={(0,0),(2,-1),(0,-2)} @@{="save";"save"-(0,1),**@{-}}\endxy}
+    \]
+    \caption{3本の紐からなる組紐}
+    \label{fig:example-of-braid}
+\end{figure}
 $n$次対称群$S_n$は$n$本の線を持つあみだくじとその接着のなす群と思えるが、ブレイド群はそこに線の絡まり合いを許したようなものと考えられる。
 対称群が隣り合う線の入れ替えによって生成されるのと同様に、ブレイド群は隣り合う紐の絡まり合いによって生成される。
 ここでは紐$i$と$i+1$を入れ替える操作を$T_i$と書くことにする。
-例えば上の図は$B_3$の中で$T_1T_2T_1 = T_2T_1T_2$が成り立つことを表している。
+例えば図\ref{fig:example-of-braid}は$B_3$の中で$T_1T_2T_1 = T_2T_1T_2$が成り立つことを表している。
 この関係式$T_iT_{i+1}T_i = T_{i+1}T_iT_{i+1}$を\textbf{ブレイド関係式}という。
 また$|i-j| \geq 2$のとき明らかに$T_i$と$T_j$は可換である。
 実はこれらの関係式のみで$B_n$が表されることが知られている。
@@ -413,8 +417,7 @@ $n$次対称群$S_n$は$n$本の線を持つあみだくじとその接着のな
 \end{equation}
 と表示されることを思い出すと、ブレイド群は対称群の関係式のうち$s_i^2 = 1$を除いたものとみなせる。
 特に自然な全射準同型$B_n \to S_n$が存在する。
-
-ブレイド群には様々な一般化が考えられるが、ここでは2つの方向性について紹介する。
+このブレイド群には様々な一般化が考えられるが、ここでは2つの方向性について紹介する。
 
 まず$n$本の紐を「平面上の$n$点の動き」とみなすと、ブレイド群の位相幾何的な解釈が得られる。
 平面上の$n$点の（順序を無視した）配置のなす空間$\UConf_n(\bC)$を、$\bC^n$から対角集合$\{(x_i)_i \mid x_i \neq x_j \text{for some} i \neq j\}$を除いて座標の入れ替えによる対称群作用で割ったものとして定義する。
@@ -426,16 +429,13 @@ $n$次対称群$S_n$は$n$本の線を持つあみだくじとその接着のな
     B_n \cong \pi_1(\UConf_n(\bC)).
 \end{equation}
 そこで平面の代わりに別の空間を使うことで、同様の群を定義することができる。
-例えばトーラス$T^2$を考えれば\textbf{楕円ブレイド群}$B^{Ell}_n$が得られる。
-これは隣り合う点を入れ替える操作$T_1, \dots, T_{n-1}$に加えて、1点をトーラスの経線または緯線に沿って一周させる操作$X_1, \dots, X_n, Y_1, \dots, Y_n$によって生成される（図\ref{fig:generator-for-elliptic-braid-group}）。
-\begin{figure}[htbp]
-    \begin{center}
-        \includegraphics[width=150mm]{../images/elliptic_braid_group.png}
-        \label{fig:generator-for-elliptic-braid-group}
-        \caption{$B^{Ell}_n$の生成元（\cite{MR2507111}より引用）}
-    \end{center}
+例えばトーラス$T^2$をとれば\textbf{楕円ブレイド群}$B^{Ell}_n$が得られる。
+これは隣り合う点を入れ替える操作$T_1, \dots, T_{n-1}$と、点を緯線または経線に沿って一周させる操作$X_1, \dots, X_n, Y_1, \dots, Y_n$によって生成される（図\ref{fig:generator-for-elliptic-braid-group}）。
+\begin{figure}[h]
+    \includegraphics[width=150mm]{../images/elliptic_braid_group.png}
+    \caption{$B^{Ell}_n$の生成元（\cite{MR2507111}より引用）}
+    \label{fig:generator-for-elliptic-braid-group}
 \end{figure}
-
 
 また対称群$S_n$が$A_{n-1}$型ルート系のWeyl群であることを思い出すと、より一般のルート系に対して定理\ref{thm:braid-group-as-artin-group}のような形で組み合わせ論的にブレイド群やその変種を定義することができる。
 \begin{definition}
@@ -453,11 +453,11 @@ $R$の基底$\{\alpha_1, \dots, \alpha_n\} \subset R$は自然に$R^{a}$の基�
 \end{proposition}
 コルート格子$Q^\vee$はコウェイト格子$P^\vee$の部分格子だから、$W^{ae} = W \ltimes P^\vee$と定めると$W^{a}$を含む群$W^{ae}$が得られる。これを$R$の\textbf{拡大アファインWeyl群}と呼ぶ。
 これらのWeyl群から鏡映の関係式$s_i^2 = 1$を忘れることで\textbf{アファインブレイド群}$B^{a}$と\textbf{拡大アファインブレイド群}$B^{ae}$が定義される。
-これらの群は$B, Q^\vee \subset B^{a}$や$B, P^\vee \subset B^{ae}$という部分群を持ち、これらによって生成される。
+これらの群は$B, Q^\vee \subset B^{a}$や$B, P^\vee \subset B^{ae}$という部分群を持ち、それらによって生成される。
 \begin{equation}
     B^{a} = \langle B, Q^\vee \rangle, \quad B^{ae} = \langle B, P^\vee \rangle.
 \end{equation}
-これにさらにウェイト格子$P$を付け加えて得られるのが、\textbf{二重アファインブレイド群}$B^{d}$である。
+$B^{ae}$にさらにウェイト格子$P$を付け加えて生成されるのが、\textbf{二重アファインブレイド群}$B^{d}$である。
 \begin{equation}
     B^{d} = \langle B, P^\vee, P\rangle.
 \end{equation}
@@ -586,15 +586,15 @@ $F_n$のミラー多様体は$n$点穴あきトーラス$T_n$である。
                 \draw(19, -1) node[below]{$\gamma_{\cO_{G_3}(-1)}$};
             \end{tikzpicture}
         \end{displaymath}
-        \label{fig:mirror-figure}
         \caption{$D^b(F_n)$の対象と$T_3$上の曲線の対応}
+        \label{fig:mirror-figure}
     \end{figure}
 \end{example}
 
 また$T_n$の写像類群$\MCG(T_n)$\footnote{正確には深谷圏の$\bZ$次数構造と整合する次数付き写像類群$\widetilde{\MCG}(T_n)$を考える必要がある。}は$\cW(T_n)$への自然な作用を通じて$D^b(F_n)$へ作用する。
-$\MCG(T_n)$は緯線や経線に沿ったDehn捻りに加えて、2つの穴を結ぶ曲線に沿った半捻りという操作で生成される \cite{MR1805936}。
-例えば図\ref{fig:mirror-figure}の$\gamma_{\cO_{G_1}(-1)}$は2つの穴を結ぶ曲線で、半捻りとは下図のような操作である。
-\begin{figure}[h]\label{fig:half-twist}
+$\MCG(T_n)$は緯線や経線に沿ったDehn捻りと、2つの穴を結ぶ曲線に沿った半捻りという操作で生成される \cite{MR1805936}。
+例えば図\ref{fig:mirror-figure}の$\gamma_{\cO_{G_1}(-1)}$は穴を結ぶ曲線で、半捻りとは図\ref{fig:half-twist}の操作である。
+\begin{figure}[h]
     \begin{displaymath}
         \begin{tikzpicture}
             \draw (0, 1.5) circle[radius=1.5];
@@ -632,6 +632,7 @@ $\MCG(T_n)$は緯線や経線に沿ったDehn捻りに加えて、2つの穴を�
         \end{tikzpicture}
     \end{displaymath}
     \caption{曲線$\gamma$に沿った半捻り}
+    \label{fig:half-twist}
 \end{figure}
 \begin{theorem}[\cite{2023arXiv230212501A}]
     $\rom{1}_n$型小平ファイバー$F_n$について、$H_{\cO_G(a)} \in \Auteq D^b(F_n)$は$\gamma_{\cO_G(a)}$に沿った$T_n$の半捻りが誘導する自己同値である。

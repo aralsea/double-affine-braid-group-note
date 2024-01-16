@@ -2,7 +2,7 @@
 
 # LaTeX
 $latex = 'uplatex -interaction=nonstopmode -file-line-error -halt-on-error %O %S';
-$max_repeat = 5;
+$max_repeat = 10;
 
 # # BibTeX
 $bibtex = 'upbibtex %O %S';
