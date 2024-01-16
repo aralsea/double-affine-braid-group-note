@@ -39,7 +39,103 @@
 \documentclass[a4j,uplatex,dvipdfmx]{jsarticle}
 %\documentclass[a4j,dvipdfmx]{jarticle}
 %\documentclass[a4paper]{article}
-%\usepackage[bold]{otf}
+%\usepackage[bold]{otf}\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsfonts, amsmath, amsthm, amssymb}
+\usepackage{mathtools}
+\usepackage{tikz-cd}
+\usepackage{here}
+\usepackage{bm}
+\usepackage{dynkin-diagrams}
+\usepackage[all,knot]{xy}
+\usepackage[backend=biber, style=alphabetic, sorting=nyt, url=false]{biblatex}
+\addbibresource{../bib/double-affine-braid-group.bib} 
+\AtBeginBibliography{\small}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large\bfseries}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\mathtoolsset{showonlyrefs=true}
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{(\theenumi) }
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+%% Theorems
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{conjecture}[theorem]{予想}
+\newtheorem{lemma}[theorem]{補題}
+\newtheorem{proposition}[theorem]{命題}
+\newtheorem{corollary}[theorem]{系}
+\newtheorem{definition}[theorem]{定義}
+\newtheorem{example}[theorem]{例}
+\newtheorem{remark}[theorem]{補足}
+
+%% Some operators
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+\DeclareMathOperator{\CHom}{\mathcal{H}\!\mathit{om}}
+\DeclareMathOperator{\CTor}{\mathcal{T}\!\mathit{or}}
+\DeclareMathOperator{\Auteq}{\mathrm{Auteq}}
+\DeclareMathOperator{\Cone}{\mathrm{Cone}}
+\DeclareMathOperator{\ev}{\mathrm{ev}}
+\DeclareMathOperator{\id}{\mathrm{id}}
+\DeclareMathOperator{\depth}{\mathrm{depth}}
+\DeclareMathOperator{\Pic}{\mathrm{Pic}}
+\DeclareMathOperator{\MCG}{\mathrm{MCG}}
+\DeclareMathOperator{\PMCG}{\mathrm{PMCG}}
+\DeclareMathOperator{\RHom}{\mathrm{RHom}}
+\DeclareMathOperator{\Ker}{\mathrm{Ker}}
+\DeclareMathOperator{\Image}{\mathrm{Im}}
+\DeclareMathOperator{\Aut}{\mathrm{Aut}}
+\DeclareMathOperator{\Inn}{\mathrm{Inn}}
+\DeclareMathOperator{\Out}{\mathrm{Out}}
+\DeclareMathOperator{\Supp}{\mathrm{Supp}}
+\DeclareMathOperator{\SL}{\mathrm{SL}}
+\DeclareMathOperator{\Spec}{\mathrm{Spec}}
+\DeclareMathOperator{\Perf}{\mathrm{Perf}}
+\DeclareMathOperator{\NS}{\mathrm{NS}}
+\DeclareMathOperator{\Ext}{\mathrm{Ext}}
+\DeclareMathOperator{\Hilb}{\mathrm{Hilb}}
+\DeclareMathOperator{\res}{\mathrm{res}}
+\DeclareMathOperator{\Ch}{\mathrm{Ch}}
+\DeclareMathOperator{\coh}{\mathrm{coh}}
+\DeclareMathOperator{\Fuk}{Fuk}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\UConf}{UConf}
+\DeclareMathOperator{\Aff}{Aff}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\GL}{GL}
+
+
+\newcommand{\nc}{\newcommand}
+
+%% Calligraphic letters
+
+\nc{\cF}{{\mathcal{F}}}
+\nc{\cG}{{\mathcal{G}}}
+\nc{\cH}{{\mathcal{H}}}
+
+\nc{\cO}{{\mathcal{O}}}
+\nc{\cU}{{\mathcal{U}}}
+\nc{\cW}{{\mathcal{W}}}
+
+%% Blackboard letters
+\nc{\bA}{{\mathbb{A}}}
+\nc{\bC}{{\mathbb{C}}}
+\nc{\bP}{{\mathbb{P}}}
+\nc{\bQ}{{\mathbb{Q}}}
+\nc{\bR}{{\mathbb{R}}}
+\nc{\bZ}{{\mathbb{Z}}}
+
+
+\nc{\fsl}{{\mathfrak{sl}}}
+\nc{\fgl}{{\mathfrak{gl}}}
+
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
 
 %% 以下を適宜書き換えてください. (Japanese version)
 \title{% 
@@ -81,23 +177,26 @@ hayato@ms.u-tokyo.ac.jp%
 \thispagestyle{empty}
 %%%% END OF maketitle and pagestyle
 
-\section{主結果}
+\section*{概要}
 
-素数は多くの人々を魅了してきた．古くから素数が無限個存在することは知られていたが，その分布については
-いまだわかっていないことが多い．
-次の\emph{Riemannゼータ函数}
-\[
-  \zeta(s)  =  \sum_{n = 1}^\infty \frac{1}{n^s}
-\]
-を考える\cite{R}．これは$1$を除く複素全平面に有理型に解析接続される．
+楕円曲線の退化として得られる特異曲線は\textbf{小平ファイバー}と呼ばれ、$ADE$型のDynkin図形により大まかに分類される。
+$A$型のDynkin図形に対応する小平ファイバーのうち$\rom{1}_n$型と呼ばれる曲線$F_n$は$n$本の$\bP^1$が$n$角形の形に交わってできるもので、そのミラー多様体は$n$点穴あきトーラス$T_n$である。
+すなわち三角圏の同値$D^b(F_n) \cong D^b(\cW(T_n))$がある。
+ここで$D^b(F_n)$は$F_n$の\textbf{連接層の導来圏(derived category of coherent sheaves)}で、$F_n$上の連接層の複体を対象とし$\Ext$群を射の空間とする圏、$D^b(\cW(T_n))$は$T_n$の\textbf{巻深谷圏(wrapped Fukaya category)}で、$T_n$のLagrange部分多様体を対象としFloerコホモロジーを射の空間とする圏である。
+これらの圈が同値になるのは（ホモロジー的）ミラー対称性と呼ばれる現象で、物理学の弦理論に由来する。
+この圏同値を用いると、トーラス上に端点をもつ$n$本の糸の組み紐がなすブレイド群$B^{Ell}_n$（楕円ブレイド群）が、$T_n$の写像類群を介して$D^b(F_n) \cong D^b(\cW(T_n))$に作用する。
 
-% 参考文献の例
-\begin{thebibliography}{99}
-  \bibitem[R]{R}
-  {Riemann, B.},
-  {\em \"Uber die Anzahl der Primzahlen unter einer gegebenen Gr\"o\ss{}e},
-  {Monatsberichte der K\"oniglich Preu\ss{}ischen Akadademie der Wissenschaften zu Berlin},
-  (1859), 671--680.
-\end{thebibliography}
+ここで楕円ブレイド群は、より一般にルート系から構成される\textbf{二重アファインブレイド群}と呼ばれる群$B^d$の、$\GL$型ルート系の場合と一致することが知られている。
+$\GL$に対応するDynkin図形は$A$型であることを踏まえると、同様の群作用が同じ型のDynkin図形を持つ二重アファインブレイド群$B_d$と小平ファイバー$F$について構成できるのではないかという問題が考えられる。
+
+最も大きな困難は小平ファイバーのミラー多様体が$F_n$の場合しか知られていないことである。
+これを回避するためには、$D^b(X)$への作用を与える圏の自己同値をシンプレクティック幾何を用いずに代数幾何の言葉のみで構成する必要がある。
+まさにそのような状況を扱った研究としてSeidelとThomasによる\textbf{捻り関手(twist functor, spherical twist)}の概念が有名であり、シンプレクティック幾何のDehn捻りに対応するべき導来圏の自己同値をミラー対称性を使わずに定式化している。
+それを元に筆者は\cite{2023arXiv230212501A}でブレイド群の生成元に対応するべき\textbf{半捻り関手}を構成した。
+本研究ではこの半捻り関手を使って$D$型や$E$型の場合に群作用$B^d \curvearrowright D^b(F)$を構成する。
+
+
+
+\printbibliography[title=参考文献]
 
 \end{document}
