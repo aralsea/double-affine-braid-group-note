@@ -1,0 +1,103 @@
+%% -*- coding: utf-8 -*-
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%   必  ず  読  ん  で  く  だ  さ  い  ！   %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%   必  ず  読  ん  で  く  だ  さ  い  ！   %%%%%%%%%%%%%%%%%%
+%%
+%% 数理新人セミナーのテンプレートです．以下のように使用してください．
+%%
+%% 1. %% から始まる行は書き換えないでください．
+%%
+%% 2. 同様に %%%% BEGINNING OF <tag> から %%%% END OF <tag> までの範囲も
+%%    変更しないでください．
+%%
+%% 3. 使用する TeX ディストリビューションは TeX Live を推奨します．
+%%
+%% 4. PDF ファイルとTeXファイルをGoogleフォームにて提出していただきます．ご提出の際，ファイル名は
+%%    姓名を用いて <FamilynameGivenname>.pdf としてください（アルファベットとドットのみ）．
+%%
+%%     Example) Suuri Tarou さんの場合：
+%%      SuuriTarou.tex
+%%      SuuriTarou.pdf
+%%
+%%    Example) Suuri Hanako さんの場合：
+%%      SuuriHanako.zip
+%%       └── SuuriHanako
+%%            ├──SuuriHanako.tex
+%%            ├── SuuriHanako.pdf
+%%            ├── my-style-file.sty
+%%            ├── my-reference.bib
+%%            └── my-figure.pdf
+%%
+%% 5. 配布時のファイルがコンパイルできないなど技術的な問題がありましたらメールにて
+%%    運営委員 mathsci_freshman7@gmail.comまでお気軽にご相談ください．
+%%
+%%%%%%%%%%%%%%%%%%   必  ず  読  ん  で  く  だ  さ  い  ！   %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%   必  ず  読  ん  で  く  だ  さ  い  ！   %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4j,uplatex,dvipdfmx]{jsarticle}
+%\documentclass[a4j,dvipdfmx]{jarticle}
+%\documentclass[a4paper]{article}
+%\usepackage[bold]{otf}
+
+%% 以下を適宜書き換えてください. (Japanese version)
+\title{% 
+Double affine braid group actions on derived categories of Kodaira fibers%
+%% ↑ 講演タイトルを記入
+}
+\author{%
+荒井 勇人
+\footnote{%
+hayato@ms.u-tokyo.ac.jp%
+}}
+\date{%
+東京大学大学院数理科学研究科%
+%% ↑ 2024年2月時点での所属を記入
+，2024年2月%
+}
+
+
+%%% Please fill out the following. (English version). 
+%\title{% 
+%title\\%
+%%%  (your talk title)
+%}
+%\author{%
+%name%
+%\footnote{%
+%email@address%
+%}}
+%\date{%
+%affiliation%
+%%% (your affiliation as of February 2024)
+%February 2024%
+%}
+
+\begin{document}
+%%%% BEGINNING OF maketitle and pagestyle
+\pagestyle{empty}
+\maketitle
+\thispagestyle{empty}
+%%%% END OF maketitle and pagestyle
+
+\section{主結果}
+
+素数は多くの人々を魅了してきた．古くから素数が無限個存在することは知られていたが，その分布については
+いまだわかっていないことが多い．
+次の\emph{Riemannゼータ函数}
+\[
+  \zeta(s)  =  \sum_{n = 1}^\infty \frac{1}{n^s}
+\]
+を考える\cite{R}．これは$1$を除く複素全平面に有理型に解析接続される．
+
+% 参考文献の例
+\begin{thebibliography}{99}
+  \bibitem[R]{R}
+  {Riemann, B.},
+  {\em \"Uber die Anzahl der Primzahlen unter einer gegebenen Gr\"o\ss{}e},
+  {Monatsberichte der K\"oniglich Preu\ss{}ischen Akadademie der Wissenschaften zu Berlin},
+  (1859), 671--680.
+\end{thebibliography}
+
+\end{document}
