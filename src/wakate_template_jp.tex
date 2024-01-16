@@ -78,6 +78,7 @@
 \DeclareMathOperator{\Fuk}{Fuk}
 \DeclareMathOperator{\Ob}{Ob}
 \DeclareMathOperator{\UConf}{UConf}
+\DeclareMathOperator{\Aff}{Aff}
 
 
 \newcommand{\nc}{\newcommand}
@@ -101,8 +102,15 @@
 \nc{\bZ}{{\mathbb{Z}}}
 
 
+\nc{\fsl}{{\mathfrak{sl}}}
+\nc{\fgl}{{\mathfrak{gl}}}
+
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
 \title{Double affine braid group actions on derived categories of Kodaira fibers}    % ご自身の講演タイトル（申込み時に申請したもの）を記入してください。
-\author{東京大学大学院　数理科学研究科 \\
+\author{東京大学大学院 数理科学研究科 \\
 荒井勇人 (Hayato ARAI) 
 \footnote{E-mail:hayato@ms.u-tokyo.ac.jp}}    
 %ご自身のお名前（漢字とローマ字両方）、正式な所属を記載するようにお願いします。
@@ -122,42 +130,63 @@
 
 \section{導入}
 \subsection{楕円曲線と小平ファイバー}
-% 代数多様体とは、大雑把にいうと「多項式からなる連立方程式で定義される図形」のことである。
-% 例えば直線$y = x$や放物線$y = x^2$は代数多様体である。
-% この節では楕円曲線およびその「退化」である小平ファイバーを例として取り上げながら、代数幾何学の基本的な概念を紹介する。
 
-% 楕円曲線とは三次式で定義される曲線のうち、特異点を持たないもののことである。
-% 例えば曲線$y^2 = x^3 + x$は楕円曲線である。$y^2 = x^3 + x^2$は三次式で定まるが、$f = y^2-x^3 - x^2$のJacobi行列$(-3x^2-2x, 2y)$は原点に特異点を持つので楕円曲線ではない（下図を参照）。
+平面上の三次式で表される代数曲線のうち、特異点を持たないものを\textbf{楕円曲線}という。
+例えば曲線$y^2 = x^3 - x + 1$は楕円曲線である。$y^2 = x^3 + x^2$は三次式で定まるが、$f = y^2-x^3 - x^2$のJacobi行列$(-3x^2-2x, 2y)$は原点で$0$になるので特異点をもち、楕円曲線ではない。
 
-% TODO: 楕円曲線の例を図にする
-
-
-% より正確に述べよう。
-% \textbf{以下この節では方程式の係数も点の座標もすべて複素数}とする。
-% 代数多様体$X$が1つの方程式$f(x_1, \dots, x_n) = 0$で定まるとき、$X$の\textbf{特異点}とは$f$のJacobi行列$Jf$のランクが$0$になる点$x \in X \subset \bC^n$のことである（連立方程式の場合も同様に定義される）。
-% すると陰関数定理より、$X$の非特異点$x$の近傍では$X$は複素多様体となる。その次元が$1$のとき曲線、$2$のとき曲面という。
-% 特異点を持たない代数多様体を\textbf{非特異}という。
-
-% 複数の代数多様体を多項式関数や有理関数による座標変換で貼り合わせたものもまた代数多様体である。
-% \textbf{射影直線}$\bP^1 = (\bC^2 \setminus \{0\}) / \bC^\times = \{[x_0:x_1]\}$は$\{[z:1] \mid z \in \bC\}$と$\{[1:w] \mid w \in \bC\}$という2つの$\bC$の貼り合わせで得られる。
-% 座標変換$w = 1/z$は有理関数だから、$\bP^1$は代数多様体である。
-% 同様に\textbf{射影平面}$\bP^2$や\textbf{射影空間}$\bP^n$が定義される。
-% 射影空間の中で斉次多項式の零点として表される図形を\textbf{射影多様体}という。
-% 例えば$y^2 = x^3 + x$は$\bC^2$の方程式だが、$\bC^2 = \{[x:y:1] \mid x, y \in \bC\} \subset \bP^2$とみなすと$(x_1/x_2)^2 = (x_1/x_2)^3 + (x_1/x_2)$となり、分母をはらって$x_1^2x_2 = x_1^3 + x_1x_2^2$とすれば$\bP^2$の方程式に変換できる。
-% 楕円曲線の定義は$\bP^2$の三次斉次多項式から得られる非特異射影代数多様体\footnote{正確にはその上の1点も指定する必要がある。}である。
-
-% 非特異射影多様体は最も基本的なクラスの代数多様体で、
-
-% 代数多様体の定義方程式をパラメータを使って変化させることで、\textbf{代数多様体の族}を考えることができる。
-% 例として、多項式$y^2 = x^3 + t$を考える。
-% これを$(t, x, y)$を座標にもつ3次元空間$\bC^3$の中の曲面だと思うと非特異だが、パラメータ$t$ごとに定まる三次曲線の族とみなすと、$t = 0$のとき特異点をもち$t \neq 0$のとき楕円曲線となる。
-% つまり楕円曲線の族$\{E_t\}_t$が$t \to 0$の極限で特異点を持つ曲線に退化している。
-% 一般に非特異射影曲面$S$から非特異射影曲線$C$への全射$\pi \colon S \to C$で、有限個の$t \in C$を除いてファイバー$\pi^{-1}(t)$が楕円曲線になるようなものを\textbf{楕円曲面}という。
-% その特異ファイバーとして現れる曲線は小平とN\'{e}ronにより分類されていて、\textbf{小平ファイバー}と呼ばれる。
-
-平面上の三次式で表される代数曲線のうち、特異点を持たないものを楕円曲線という。
-例えば曲線$y^2 = x^3 + x$は楕円曲線である。$y^2 = x^3 + x^2$は三次式で定まるが、$f = y^2-x^3 - x^2$のJacobi行列$(-3x^2-2x, 2y)$は原点で$0$になるので特異点をもち、楕円曲線ではない（下図を参照）。
-
+\begin{figure}
+    \centering
+    \begin{minipage}{.3\textwidth}
+        \centering
+        \begin{tikzpicture}[samples=300, scale=0.8]
+            \draw(-1, 2.5) node{$y^2 = x^3-x+1$};
+            \draw[thick,domain=-1.3247:2] plot(\x,{sqrt(\x^3-\x+1)});
+            \draw[thick,domain=-1.3247:2] plot(\x,{-sqrt(\x^3-\x+1)});
+        \end{tikzpicture}
+        \caption{楕円曲線}
+        \label{fig:fig1}
+    \end{minipage}%
+    \begin{minipage}{.3\textwidth}
+        \centering
+        \begin{tikzpicture}[samples=300, scale=0.8]
+            \draw(-1.5, 2.5) node{$y^2 = x^3 + x^2$};
+            \draw[thick, domain=-1:1.5, samples=100] plot(\x,{sqrt(\x+1)*(abs(\x))});
+            \draw[thick, domain=-1:1.5, samples=100] plot(\x,{-sqrt(\x+1)*(abs(\x))});
+        \end{tikzpicture}
+        \caption{$\rom{1}_1$型小平ファイバー}
+        \label{fig:fig2}
+    \end{minipage}
+    \begin{minipage}{.3\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.3]
+            % fiber
+            \draw[thick] (-9,-1)--(-3,8);
+            \draw[thick] (-10,0)--(2,0);
+            \draw[thick] (1,-1)--(-5,8);
+        \end{tikzpicture}
+        \caption{$\rom{1}_3$型小平ファイバー}
+        \label{fig:fig3}
+    \end{minipage}%
+\end{figure}
+楕円曲線の族として得られる（非特異）曲面を楕円曲面という。
+例えば、$t$をパラメータとする楕円曲線の族$y^2 = x^3 + x^2 + t$は楕円曲面である。
+これは$t \neq 0$では楕円曲線だが、$t = 0$では特異曲線になる（退化する）。
+より正確には、楕円曲面とは曲面$S$から曲線$C$への全射$\pi \colon S \to C$であって、有限個の$t \in C$を除いてファイバー$\pi^{-1}(t)$が楕円曲線になるようなもののことである。
+いくつかのファイバーは特異点を持つかもしれないが、小平とN\'{e}ronは\textbf{相対的極小}という良いクラス\footnote{一般の楕円曲面はブローダウンという操作により相対的極小にすることができる。}の楕円曲面に対しどのような特異ファイバーが現れるかを分類した。
+それらを\textbf{小平ファイバー}といい、既約成分を頂点としその交点を辺としたグラフを考えることで（アファイン）Dynkin図形が得られ、それをもとに以下のように分類される。
+\begin{enumerate}
+    \item[$(\rom{1}_1)$] 1つの二重点を持つ有理曲線、Dynkin図形$A_1$
+    \item[$(\rom{1}_N)$] $N \geq 2$本の$\bP^1$を$N$角形の形に並べたもの、アファインDynkin図形$\tilde{A}_{N-1}$
+    \item[$(\rom{2})$] 1つの尖点を持つ有理曲線、$A_1$
+    \item[$(\rom{3})$] 1点で重複度2で接する2本の$\bP^1$、$\tilde{A}_1$
+    \item[$(\rom{4})$] 1点で交わる3本の$\bP^1$、$\tilde{A}_2$
+    \item[$(\rom{1}^*_N)$] $4$本の$\bP^1$と$N+1 \geq 1$本の重複度$2$の$\bP^1$を既約成分を持つ曲線、$\tilde{D}_{N+4}$
+    \item[$(\rom{2}^*)$] $9$本の重複度つき$\bP^1$を既約成分にもつ曲線、$\tilde{E}_8$
+    \item[$(\rom{3}^*)$] $8$本の重複度つき$\bP^1$を既約成分にもつ曲線、$\tilde{E}_7$
+    \item[$(\rom{4}^*)$] $7$本の重複度つき$\bP^1$を既約成分にもつ曲線、$\tilde{E}_6$
+    \item[$({}_m\rom{1}_N)$] 重複度$m \geq 2$の$\rom{1}_N$型曲線
+\end{enumerate}
+本稿では初めに$A$型Dynkin図形に対応するもの、特に$N \geq 2$の$\rom{1}_N$型の小平ファイバーの導来圏について先行研究を紹介し、それらが$D$型と$E$型についてどのように拡張されるかを見ていく。
 % TODO: 楕円曲線の例を図にする
 
 \subsection{代数多様体の導来圏とホモロジー的ミラー対称性}
@@ -313,15 +342,15 @@ $X, Y$を非特異射影多様体とし、$p_X \colon X\times Y \to X, p_Y \colo
     $X, Y$を非特異射影多様体とし、$\Phi \colon D^b(X) \to D^b(Y)$を充満忠実な三角関手とする。
     このとき$\Phi$はある積分核$P$によるFourier--向井関手$\Phi^P$と同型である。
 \end{theorem}
-\begin{remark}
-    Fourier--向井関手という名前は
-    \begin{enumerate}
-        \item 対象の対応$\Phi^P(F) = p_{Y*}(p_X^*F \otimes P)$がFourier変換$\cF(f)(\xi) = \int_\bR f(x)\exp(-ix\xi)dx$と似た形をしていること、
-        \item 向井\cite{MR607081}によって導入され、導来同値だが同型でない多様体の初めての例の構成（定理\ref{mukai}）に使用されたこと
-    \end{enumerate}
-    に由来する。
-\end{remark}
-さらにSeidelとThomasは\cite{MR1831820}において、導来圏の自己同値の構成法である捻り関手の概念を導入した。
+% \begin{remark}
+%     Fourier--向井関手という名前は
+%     \begin{enumerate}
+%         \item 対象の対応$\Phi^P(F) = p_{Y*}(p_X^*F \otimes P)$がFourier変換$\cF(f)(\xi) = \int_\bR f(x)\exp(-ix\xi)dx$と似た形をしていること、
+%         \item 向井\cite{MR607081}によって導入され、導来同値だが同型でない多様体の初めての例の構成（定理\ref{mukai}）に使用されたこと
+%     \end{enumerate}
+%     に由来する。
+% \end{remark}
+SeidelとThomasは\cite{MR1831820}において、導来圏の自己同値の構成法である捻り関手の概念を導入した。
 \begin{theorem}[\cite{MR1831820}]
     $X$を$n$次元の非特異射影多様体とし、$E \in D^b(X)$を\textbf{球面対象}、すなわち\begin{equation}
         E \otimes \omega_X \cong E,\quad \Hom^i(E, E) = \begin{cases}
@@ -458,10 +487,37 @@ $n$次対称群$S_n$は$n$本の線を持つあみだくじとその接着のな
 そこで平面の代わりに別の空間を使うことで、同様の群を定義することができる。
 例えばトーラス$T$を考えれば楕円ブレイド群$B^{Ell}_n$が得られる。
 
-また対称群$S_n$が$A_{n-1}$型ルート系のWeyl群として表されることを思い出すと、より一般のルート系やCoxeter系に対して定理\ref{thm:braid-group-as-artin-group}のような形で組み合わせ論的にブレイド群やその変種（アファインブレイド群、拡大アファインブレイド群、二重アファインブレイド群など）を定義することができる。
+また対称群$S_n$が$A_{n-1}$型ルート系のWeyl群として表されることを思い出すと、より一般のルート系に対して定理\ref{thm:braid-group-as-artin-group}のような形で組み合わせ論的にブレイド群やその変種を定義することができる。
+\begin{definition}
+    $R$を既約有限ルート系とし$\{\alpha_1, \dots, \alpha_n\} \subset R$を基底の1つとする。
+    $R$のWeyl群$W$は$\alpha_i$に対応する鏡映$s_i$たちで生成され、鏡映$s_i$は$s_i^2=1$と（適切な）ブレイド関係式を満たす。そこで$T_1, \dots, T_n$を生成元とし$s_i$の関係式のうち$s_i^2=1$を除いたものを関係式として定まる群を\textbf{ブレイド群}といい、$B$と書く。
+    $B$は基底の取り方によらないことが知られている。
+\end{definition}
+ユークリッド空間$V$上の有限ルート系$R$があると、そこからアファインルート系$R^{a}$が$\{\alpha + n \delta \in \Aff(V) \mid \alpha \in R, n \in \bZ\}$により定まる。
+ここで$\Aff(V)$は$V$上のアファイン関数全体のなすベクトル空間で、$\delta$は定数$1$を返す関数である。
+$R$の基底$\{\alpha_1, \dots, \alpha_n\} \subset R$は自然に$R^{a}$の基底$\{\alpha_0, \dots, \alpha_n\} \subset R^{a}$を与える。具体的には最高ルートを$\theta \in R$として$\alpha_0 = -\theta + \delta$ととる。
+このとき$R^{a}$のWeyl群$W^{a}$は鏡映$s_0, \dots, s_n$で生成され、特に$W = \langle s_1, \dots, s_n\rangle \subset W$である。
+さらに以下のような表示も知られている。
+\begin{proposition}
+    $R$のコルート格子を$Q^\vee \subset V$とすると、平行移動により$Q^\vee \subset W^{a}$である。そして$W^{a} \cong W \ltimes Q^\vee$である。右辺は$R$の\textbf{アファインWeyl群}と呼ばれる。
+\end{proposition}
+コルート格子$Q^\vee$はコウェイト格子$P^\vee$の部分格子だから、$W^{ae} = W \ltimes P^\vee$と定めると$W^{a}$を含む群$W^{ae}$が得られる。これを$R$の\textbf{拡大アファインWeyl群}と呼ぶ。
+これらのWeyl群から鏡映の関係式$s_i^2 = 1$を忘れることで\textbf{アファインブレイド群}$B^{a}$と\textbf{拡大アファインブレイド群}$B^{ae}$が得られる。
+これらの群は$B, Q^\vee \subset B^{a}$や$B, P^\vee \subset B^{ae}$という部分群を持ち、これらによって生成される。
+\begin{equation}
+    B^{a} = \langle B, Q^\vee \rangle, \quad B^{ae} = \langle B, P^\vee \rangle
+\end{equation}
+これにさらにウェイト格子$P$を付け加えて得られるのが、\textbf{二重アファインブレイド群}$B^{d}$である。
+\begin{equation}
+    B^{d} = \langle B, P^\vee, P\rangle
+\end{equation}
+もはや厳密な定義には触れないが、右辺の生成元の間の関係式は明示的に与えられることを述べておく。
 
-
-
+\begin{remark}
+    $A_n$型既約有限ルート系は単純Lie代数$\fsl_{n+1}$に対応するが、
+    $\fsl_{n+1}$の代わりに簡約Lie代数$\fgl_{n+1}$に対応する二重アファインブレイド群を定義することもできる。
+    これは楕円ブレイド群$B^{Ell}_n$と同型になることが知られている。
+\end{remark}
 
 
 
@@ -482,7 +538,21 @@ $n$次対称群$S_n$は$n$本の線を持つあみだくじとその接着のな
 
 
 
+\section{主結果}
+本稿の主結果を述べる。
+\begin{theorem}
+    $\pi \colon X \to T$を非特異射影多様体の間の平坦射とし、$i \colon X_0 = \pi^{-1}(0) \to X$をファイバーとする。
+    また$E \in D^b(X_0)$を、$i_*E \in D^b(X)$が球面対象になるような対象とする。
+    このとき以下の図式を可換にするような同値$H_E \colon D^b(X_0) \to D^b(X_0)$が$E$と$i$から構成できる。
+    \begin{equation}
+        \begin{tikzcd}
+            D^b(X_0) \arrow[r,"i_*"]\arrow[d, "H_E"'] & D^b(X) \arrow[d,"T_{i_*E}"]\\
+            D^b(X_0) \arrow[r, "i_*"]& D^b(X).
+        \end{tikzcd}
+    \end{equation}
+\end{theorem}
 
+これを楕円曲面$\pi \colon S \to C$に適用する。$i \colon F = \pi^{-1}(0) \hookrightarrow S$を既約でないファイバーとする。
 
 \section{小平ファイバーのミラー対称性と写像類群}
 楕円曲面$\pi \colon S \to C$の特異ファイバーとして現れうる曲線は小平と N\'{e}ronによりADE型のアファインDynkin図形を用いて分類されている。
