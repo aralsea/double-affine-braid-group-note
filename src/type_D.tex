@@ -106,10 +106,10 @@
 
 
 \section{記法}
-$(V,(-, -))$を$n$次元ユークリッド空間とし、$R$をその上の既約有限ルート系とする。
+$(V,(-, -))$を$n$次元ユークリッド空間とし、$R$をその上の既約有限ルート系とする。内積により$V$と$V^*$を同一視する。
 \begin{itemize}
     \item $\{\alpha_1, \dots, \alpha_n\} \subset R$を$R$の基底とする。つまり$\alpha_i$たちは単純ルートである。
-    \item $\{\alpha_1^\vee, \dots, \alpha_n^\vee\} \subset R$を単純コルートの集合とする。つまり$\alpha^\vee = \frac{2\alpha}{(\alpha, \alpha)}$である。
+    \item $\{\alpha_1^\vee, \dots, \alpha_n^\vee\}$を単純コルートの集合とする。つまり$\alpha^\vee = \frac{2\alpha}{(\alpha, \alpha)}$である。
     \item $Q = \bigoplus_{i = 1}^n \bZ \alpha_i \subset V$ をルート格子とし、 $Q^\vee = \bigoplus_{i = 1}^n \bZ \alpha_i^\vee \subset V$ をコルート格子とする。
     \item $P = \{\lambda \in V \mid (\lambda, Q^\vee) \subset \bZ\}$をウェイト格子とし、$P^\vee = \{\lambda' \in V \mid (\lambda', Q) \subset \bZ\}$をコウェイト格子とする。
     \item $s_\alpha$を$\alpha$に付随する鏡映、つまり$s_\alpha(x) = x - (x, \alpha)\alpha^\vee$で定まる$V$の（内積を保つ）自己同型とする。$R$のWeyl群$W = \langle s_\alpha \mid \alpha \in R \rangle$はそれらの生成する$\GL(V)$の部分群である。これは単純ルートに付随する鏡映$s_i = s_{\alpha_i}$たちで生成される有限群である。
@@ -117,11 +117,14 @@ $(V,(-, -))$を$n$次元ユークリッド空間とし、$R$をその上の既�
 \section{ルート系、Weyl群、ブレイド群}
 $(V,(-, -))$を$n$次元ユークリッド空間とする。
 \begin{itemize}
-    \item $F=\Aff(V)$を$V$上の$\bR$値アファイン関数全体のなすベクトル空間とし、$V$の内積を使って$F \cong V \oplus \bR \delta$と同一視する。ここで$\delta$は定数$1$を返す関数である。$f \in F$のとき$V$成分、つまり勾配ベクトルを$Df \in V$で表す。
+    \item $F = V^* \oplus \bR \delta$を$V$上の$\bR$値アファイン関数全体のなすベクトル空間とし、$V$の内積を使って$F \cong V \oplus \bR \delta$と同一視する。ここで$\delta$は定数$1$を返す関数である。$f \in F$のとき$V$成分、つまり勾配ベクトルを$Df \in V$で表す。
     \item $V$の内積を$\bR \delta$上$0$として$F$上の双線形形式に拡張する。そして定数でない$f \in F$について$f^\vee = \frac{2f}{(f, f)}$と定める。
     \item 定数でない$f \in F$について$f^{-1}(0) \subset V$をアファイン超平面とし、それについての鏡映を$s_f$とおく。その$F$への作用も$s_f$とかく。
     \item $v \in V$についての平行移動を$t(v)$とおく。
 \end{itemize}
+\begin{remark}
+    $V$のアファイン変換群$\Aff(V) = \GL(V) \ltimes V$から$\GL(F)$に自然な群準同型$\varphi \mapsto (\varphi^{-1})^*$がある。これは単射だが全射でない。
+\end{remark}
 
 \begin{definition}
     $F$の部分集合$R^a$が$V$上のアファインルート系であるとは以下を満たすこと。
@@ -198,7 +201,8 @@ $(V,(-, -))$を$n$次元ユークリッド空間とする。
         \item 同様に$B^{ae} = \Omega \ltimes B^a$は共役作用$\pi_i T_{s_{\alpha_j}} \pi_i^{-1} = T_{s_{\pi_i(\alpha_j)}}$により記述される。
     \end{itemize}
 \end{example}
-\section{二重アファインブレイド群}
+\section{二重アファインブレイド群（有限既約ルート系）}
+$(R, V)$を有限既約ルート系とする。
 $\tau =\{\tau_0, \dots, \tau_n\}$を不定元の集合とする。ただし$s_i$と$s_j$が$W^a$の中で共役なときに$\tau_i = \tau_j$であると定める。そして$\bC_\tau = \bC(\tau_0, \dots, \tau_n)$を$\bC$上の有理関数体とする。
 
 次に$e \in \bZ>0$を$(P, P^\vee) = \frac{1}{e}\bZ$となるような整数と定め、格子$P \oplus \bZ \frac{\delta}{e} \subset F = \Aff(V)$への$W^{ae}$の作用を
@@ -210,7 +214,7 @@ $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \b
 \begin{equation}
     w(q^{k/e}X^\mu) = q^{k/e} \cdot q^{-(\lambda, v(\mu))}X^{v(\mu)}
 \end{equation}
-と定義する。$v$の線形性よりこれはwell-definedである。これを用いて二重アファインブレイド群を以下で定義する。
+と定義する。$v$の線形性よりこれはwell-definedな線形作用である。これを用いて二重アファインブレイド群を以下で定義する。
 \begin{definition}
     $B^{ae} = \langle T_0, \dots, T_n, \Omega\rangle$をCoxeter表示とする。このとき二重アファインブレイド群$B^d$は$T_0, \dots, T_n, \Omega, X^P, q^{1/e}$を生成元とし以下の関係式で定まるような群である。
     \begin{enumerate}
@@ -231,6 +235,7 @@ $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \b
         \item $e = 2$
         \item $\mu = \sum_i \xi_i \omega_i \in P$について$(\mu, \alpha_i^\vee) = 0$となる条件は$i=0$のとき$\xi_1 + 2\xi_2 + \xi_3 + \xi_4 = 0$、$i > 0$のとき$\xi_i = 0$である。
         \item $(\mu, \alpha_i^\vee) = 1$となる条件は$i=0$のとき$\xi_1 + 2\xi_2 + \xi_3 + \xi_4 = -1$、$i > 0$のとき$\xi_i = 1$である。
+        \item $\Omega = \{1, \pi_1, \pi_3, \pi_4\} \cong \bZ/2\bZ \oplus \bZ/2\bZ$であり、$\pi_i \in \Omega$はDynkin図形の頂点$0$と$i$を入れ替えるような折り返しによる自己同型に対応する。
     \end{itemize}
     これらを踏まえて$B^d$の関係式を（$X_i = X^{\omega_i}$として）具体的に書き下すと
     \begin{itemize}
@@ -244,6 +249,8 @@ $w = t(\lambda)v \in W^{ae}, \lambda \in P^\vee, v \in W$と$\mu \in P, k \in \b
         \item $T_0X_1^{-1}T_0 = X^{s_0(\omega_1)} = q^{-1}X_1^{-1}X_2$
     \end{itemize}
 \end{example}
+\section{二重アファインブレイド群（$\GL_n$の場合）}
+
 \section{小平ファイバーの導来圏}
 $\pi \colon S \to C$を楕円曲面とし、$X$を既約でない小平ファイバーとする。その（被約とは限らない）既約成分を$G_0, \dots, G_n$とし、それらを被約化したものを$G_{0, \red}, \dots, G_{n, \red}$とする。
 \[
@@ -262,7 +269,7 @@ $\pi \colon S \to C$を楕円曲面とし、$X$を既約でない小平ファイ
     による$T_{i_*E}$の像を$H_E$と書き、$E$に付随する半捻り関手と呼ぶ。
 \end{definition}
 \subsection{直線束による共役作用}
-\begin{lemma}\label{lem:cartier-divisor-on-projective-scheme}
+\begin{lemma}[Cartier因子 = 直線束]\label{lem:cartier-divisor-on-projective-scheme}
     Noether環$R$上の射影的スキーム$S$について（特に任意の小平ファイバーについて）$\Div(S) \to \Pic(S), D \mapsto \cO_S(D)$は全射であり、$\DivCl(S) \to \Pic(S)$は同型である。
 \end{lemma}
 \begin{proof}
